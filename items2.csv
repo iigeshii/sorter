@@ -15,7 +15,7 @@ E.B.1-4,13,East,Bottom,1,4,Soft Terrain & Organic Ground,Snow,,
 E.B.1-5,14,East,Bottom,1,5,Soft Terrain & Organic Ground,Snow Block,,
 E.B.1-6,15,East,Bottom,1,6,Soft Terrain & Organic Ground,Powder Snow,,
 E.B.1-7,16,East,Bottom,1,7,Soft Terrain & Organic Ground,Torchflower Seeds,Yes,Yes
-E.B.1-8,17,East,Bottom,1,8,Soft Terrain & Organic Ground,Pitcher Pods,,
+E.B.1-8,17,East,Bottom,1,8,Soft Terrain & Organic Ground,Pitcher Pods,Yes,Yes
 E.B.1-9,18,East,Bottom,1,9,Soft Terrain & Organic Ground,Flowers (All),,
 E.T.2-1,19,East,Top,2,1,"Sand, Gravel & Sandstone",Sand,,
 E.T.2-2,20,East,Top,2,2,"Sand, Gravel & Sandstone",Red Sand,,
@@ -144,7 +144,7 @@ S.B.2-7,142,South,Bottom,2,7,Overworld Wood,Mangrove Planks,,
 S.B.2-8,143,South,Bottom,2,8,Overworld Wood,Cherry Planks,,
 S.B.2-9,144,South,Bottom,2,9,Overworld Wood,OPEN / Reserve,,
 S.T.3-1,145,South,Top,3,1,Wood Shapes,Slabs,,
-S.T.3-2,146,South,Top,3,2,Wood Shapes,Stairs,,
+S.T.3-2,146,South,Top,3,2,Wood Shapes,Stairs,Yes,Yes
 S.T.3-3,147,South,Top,3,3,Wood Shapes,Fences,,
 S.T.3-4,148,South,Top,3,4,Wood Shapes,Fence Gates,,
 S.T.3-5,149,South,Top,3,5,Wood Shapes,Doors,,
