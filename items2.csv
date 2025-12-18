@@ -35,7 +35,7 @@
 34,E.B.2-7,East,2,Bottom,7,"Sand, Gravel & Sandstone",Smooth Red Sandstone,,
 35,E.B.2-8,East,2,Bottom,8,"Sand, Gravel & Sandstone",Chiseled Red Sandstone,,
 36,E.B.2-9,East,2,Bottom,9,"Sand, Gravel & Sandstone",OPEN / Reserve,,
-37,E.T.3-1,East,3,Top,1,Core Stone & Deepslate,Stone,,
+37,E.T.3-1,East,3,Top,1,Core Stone & Deepslate,Stone,Yes,Yes
 38,E.T.3-2,East,3,Top,2,Core Stone & Deepslate,Cobblestone,Yes,Yes
 39,E.T.3-3,East,3,Top,3,Core Stone & Deepslate,Deepslate,,
 40,E.T.3-4,East,3,Top,4,Core Stone & Deepslate,Cobbled Deepslate,,
@@ -44,7 +44,7 @@
 43,E.T.3-7,East,3,Top,7,Core Stone & Deepslate,OPEN / Reserve,,
 44,E.T.3-8,East,3,Top,8,Core Stone & Deepslate,OPEN / Reserve,,
 45,E.T.3-9,East,3,Top,9,Core Stone & Deepslate,OPEN / Reserve,,
-46,E.B.3-1,East,3,Bottom,1,Core Stone & Deepslate,Smooth Stone,,
+46,E.B.3-1,East,3,Bottom,1,Core Stone & Deepslate,Smooth Stone,Yes,Yes
 47,E.B.3-2,East,3,Bottom,2,Core Stone & Deepslate,Stone Bricks,,
 48,E.B.3-3,East,3,Bottom,3,Core Stone & Deepslate,Cracked Stone Bricks,,
 49,E.B.3-4,East,3,Bottom,4,Core Stone & Deepslate,Chiseled Stone Bricks,Yes,Yes
@@ -113,9 +113,9 @@
 112,S.T.1-4,South,1,Top,4,Manufactured Blocks,Terracotta,,
 113,S.T.1-5,South,1,Top,5,Manufactured Blocks,Colored Terracotta,,
 114,S.T.1-6,South,1,Top,6,Manufactured Blocks,Glazed Terracotta,,
-115,S.T.1-7,South,1,Top,7,Wood Shapes (Consolidated),Structural (Slabs/Stairs/Fences),,
-116,S.T.1-8,South,1,Top,8,Manufactured Blocks,OPEN / Reserve,,
-117,S.T.1-9,South,1,Top,9,Manufactured Blocks,OPEN / Reserve,,
+115,S.T.1-7,South,1,Top,7,Wood Shapes,Wood Slabs (All),,
+116,S.T.1-8,South,1,Top,8,Wood Shapes,Wood Stairs (All),Yes,Yes
+117,S.T.1-9,South,1,Top,9,Wood Shapes,Wood Fences & Gates (All),,
 118,S.B.1-1,South,1,Bottom,1,Manufactured Blocks,Stained Glass (Colors),,
 119,S.B.1-2,South,1,Bottom,2,Manufactured Blocks,Concrete,,
 120,S.B.1-3,South,1,Bottom,3,Manufactured Blocks,Concrete Powder,,
@@ -143,24 +143,24 @@
 142,S.B.2-7,South,2,Bottom,7,Overworld Wood,Mangrove Planks,,
 143,S.B.2-8,South,2,Bottom,8,Overworld Wood,Cherry Planks,,
 144,S.B.2-9,South,2,Bottom,9,Overworld Wood,OPEN / Reserve,,
-145,S.T.3-1,South,3,Top,1,Farming - Food & Meats,Wheat & Seeds,,
-146,S.T.3-2,South,3,Top,2,Farming - Food & Meats,Carrots,,
-147,S.T.3-3,South,3,Top,3,Farming - Food & Meats,Potatoes,,
-148,S.T.3-4,South,3,Top,4,Farming - Food & Meats,Beetroot,,
-149,S.T.3-5,South,3,Top,5,Farming - Food & Meats,Sugar Cane,Yes,Yes
-150,S.T.3-6,South,3,Top,6,Farming - Food & Meats,Pumpkins & Melons,,
-151,S.T.3-7,South,3,Top,7,Farming - Food & Meats,Sweet Berries / Kelp,,
-152,S.T.3-8,South,3,Top,8,Farming - Food & Meats,OPEN / Reserve,,
-153,S.T.3-9,South,3,Top,9,Farming - Food & Meats,OPEN / Reserve,,
-154,S.B.3-1,South,3,Bottom,1,Farming - Food & Meats,Raw Meats (All),,
+145,S.T.3-1,South,3,Top,1,Farming - Crops,Wheat & Seeds,,
+146,S.T.3-2,South,3,Top,2,Farming - Crops,Beetroot & Seeds,Yes,Yes
+147,S.T.3-3,South,3,Top,3,Farming - Crops,Carrots,,
+148,S.T.3-4,South,3,Top,4,Farming - Crops,Potatoes,,
+149,S.T.3-5,South,3,Top,5,Farming - Crops,Sugar Cane,Yes,Yes
+150,S.T.3-6,South,3,Top,6,Farming - Crops,Pumpkins,,
+151,S.T.3-7,South,3,Top,7,Farming - Crops,Melons,,
+152,S.T.3-8,South,3,Top,8,Farming - Crops,Sweet Berries,,
+153,S.T.3-9,South,3,Top,9,Farming - Crops,Kelp,,
+154,S.B.3-1,South,3,Bottom,1,Farming - Food & Meats,Raw Meats (All),Yes,No
 155,S.B.3-2,South,3,Bottom,2,Farming - Food & Meats,Cooked Meats (All),,
-156,S.B.3-3,South,3,Bottom,3,Farming - Food & Meats,Fish (Raw & Cooked),,
-157,S.B.3-4,South,3,Bottom,4,Farming - Food & Meats,Eggs,,
+156,S.B.3-3,South,3,Bottom,3,Farming - Food & Meats,Raw Fish,Yes,Yes
+157,S.B.3-4,South,3,Bottom,4,Farming - Food & Meats,Cooked Fish,Yes,Yes
 158,S.B.3-5,South,3,Bottom,5,Farming - Food & Meats,Honey Bottles / Honeycomb,Yes,Yes
-159,S.B.3-6,South,3,Bottom,6,Farming - Food & Meats,Mushrooms,,
+159,S.B.3-6,South,3,Bottom,6,Farming - Food & Meats,Mushrooms,Yes,Yes
 160,S.B.3-7,South,3,Bottom,7,Farming - Food & Meats,Golden Foods / Stews,,
-161,S.B.3-8,South,3,Bottom,8,Farming - Food & Meats,OPEN / Reserve,,
-162,S.B.3-9,South,3,Bottom,9,Farming - Food & Meats,OPEN / Reserve,,
+161,S.B.3-8,South,3,Bottom,8,Farming - Food & Meats,Bread,,
+162,S.B.3-9,South,3,Bottom,9,Farming - Food & Meats,Eggs,,
 181,W.T.1-1,West,1,Top,1,Mob Drops (Common),Rotten Flesh,,
 182,W.T.1-2,West,1,Top,2,Mob Drops (Common),Bones,,
 183,W.T.1-3,West,1,Top,3,Mob Drops (Common),Bone Meal,,
@@ -182,20 +182,20 @@
 199,W.T.2-1,West,2,Top,1,Redstone & Mechanics,Redstone Dust,,
 200,W.T.2-2,West,2,Top,2,Redstone & Mechanics,Redstone Torch,,
 201,W.T.2-3,West,2,Top,3,Redstone & Mechanics,Repeater,,
-202,W.T.2-4,West,2,Top,4,Redstone & Mechanics,Comparator,,
+202,W.T.2-4,West,2,Top,4,Redstone & Mechanics,Comparator,Yes,Yes
 203,W.T.2-5,West,2,Top,5,Redstone & Mechanics,Observer,,
 204,W.T.2-6,West,2,Top,6,Redstone & Mechanics,Dropper,,
 205,W.T.2-7,West,2,Top,7,Redstone & Mechanics,Dispenser,,
 206,W.T.2-8,West,2,Top,8,Redstone & Mechanics,Piston,,
 207,W.T.2-9,West,2,Top,9,Redstone & Mechanics,Sticky Piston,,
-208,W.B.2-1,West,2,Bottom,1,Redstone & Mechanics,Rail,,
-209,W.B.2-2,West,2,Bottom,2,Redstone & Mechanics,Powered Rail,,
-210,W.B.2-3,West,2,Bottom,3,Redstone & Mechanics,Detector Rail,,
-211,W.B.2-4,West,2,Bottom,4,Redstone & Mechanics,Activator Rail,,
-212,W.B.2-5,West,2,Bottom,5,Redstone & Mechanics,Minecart,,
+208,W.B.2-1,West,2,Bottom,1,Redstone & Mechanics,Rails (All),,
+209,W.B.2-2,West,2,Bottom,2,Redstone & Mechanics,Minecarts (All),,
+210,W.B.2-3,West,2,Bottom,3,Redstone & Mechanics,Barrels,,
+211,W.B.2-4,West,2,Bottom,4,Redstone & Mechanics,Shulker Boxes (Empty),,
+212,W.B.2-5,West,2,Bottom,5,Redstone & Mechanics,Ender Chest,,
 213,W.B.2-6,West,2,Bottom,6,Redstone & Mechanics,Hopper,Yes,Yes
-214,W.B.2-7,West,2,Bottom,7,Redstone & Mechanics,Chest Minecart,,
-215,W.B.2-8,West,2,Bottom,8,Redstone & Mechanics,Hopper Minecart,,
+214,W.B.2-7,West,2,Bottom,7,Redstone & Mechanics,Chests & Trapped Chests,,
+215,W.B.2-8,West,2,Bottom,8,Redstone & Mechanics,Copper Chests,,
 216,W.B.2-9,West,2,Bottom,9,Redstone & Mechanics,OPEN / Reserve,,
 217,W.T.3-1,West,3,Top,1,Rare & Boss Mob Drops,Wither Skeleton Skull,,
 218,W.T.3-2,West,3,Top,2,Rare & Boss Mob Drops,Totem of Undying,,
@@ -266,6 +266,6 @@
 283,W.B.6-4,West,6,Bottom,4,Nether Materials,Twisting Vines,,
 284,W.B.6-5,West,6,Bottom,5,Nether Materials,Weeping Vines,,
 285,W.B.6-6,West,6,Bottom,6,Nether Materials,Crimson Nylium,,
-286,W.B.6-7,West,6,Bottom,7,Nether Materials,Glowstone,,
+286,W.B.6-7,West,6,Bottom,7,Nether Materials,Glowstone,Yes,Yes
 287,W.B.6-8,West,6,Bottom,8,Nether Materials,Warped Nylium,,
 288,W.B.6-9,West,6,Bottom,9,Nether Materials,OPEN / Reserve,,
