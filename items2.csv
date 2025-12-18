@@ -5,8 +5,8 @@
 4,E.1.T.4,East,1,Top,4,Base Terrain (Core Ground Blocks),Podzol,Yes,Yes
 5,E.1.T.5,East,1,Top,5,Base Terrain (Core Ground Blocks),Dirt (Overflow),Yes,Yes
 6,E.1.T.6,East,1,Top,6,Base Terrain (Core Ground Blocks),Rooted Dirt,EMPTY,
-7,E.1.T.7,East,1,Top,7,Base Terrain (Core Ground Blocks),Mud,EMPTY,
-8,E.1.T.8,East,1,Top,8,Base Terrain (Core Ground Blocks),Packed Mud,EMPTY,
+7,E.T.1-7,East,1,Top,7,Base Terrain (Core Ground Blocks),Mud & Packed Mud,,
+8,E.T.1-8,East,1,Top,8,OPEN / Reserve,OPEN / Reserve,,
 9,E.1.T.9,East,1,Top,9,Base Terrain (Core Ground Blocks),Clay,Yes,Yes
 10,E.1.B.1,East,1,Bottom,1,Soft Terrain & Organic Ground,Mycelium,EMPTY,
 11,E.1.B.2,East,1,Bottom,2,Soft Terrain & Organic Ground,Moss Block,EMPTY,
@@ -104,9 +104,9 @@
 103,E.6.B.4,East,6,Bottom,4,Wood Utilities,Doors (All),,
 104,E.6.B.5,East,6,Bottom,5,Wood Utilities,Trapdoors (All),,
 105,E.6.B.6,East,6,Bottom,6,Wood Utilities,Signs & Hanging Signs (All),,
-106,E.B.6-7,East,6,Bottom,7,Building Utilities,Ladders,,
-107,E.B.6-8,East,6,Bottom,8,Building Utilities,Scaffolding,,
-108,E.6.B.9,East,6,Bottom,9,OPEN / Reserve,OPEN / Reserve,,
+106,E.6.B.7,East,6,Bottom,7,Building Utilities,Ladders,,
+107,E.6.B.8,East,6,Bottom,8,Building Utilities,Scaffolding,,
+108,E.6.B.9,East,6,Bottom,9,Building Utilities,Buckets (Empty & Fluid),,
 109,S.1.T.1,South,1,Top,1,Overworld Wood,Oak Logs,,
 110,S.1.T.2,South,1,Top,2,Overworld Wood,Spruce Logs,,
 111,S.1.T.3,South,1,Top,3,Overworld Wood,Birch Logs,,
@@ -190,7 +190,7 @@
 207,W.2.T.9,West,2,Top,9,Redstone & Mechanics,Sticky Piston,,
 208,W.2.B.1,West,2,Bottom,1,Redstone & Mechanics,Rails (All),,
 209,W.2.B.2,West,2,Bottom,2,Redstone & Mechanics,Minecarts (All),,
-210,W.2.B.3,West,2,Bottom,3,Redstone & Mechanics,Barrels,,
+210,W.2.B.3,West,2,Bottom,3,Utilities,Mob Buckets (All Mobs),,
 211,W.2.B.4,West,2,Bottom,4,Redstone & Mechanics,Shulker Boxes,,
 212,W.2.B.5,West,2,Bottom,5,Redstone & Mechanics,Ender Chest,,
 213,W.2.B.6,West,2,Bottom,6,Redstone & Mechanics,Hopper,,
