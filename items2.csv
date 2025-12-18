@@ -1,33 +1,33 @@
 ﻿#,ID,Wall,Cluster,Top/Bottom,Number,Categories,Description,Locked,Framed
-1,E.1.T.1,East,1,Top,1,Base Terrain (Core Ground Blocks),Dirt (Primary),,
-2,E.1.T.2,East,1,Top,2,Base Terrain (Core Ground Blocks),Grass Block,,
-3,E.1.T.3,East,1,Top,3,Base Terrain (Core Ground Blocks),Coarse Dirt,,
-4,E.1.T.4,East,1,Top,4,Base Terrain (Core Ground Blocks),Podzol,,
-5,E.1.T.5,East,1,Top,5,Base Terrain (Core Ground Blocks),Dirt (Overflow),,
-6,E.1.T.6,East,1,Top,6,Base Terrain (Core Ground Blocks),Rooted Dirt,,
-7,E.1.T.7,East,1,Top,7,Base Terrain (Core Ground Blocks),Mud,,
-8,E.1.T.8,East,1,Top,8,Base Terrain (Core Ground Blocks),Packed Mud,,
+1,E.1.T.1,East,1,Top,1,Base Terrain (Core Ground Blocks),Dirt (Primary),Yes,Yes
+2,E.1.T.2,East,1,Top,2,Base Terrain (Core Ground Blocks),Grass Block,Yes,Yes
+3,E.1.T.3,East,1,Top,3,Base Terrain (Core Ground Blocks),Coarse Dirt,EMPTY,
+4,E.1.T.4,East,1,Top,4,Base Terrain (Core Ground Blocks),Podzol,Yes,Yes
+5,E.1.T.5,East,1,Top,5,Base Terrain (Core Ground Blocks),Dirt (Overflow),Yes,Yes
+6,E.1.T.6,East,1,Top,6,Base Terrain (Core Ground Blocks),Rooted Dirt,EMPTY,
+7,E.1.T.7,East,1,Top,7,Base Terrain (Core Ground Blocks),Mud,EMPTY,
+8,E.1.T.8,East,1,Top,8,Base Terrain (Core Ground Blocks),Packed Mud,EMPTY,
 9,E.1.T.9,East,1,Top,9,Base Terrain (Core Ground Blocks),Clay,Yes,Yes
-10,E.1.B.1,East,1,Bottom,1,Soft Terrain & Organic Ground,Mycelium,,
-11,E.1.B.2,East,1,Bottom,2,Soft Terrain & Organic Ground,Moss Block,,
-12,E.1.B.3,East,1,Bottom,3,Soft Terrain & Organic Ground,Moss Carpet,,
-13,E.1.B.4,East,1,Bottom,4,Soft Terrain & Organic Ground,Snow,,
-14,E.1.B.5,East,1,Bottom,5,Soft Terrain & Organic Ground,Snow Block,,
-15,E.1.B.6,East,1,Bottom,6,Soft Terrain & Organic Ground,Powder Snow,,
+10,E.1.B.1,East,1,Bottom,1,Soft Terrain & Organic Ground,Mycelium,EMPTY,
+11,E.1.B.2,East,1,Bottom,2,Soft Terrain & Organic Ground,Moss Block,EMPTY,
+12,E.1.B.3,East,1,Bottom,3,Soft Terrain & Organic Ground,Moss Carpet,EMPTY,
+13,E.1.B.4,East,1,Bottom,4,Soft Terrain & Organic Ground,Snow,EMPTY,
+14,E.1.B.5,East,1,Bottom,5,Soft Terrain & Organic Ground,Snow Block,EMPTY,
+15,E.1.B.6,East,1,Bottom,6,Soft Terrain & Organic Ground,Powder Snow,EMPTY,
 16,E.1.B.7,East,1,Bottom,7,Soft Terrain & Organic Ground,Torchflower Seeds,Yes,Yes
 17,E.1.B.8,East,1,Bottom,8,Soft Terrain & Organic Ground,Pitcher Pods,Yes,Yes
-18,E.1.B.9,East,1,Bottom,9,Soft Terrain & Organic Ground,Flowers (All),,
+18,E.1.B.9,East,1,Bottom,9,Soft Terrain & Organic Ground,Flowers (All),Yes,Yes
 19,E.2.T.1,East,2,Top,1,Soft Terrain & Organic Ground,Leaf Litter,Yes,Yes
-20,E.2.T.2,East,2,Top,2,OPEN / Reserve,OPEN / Reserve,,
-21,E.2.T.3,East,2,Top,3,OPEN / Reserve,OPEN / Reserve,,
-22,E.2.T.4,East,2,Top,4,OPEN / Reserve,OPEN / Reserve,,
-23,E.2.T.5,East,2,Top,5,OPEN / Reserve,OPEN / Reserve,,
-24,E.2.T.6,East,2,Top,6,OPEN / Reserve,OPEN / Reserve,,
-25,E.2.T.7,East,2,Top,7,OPEN / Reserve,OPEN / Reserve,,
-26,E.2.T.8,East,2,Top,8,OPEN / Reserve,OPEN / Reserve,,
-27,E.2.T.9,East,2,Top,9,OPEN / Reserve,OPEN / Reserve,,
-28,E.2.B.1,East,2,Bottom,1,"Sand, Gravel & Sandstone",Sand,,
-29,E.2.B.2,East,2,Bottom,2,"Sand, Gravel & Sandstone",Red Sand,,
+20,E.2.T.2,East,2,Top,2,OPEN / Reserve,OPEN / Reserve,EMPTY,
+21,E.2.T.3,East,2,Top,3,OPEN / Reserve,OPEN / Reserve,EMPTY,
+22,E.2.T.4,East,2,Top,4,OPEN / Reserve,OPEN / Reserve,EMPTY,
+23,E.2.T.5,East,2,Top,5,OPEN / Reserve,OPEN / Reserve,EMPTY,
+24,E.2.T.6,East,2,Top,6,OPEN / Reserve,OPEN / Reserve,EMPTY,
+25,E.2.T.7,East,2,Top,7,OPEN / Reserve,OPEN / Reserve,EMPTY,
+26,E.2.T.8,East,2,Top,8,OPEN / Reserve,OPEN / Reserve,EMPTY,
+27,E.2.T.9,East,2,Top,9,OPEN / Reserve,OPEN / Reserve,EMPTY,
+28,E.2.B.1,East,2,Bottom,1,"Sand, Gravel & Sandstone",Sand,Yes,Yes
+29,E.2.B.2,East,2,Bottom,2,"Sand, Gravel & Sandstone",Red Sand,EMPTY,
 30,E.2.B.3,East,2,Bottom,3,"Sand, Gravel & Sandstone",Gravel,,
 31,E.2.B.4,East,2,Bottom,4,"Sand, Gravel & Sandstone",Flint,,
 32,E.2.B.5,East,2,Bottom,5,"Sand, Gravel & Sandstone",Sandstone,,
@@ -39,22 +39,22 @@
 38,E.3.T.2,East,3,Top,2,Core Stone & Deepslate,Cobblestone,Yes,Yes
 39,E.3.T.3,East,3,Top,3,Core Stone & Deepslate,Deepslate,,
 40,E.3.T.4,East,3,Top,4,Core Stone & Deepslate,Cobbled Deepslate,,
-41,E.3.T.5,East,3,Top,5,Core Stone & Deepslate,Smooth Stone,,
-42,E.3.T.6,East,3,Top,6,Core Stone & Deepslate,Stone Bricks,,
-43,E.3.T.7,East,3,Top,7,Core Stone & Deepslate,Bricks Variants,,
-44,E.3.T.8,East,3,Top,8,OPEN / Reserve,OPEN / Reserve,,
+41,E.3.T.5,East,3,Top,5,Core Stone & Deepslate,Polished Deepslate,Yes,Yes
+42,E.3.T.6,East,3,Top,6,Core Stone & Deepslate,Smooth Stone,,
+43,E.3.T.7,East,3,Top,7,Core Stone & Deepslate,Stone Bricks,,
+44,E.3.T.8,East,3,Top,8,Core Stone & Deepslate,Bricks Variants,,
 45,E.3.T.9,East,3,Top,9,OPEN / Reserve,OPEN / Reserve,,
 46,E.3.B.1,East,3,Bottom,1,Stone Variants,Andesite (All),,
-47,E.3.B.2,East,3,Bottom,2,Stone Variants,Diorite (All),,
-48,E.3.B.3,East,3,Bottom,3,Stone Variants,Granite (All),,
+47,E.3.B.2,East,3,Bottom,2,Stone Variants,Diorite (All),Yes,Yes
+48,E.3.B.3,East,3,Bottom,3,Stone Variants,Granite (All),Yes,Yes
 49,E.3.B.4,East,3,Bottom,4,Stone Variants,Tuff (All),,
 50,E.3.B.5,East,3,Bottom,5,OPEN / Reserve,OPEN / Reserve,,
 51,E.3.B.6,East,3,Bottom,6,OPEN / Reserve,OPEN / Reserve,,
 52,E.3.B.7,East,3,Bottom,7,OPEN / Reserve,OPEN / Reserve,,
 53,E.3.B.8,East,3,Bottom,8,OPEN / Reserve,OPEN / Reserve,,
 54,E.3.B.9,East,3,Bottom,9,OPEN / Reserve,OPEN / Reserve,,
-55,E.4.T.1,East,4,Top,1,Stone Shapes,Stone Slabs (ALL),,
-56,E.4.T.2,East,4,Top,2,Stone Shapes,Stone Stairs (ALL),,
+55,E.4.T.1,East,4,Top,1,Stone Shapes,Stone Slabs (ALL),Yes,Yes
+56,E.4.T.2,East,4,Top,2,Stone Shapes,Stone Stairs (ALL),Yes,Yes
 57,E.4.T.3,East,4,Top,3,Stone Shapes,Stone Walls (ALL),,
 58,E.4.T.4,East,4,Top,4,Stone Shapes,Brick Slabs (ALL),,
 59,E.4.T.5,East,4,Top,5,Stone Shapes,Brick Stairs (ALL),,
@@ -110,7 +110,7 @@
 109,S.1.T.1,South,1,Top,1,Overworld Wood,Oak Logs,,
 110,S.1.T.2,South,1,Top,2,Overworld Wood,Spruce Logs,,
 111,S.1.T.3,South,1,Top,3,Overworld Wood,Birch Logs,,
-112,S.1.T.4,South,1,Top,4,Overworld Wood,Jungle Logs,,
+112,S.1.T.4,South,1,Top,4,Overworld Wood,Jungle Logs,Yes,Yes
 113,S.1.T.5,South,1,Top,5,Overworld Wood,Acacia Logs,,
 114,S.1.T.6,South,1,Top,6,Overworld Wood,Dark Oak Logs,,
 115,S.1.T.7,South,1,Top,7,Overworld Wood,Mangrove Logs,,
@@ -144,20 +144,20 @@
 143,S.2.B.8,South,2,Bottom,8,Farming - Food & Meats,Golden Carrots,,
 144,S.2.B.9,South,2,Bottom,9,Farming - Food & Meats,OPEN / Reserve,,
 145,S.3.T.1,South,3,Top,1,Farming - Crops,Wheat & Seeds,,
-146,S.3.T.2,South,3,Top,2,Farming - Crops,Beetroot & Seeds,Yes,Yes
+146,S.3.T.2,South,3,Top,2,Farming - Crops,Beetroot & Seeds,,
 147,S.3.T.3,South,3,Top,3,Farming - Crops,Carrots,,
 148,S.3.T.4,South,3,Top,4,Farming - Crops,Potatoes,,
-149,S.3.T.5,South,3,Top,5,Farming - Crops,Sugar Cane,Yes,Yes
+149,S.3.T.5,South,3,Top,5,Farming - Crops,Sugar Cane,,
 150,S.3.T.6,South,3,Top,6,Farming - Crops,Pumpkins,,
 151,S.3.T.7,South,3,Top,7,Farming - Crops,Melons,,
 152,S.3.T.8,South,3,Top,8,Farming - Crops,Sweet Berries,,
 153,S.3.T.9,South,3,Top,9,Farming - Crops,Kelp,,
-154,S.3.B.1,South,3,Bottom,1,Farming - Food & Meats,Raw Meats (All),Yes,No
+154,S.3.B.1,South,3,Bottom,1,Farming - Food & Meats,Raw Meats (All),,
 155,S.3.B.2,South,3,Bottom,2,Farming - Food & Meats,Cooked Meats (All),,
-156,S.3.B.3,South,3,Bottom,3,Farming - Food & Meats,Raw Fish,Yes,Yes
-157,S.3.B.4,South,3,Bottom,4,Farming - Food & Meats,Cooked Fish,Yes,Yes
-158,S.3.B.5,South,3,Bottom,5,Farming - Food & Meats,Honey Bottles / Honeycomb,Yes,Yes
-159,S.3.B.6,South,3,Bottom,6,Farming - Food & Meats,Mushrooms,Yes,Yes
+156,S.3.B.3,South,3,Bottom,3,Farming - Food & Meats,Raw Fish,,
+157,S.3.B.4,South,3,Bottom,4,Farming - Food & Meats,Cooked Fish,,
+158,S.3.B.5,South,3,Bottom,5,Farming - Food & Meats,Honey Bottles / Honeycomb,,
+159,S.3.B.6,South,3,Bottom,6,Farming - Food & Meats,Mushrooms,,
 160,S.3.B.7,South,3,Bottom,7,Farming - Food & Meats,Stews & Soups (All),,
 161,S.3.B.8,South,3,Bottom,8,Farming - Food & Meats,Bread,,
 162,S.3.B.9,South,3,Bottom,9,Farming - Food & Meats,Eggs,,
@@ -182,7 +182,7 @@
 199,W.2.T.1,West,2,Top,1,Redstone & Mechanics,Redstone Dust,,
 200,W.2.T.2,West,2,Top,2,Redstone & Mechanics,Redstone Torch,,
 201,W.2.T.3,West,2,Top,3,Redstone & Mechanics,Repeater,,
-202,W.2.T.4,West,2,Top,4,Redstone & Mechanics,Comparator,Yes,Yes
+202,W.2.T.4,West,2,Top,4,Redstone & Mechanics,Comparator,,
 203,W.2.T.5,West,2,Top,5,Redstone & Mechanics,Observer,,
 204,W.2.T.6,West,2,Top,6,Redstone & Mechanics,Dropper,,
 205,W.2.T.7,West,2,Top,7,Redstone & Mechanics,Dispenser,,
@@ -193,8 +193,8 @@
 210,W.2.B.3,West,2,Bottom,3,Redstone & Mechanics,Barrels,,
 211,W.2.B.4,West,2,Bottom,4,Redstone & Mechanics,Shulker Boxes,,
 212,W.2.B.5,West,2,Bottom,5,Redstone & Mechanics,Ender Chest,,
-213,W.2.B.6,West,2,Bottom,6,Redstone & Mechanics,Hopper,Yes,Yes
-214,W.2.B.7,West,2,Bottom,7,Redstone & Mechanics,Chests (All Types),,
+213,W.2.B.6,West,2,Bottom,6,Redstone & Mechanics,Hopper,,
+214,W.2.B.7,West,2,Bottom,7,Redstone & Mechanics,Chests (All Types),Yes,Yes
 215,W.2.B.8,West,2,Bottom,8,Redstone & Mechanics,Buttons (All),,
 216,W.2.B.9,West,2,Bottom,9,Redstone & Mechanics,Pressure Plates (All),,
 217,W.3.T.1,West,3,Top,1,Rare & Boss Mob Drops,Wither Skeleton Skull,,
@@ -222,7 +222,7 @@
 239,W.4.T.5,West,4,Top,5,"Tools, Armor & Combat",Elytra,,
 240,W.4.T.6,West,4,Top,6,"Tools, Armor & Combat",Bows & Crossbows,,
 241,W.4.T.7,West,4,Top,7,"Tools, Armor & Combat",Arrows,,
-242,W.4.T.8,West,4,Top,8,"Tools, Armor & Combat",Rockets,Yes,Yes
+242,W.4.T.8,West,4,Top,8,"Tools, Armor & Combat",Rockets,,
 243,W.4.T.9,West,4,Top,9,"Tools, Armor & Combat",OPEN / Reserve,,
 244,W.4.B.1,West,4,Bottom,1,"Tools, Armor & Combat",Swords,,
 245,W.4.B.2,West,4,Bottom,2,"Tools, Armor & Combat",Pickaxes,,
@@ -233,19 +233,19 @@
 250,W.4.B.7,West,4,Bottom,7,"Tools, Armor & Combat",Tridents,,
 251,W.4.B.8,West,4,Bottom,8,"Tools, Armor & Combat",Fishing Rods,,
 252,W.4.B.9,West,4,Bottom,9,"Tools, Armor & Combat",OPEN / Reserve,,
-253,W.5.T.1,West,5,Top,1,Villagers & Enchanting,Books & Bookshelves,Yes,Yes
+253,W.5.T.1,West,5,Top,1,Villagers & Enchanting,Books & Bookshelves,,
 254,W.5.T.2,West,5,Top,2,Villagers & Enchanting,Enchanted Books,,
 255,W.5.T.3,West,5,Top,3,Villagers & Enchanting,Name Tags,,
 256,W.5.T.4,West,5,Top,4,Villagers & Enchanting,Bells,,
-257,W.5.T.5,West,5,Top,5,Villagers & Enchanting,Leads,Yes,Yes
+257,W.5.T.5,West,5,Top,5,Villagers & Enchanting,Leads,,
 258,W.5.T.6,West,5,Top,6,Villagers & Enchanting,Job Site Blocks (All),,
 259,W.5.T.7,West,5,Top,7,Villagers & Enchanting,Experience Bottles,,
 260,W.5.T.8,West,5,Top,8,Villagers & Enchanting,Paper & Maps,,
 261,W.5.T.9,West,5,Top,9,Villagers & Enchanting,OPEN / Reserve,,
 262,W.B.5-1,West,5,Bottom,1,Ores & Raw Metals,Coal (Ore / Block),,
 263,W.B.5-2,West,5,Bottom,2,Ores & Raw Metals,Copper (Ore / Raw / Ingot / Block),,
-264,W.B.5-3,West,5,Bottom,3,Ores & Raw Metals,Iron (Ore / Raw / Ingot / Nugget / Block),Yes,Yes
-265,W.B.5-4,West,5,Bottom,4,Ores & Raw Metals,Gold (Ore / Raw / Ingot / Nugget / Block),Yes,Yes
+264,W.B.5-3,West,5,Bottom,3,Ores & Raw Metals,Iron (Ore / Raw / Ingot / Nugget / Block),,
+265,W.B.5-4,West,5,Bottom,4,Ores & Raw Metals,Gold (Ore / Raw / Ingot / Nugget / Block),,
 266,W.B.5-5,West,5,Bottom,5,Ores & Raw Metals,Redstone (Ore / Dust / Block),,
 267,W.B.5-6,West,5,Bottom,6,Ores & Raw Metals,Lapis (Ore / Dye / Block),,
 268,W.B.5-7,West,5,Bottom,7,Ores & Raw Metals,Diamond (Ore / Gem / Block),,
