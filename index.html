@@ -1,523 +1,669 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Storage Directory</title>
-  <style>
-    :root{
-      --bg:#0b0f14; --panel:#101826; --text:#e6edf3; --muted:#9fb0c0; --border:#223042;
-      --accent:#7aa2ff; --ok:#46d39a;
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
-      --radius: 14px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
-      padding:18px;
-    }
-    header{
-      max-width:1200px; margin:0 auto 14px;
-      display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    }
-    h1{ margin:0; font-size:18px; letter-spacing:.2px; }
-    .sub{ color:var(--muted); font-size:12px; margin-top:4px; }
-    .topControls{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-    input[type="text"]{
-      min-width:320px; max-width:520px; width:min(520px, 88vw);
-      padding:10px 12px; border-radius:12px;
-      border:1px solid var(--border); background:rgba(255,255,255,.03); color:var(--text);
-      outline:none;
-    }
-    input[type="text"]:focus{ border-color:rgba(122,162,255,.6); box-shadow:0 0 0 3px rgba(122,162,255,.15) }
-    button{
-      padding:10px 12px; border-radius:12px;
-      border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text);
-      cursor:pointer; font-weight:700;
-    }
-    button:hover{ background:rgba(255,255,255,.06) }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Item Directory</title>
 
-    main{
-      max-width:1200px; margin:0 auto;
-      display:grid; grid-template-columns: 420px 1fr; gap:14px;
-    }
-    @media (max-width: 980px){ main{ grid-template-columns: 1fr; } }
+<style>
+:root{
+  --bg:#0b0f14;
+  --panel:#101826;
+  --text:#e6edf3;
+  --muted:#9fb0c0;
+  --border:#223042;
+  --accent:#7aa2ff;
+  --ok:#46d39a;
+  --shadow:0 12px 40px rgba(0,0,0,.35);
+  --radius:14px;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+*{box-sizing:border-box}
+body{ margin:0; padding:18px; background:var(--bg); color:var(--text); font-family:var(--sans); }
+header{
+  max-width:1200px; margin:0 auto 16px;
+  display:flex; justify-content:space-between; align-items:flex-end;
+  gap:12px; flex-wrap:wrap;
+}
+h1{margin:0;font-size:18px}
+.sub{color:var(--muted);font-size:12px}
 
-    .panel{
-      border:1px solid var(--border); border-radius:var(--radius);
-      background:linear-gradient(to bottom, rgba(16,24,38,.78), rgba(16,24,38,.55));
-      box-shadow:var(--shadow); overflow:hidden;
-    }
-    .hd{
-      padding:12px 14px; border-bottom:1px solid var(--border);
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
-    .hd .k{ color:var(--muted); font-size:12px; letter-spacing:.35px; text-transform:uppercase; }
-    .bd{ padding:12px 14px; }
+.controls{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+input[type="text"]{
+  min-width:280px; width:min(560px, 88vw);
+  padding:10px 12px; border-radius:12px;
+  border:1px solid var(--border); background:rgba(255,255,255,.03); color:var(--text);
+  outline:none;
+}
+input[type="text"]:focus{
+  border-color:rgba(122,162,255,.6);
+  box-shadow:0 0 0 3px rgba(122,162,255,.15);
+}
+button{
+  padding:10px 12px; border-radius:12px;
+  border:1px solid var(--border); background:rgba(255,255,255,.04);
+  color:var(--text); cursor:pointer; font-weight:700;
+}
+button:hover{background:rgba(255,255,255,.06)}
 
-    .stat{ color:var(--muted); font-size:12px; font-family:var(--mono); }
+main{
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns: 1fr 420px; gap:14px;
+}
+@media(max-width:980px){ main{ grid-template-columns: 1fr; } }
 
-    .results{ display:flex; flex-direction:column; gap:10px; }
-    .card{
-      border:1px solid var(--border); border-radius:12px;
-      padding:10px 10px; background:rgba(255,255,255,.02);
-      cursor:pointer;
-      transition: border-color .12s ease, background .12s ease;
-    }
-    .card:hover{ border-color:rgba(122,162,255,.35); background:rgba(255,255,255,.04); }
-    .card .top{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:6px;
-    }
-    .id{ font-family:var(--mono); font-weight:800; font-size:12px; }
-    .pill{
-      font-family:var(--mono); font-size:11px; padding:2px 8px; border-radius:999px;
-      border:1px solid rgba(70,211,154,.35); color:var(--ok); background:rgba(70,211,154,.08);
-      white-space:nowrap;
-    }
-    .desc{ font-size:12.5px; line-height:1.25; }
-    .meta{ margin-top:6px; color:var(--muted); font-size:11px; display:flex; gap:10px; flex-wrap:wrap; }
-    .muted{ color:var(--muted); }
-    .mono{ font-family:var(--mono); }
+.panel{
+  border:1px solid var(--border); border-radius:var(--radius);
+  background:linear-gradient(to bottom, rgba(16,24,38,.78), rgba(16,24,38,.55));
+  box-shadow:var(--shadow); overflow:hidden;
+}
+.hd{
+  padding:12px 14px; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+}
+.k{ color:var(--muted); font-size:12px; letter-spacing:.35px; text-transform:uppercase; }
+.bd{ padding:12px 14px; }
+.mono{ font-family:var(--mono); }
+.muted{ color:var(--muted); }
 
-    /* Diagram */
-    .diagramWrap{ display:flex; flex-direction:column; gap:12px; }
-    .diagram{
-      border:1px solid var(--border); border-radius:var(--radius);
-      background:rgba(255,255,255,.02); padding:12px;
-      overflow:auto;
-    }
-    .legend{ color:var(--muted); font-size:12px; line-height:1.35; }
-    .layout{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-      min-width: 640px;
-    }
-    .wallBox{
-      border:1px solid var(--border); border-radius:14px; overflow:hidden;
-      background:rgba(255,255,255,.02);
-    }
-    .wallHd{
-      padding:10px 12px; border-bottom:1px solid var(--border);
-      display:flex; justify-content:space-between; align-items:center; gap:10px;
-    }
-    .wallName{ font-weight:900; }
-    .wallRange{ color:var(--muted); font-family:var(--mono); font-size:12px; }
-    .cols{
-      display:grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(52px, 1fr);
-      gap:8px;
-      padding:10px;
-    }
-    .colTile{
-      border:1px solid var(--border); border-radius:12px;
-      background:rgba(255,255,255,.02);
-      padding:10px 6px;
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--mono); font-weight:900;
-      color:var(--muted);
-      user-select:none;
-      position:relative;
-      min-height:44px;
-    }
-    .colTile.active{
-      border-color: rgba(122,162,255,.9);
-      box-shadow: 0 0 0 4px rgba(122,162,255,.18);
-      background: rgba(122,162,255,.10);
-      color: var(--text);
-    }
-    .colTile .dot{
-      position:absolute; top:7px; right:7px;
-      width:8px; height:8px; border-radius:999px;
-      background: rgba(70,211,154,.85);
-      box-shadow: 0 0 0 3px rgba(70,211,154,.14);
-      opacity:.0;
-    }
-    .colTile.hasItems .dot{ opacity:1; }
+.notice{
+  border:1px solid rgba(122,162,255,.35);
+  background:rgba(122,162,255,.08);
+  padding:10px 12px; border-radius:12px;
+  font-size:12px; margin-bottom:10px;
+}
+.error{
+  border:1px solid rgba(255,107,107,.35);
+  background:rgba(255,107,107,.08);
+  padding:10px 12px; border-radius:12px;
+  font-size:12px; white-space:pre-line; margin-bottom:10px;
+}
 
-    .details{
-      border-top:1px solid var(--border);
-      padding:12px 14px;
-      background:rgba(16,24,38,.35);
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    }
-    .details .blk .k{ color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.35px; }
-    .details .blk .v{ font-family:var(--mono); font-size:12px; margin-top:4px; }
+/* TABLE DIRECTORY */
+.tableWrap{
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:rgba(255,255,255,.02);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px;
+}
+thead th{
+  text-align:left;
+  padding:10px 10px;
+  border-bottom:1px solid var(--border);
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.35px;
+  user-select:none;
+  cursor:pointer;
+  position:sticky;
+  top:0;
+  background:rgba(16,24,38,.95);
+}
+thead th:hover{ color:var(--text); }
+tbody td{
+  padding:10px 10px;
+  border-bottom:1px solid rgba(34,48,66,.6);
+  vertical-align:top;
+}
+tbody tr{
+  cursor:pointer;
+}
+tbody tr:hover{
+  background:rgba(255,255,255,.04);
+}
+tbody tr.selected{
+  background:rgba(122,162,255,.10);
+}
+.small{ font-size:11px; color:var(--muted); }
+.pill{
+  display:inline-block;
+  padding:2px 8px;
+  border-radius:999px;
+  border:1px solid rgba(70,211,154,.35);
+  color:var(--ok);
+  background:rgba(70,211,154,.08);
+  font-family:var(--mono);
+  font-size:11px;
+  white-space:nowrap;
+}
 
-    .error{
-      padding:10px 12px;
-      border:1px solid rgba(255,107,107,.35);
-      background: rgba(255,107,107,.08);
-      border-radius:12px;
-      color: var(--text);
-      font-size:12px;
-      line-height:1.35;
-    }
-  </style>
+/* MAP oriented like entering from NORTH:
+   West wall LEFT, South wall TOP, East wall RIGHT */
+.mapGrid{
+  display:grid;
+  grid-template-columns: 1fr 18px 1fr;
+  grid-template-rows: auto 12px auto;
+  gap:10px;
+  align-items:stretch;
+}
+.wallBox{
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  background:rgba(255,255,255,.02);
+}
+.wallHd{
+  padding:10px 12px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+.wallName{ font-weight:900; }
+.wallRange{ font-family:var(--mono); font-size:12px; color:var(--muted); }
+
+.cols{
+  display:grid;
+  gap:8px;
+  padding:10px;
+}
+/* horizontal row (South wall) */
+.cols.row{
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(44px, 1fr);
+}
+/* vertical column (West/East walls) */
+.cols.col{
+  grid-auto-rows:minmax(40px, auto);
+}
+.colTile{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:10px 0;
+  text-align:center;
+  font-family:var(--mono);
+  font-weight:900;
+  color:var(--muted);
+  position:relative;
+  user-select:none;
+}
+.colTile.has::after{
+  content:"";
+  position:absolute;
+  top:6px; right:6px;
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--ok);
+}
+.colTile.active{
+  color:var(--text);
+  background:rgba(122,162,255,.12);
+  border-color:rgba(122,162,255,.9);
+  box-shadow:0 0 0 4px rgba(122,162,255,.18);
+}
+.centerGap{
+  grid-column:2;
+  grid-row:1 / span 3;
+}
+.centerLabel{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:.35px;
+  text-transform:uppercase;
+  text-align:center;
+  user-select:none;
+}
+
+/* selection details */
+.details{
+  border-top:1px solid var(--border);
+  padding:12px 14px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+</style>
 </head>
+
 <body>
 <header>
   <div>
-    <h1>Storage Directory</h1>
-    <div class="sub">Search items, then see which wall/column to go to (A–X).</div>
+    <h1>Item Directory</h1>
+    <div class="sub">Search → sort → click an item to highlight its wall column</div>
   </div>
-  <div class="topControls">
-    <input id="q" type="text" placeholder="Search (e.g., prismarine, quartz, B2-7, torches)..." />
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search (e.g. quartz, prismarine, ladders, B2-7)" />
     <button id="clear">Clear</button>
-    <button id="reload">Reload items2.csv</button>
   </div>
 </header>
 
 <main>
-  <!-- Directory -->
+  <!-- DIRECTORY -->
   <section class="panel">
     <div class="hd">
       <div class="k">Directory</div>
-      <div class="stat" id="stat">Loading…</div>
+      <div class="mono muted" id="stat">Loading…</div>
     </div>
     <div class="bd">
-      <div id="err" style="display:none;"></div>
-      <div class="results" id="results"></div>
-      <div class="muted" id="none" style="display:none; font-size:12px; padding:8px 2px;">
-        No matches.
+      <div id="message" style="display:none;"></div>
+
+      <!-- Local fallback only shown if server load fails -->
+      <div id="localFallback" style="display:none;">
+        <div class="notice">
+          Server load failed (likely local file mode). Select <span class="mono">items.csv</span> from disk.
+        </div>
+        <input id="file" type="file" accept=".csv,text/csv" />
+        <button id="loadFile">Load CSV</button>
+        <div class="small" style="margin-top:8px;">
+          Tip: On GitHub Pages this picker stays hidden and the page loads <span class="mono">items.csv</span> automatically.
+        </div>
+        <div style="height:12px;"></div>
       </div>
+
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="Description">Item <span id="sortDesc"></span></th>
+              <th data-sort="Location">Location</th>
+              <th data-sort="Categories">Category</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="muted" id="none" style="display:none;font-size:12px;margin-top:10px;">No matches.</div>
     </div>
   </section>
 
-  <!-- Diagram -->
+  <!-- MAP -->
   <section class="panel">
     <div class="hd">
-      <div class="k">Where are the columns?</div>
-      <div class="stat mono">East: A–I • South: J–O • West: P–X</div>
+      <div class="k">Barn Map</div>
+      <div class="mono muted">Enter from North: West ← · South ↑ · East →</div>
     </div>
-    <div class="bd diagramWrap">
-      <div class="legend">
-        The green dot means that column has at least one defined chest entry in <span class="mono">items2.csv</span>.
-        Click a search result to highlight its column.
+    <div class="bd">
+      <div class="small muted" style="margin-bottom:10px;">
+        West wall = P–X, South wall = J–O, East wall = A–I
       </div>
+      <div class="mapGrid" id="map"></div>
+    </div>
 
-      <div class="diagram">
-        <div class="layout" id="layout"></div>
+    <div class="details">
+      <div>
+        <div class="k">Item</div>
+        <div class="mono" id="selDesc">—</div>
       </div>
-
-      <div class="details">
-        <div class="blk">
-          <div class="k">Selected</div>
-          <div class="v" id="selDesc">—</div>
-        </div>
-        <div class="blk">
-          <div class="k">ChestID</div>
-          <div class="v" id="selChest">—</div>
-        </div>
-        <div class="blk">
-          <div class="k">Wall / Column</div>
-          <div class="v" id="selLoc">—</div>
-        </div>
+      <div>
+        <div class="k">Chest</div>
+        <div class="mono" id="selChest">—</div>
+      </div>
+      <div>
+        <div class="k">Wall/Column</div>
+        <div class="mono" id="selLoc">—</div>
       </div>
     </div>
   </section>
 </main>
 
 <script>
-  const $ = (id) => document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-  /** CSV parser (handles quotes) **/
-  function parseCSV(text){
-    const rows = [];
-    let row = [];
-    let cur = "";
-    let inQuotes = false;
+/* ---------------- CSV ---------------- */
+function parseCSV(text){
+  const rows=[]; let row=[], cur="", q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i], n=text[i+1];
+    if(q){
+      if(c === '"' && n === '"'){ cur+='"'; i++; }
+      else if(c === '"'){ q=false; }
+      else cur+=c;
+    } else {
+      if(c === '"') q=true;
+      else if(c === ','){ row.push(cur); cur=""; }
+      else if(c === '\n'){ row.push(cur); rows.push(row); row=[]; cur=""; }
+      else if(c !== '\r'){ cur+=c; }
+    }
+  }
+  row.push(cur); rows.push(row);
+  return rows.filter(r => r.some(x => (x||"").trim() !== ""));
+}
+function toObjects(table){
+  const header = table[0].map(x => (x||"").trim());
+  return table.slice(1).map(r=>{
+    const o={};
+    header.forEach((k,i)=>o[k]=r[i] ?? "");
+    return o;
+  });
+}
+function norm(s){ return (s ?? "").toString().trim(); }
+function get(o, key){
+  if(o[key] !== undefined) return o[key];
+  const k = Object.keys(o).find(x => x.toLowerCase() === key.toLowerCase());
+  return k ? o[k] : "";
+}
 
-    for (let i=0; i<text.length; i++){
-      const ch = text[i];
-      const next = text[i+1];
+/* ---------------- Data ---------------- */
+let ITEMS = [];        // full loaded items
+let VIEW  = [];        // filtered/sorted view
+let COLS_WITH_ITEMS = new Set();
+let COL_NODES = new Map(); // "A" => element
+let ACTIVE_COL = null;
+let ACTIVE_KEY = null; // ChestID|Description used for row highlight
 
-      if (inQuotes){
-        if (ch === '"' && next === '"'){ cur += '"'; i++; }
-        else if (ch === '"'){ inQuotes = false; }
-        else cur += ch;
-      } else {
-        if (ch === '"') inQuotes = true;
-        else if (ch === ','){ row.push(cur); cur = ""; }
-        else if (ch === '\n'){ row.push(cur); rows.push(row); row=[]; cur=""; }
-        else if (ch === '\r'){ /* ignore */ }
-        else cur += ch;
+let SORT = { key: "Description", dir: "asc" }; // asc/desc
+
+function wallForColumn(c){
+  c = c.toUpperCase();
+  if(c >= "A" && c <= "I") return "East";
+  if(c >= "J" && c <= "O") return "South";
+  if(c >= "P" && c <= "X") return "West";
+  return "Other";
+}
+function colRange(a,b){
+  const out=[];
+  for(let i=a.charCodeAt(0); i<=b.charCodeAt(0); i++) out.push(String.fromCharCode(i));
+  return out;
+}
+function sortIcon(thKey){
+  if(SORT.key !== thKey) return "";
+  return SORT.dir === "asc" ? " ▲" : " ▼";
+}
+
+/* ---------------- Map ---------------- */
+function buildMap(){
+  const map = $("map");
+  map.innerHTML = "";
+  COL_NODES.clear();
+
+  // WEST on LEFT (P..X vertical)
+  // SOUTH on TOP (J..O horizontal)
+  // EAST on RIGHT (A..I vertical)
+  const westCols  = colRange("P","X"); // vertical
+  const southCols = colRange("J","O"); // horizontal
+  const eastCols  = colRange("A","I"); // vertical
+
+  const westBox = wallBox("West Wall", "P–X", westCols, "col");
+  westBox.style.gridColumn = "1";
+  westBox.style.gridRow = "2";
+
+  const southBox = wallBox("South Wall", "J–O", southCols, "row");
+  southBox.style.gridColumn = "1 / span 3";
+  southBox.style.gridRow = "1";
+
+  const eastBox = wallBox("East Wall", "A–I", eastCols, "col");
+  eastBox.style.gridColumn = "3";
+  eastBox.style.gridRow = "2";
+
+  const center = document.createElement("div");
+  center.className = "centerGap";
+  center.innerHTML = `<div class="centerLabel">Center / Aisle</div>`;
+
+  map.appendChild(southBox);
+  map.appendChild(westBox);
+  map.appendChild(center);
+  map.appendChild(eastBox);
+}
+
+function wallBox(name, range, cols, mode){
+  const box = document.createElement("div");
+  box.className = "wallBox";
+
+  const hd = document.createElement("div");
+  hd.className = "wallHd";
+  hd.innerHTML = `<div class="wallName">${name}</div><div class="wallRange">${range}</div>`;
+
+  const grid = document.createElement("div");
+  grid.className = "cols " + mode;
+
+  cols.forEach(c=>{
+    const tile = document.createElement("div");
+    tile.className = "colTile" + (COLS_WITH_ITEMS.has(c) ? " has" : "");
+    tile.textContent = c;
+    tile.dataset.col = c;
+
+    // clicking a tile filters search by column shortcut
+    tile.addEventListener("click", () => {
+      const q = $("search").value.trim();
+      const token = `col:${c}`;
+      if(!q.toLowerCase().includes(token.toLowerCase())){
+        $("search").value = (q ? q + " " : "") + token;
+        run();
       }
-    }
-    row.push(cur); rows.push(row);
-    while (rows.length && rows[rows.length-1].every(c => (c??"").toString().trim()==="")) rows.pop();
-    return rows;
-  }
-
-  function normalize(s){ return (s ?? "").toString().trim(); }
-
-  function rowsToObjects(table){
-    const header = table[0].map(h => normalize(h));
-    const objs = [];
-    for (let r=1; r<table.length; r++){
-      const arr = table[r];
-      if (arr.every(c => normalize(c)==="")) continue;
-      const o = {};
-      for (let c=0; c<header.length; c++){
-        o[header[c] || ("Col"+c)] = arr[c] ?? "";
-      }
-      objs.push(o);
-    }
-    return objs;
-  }
-
-  function getField(o, ...names){
-    for (const n of names){
-      if (o[n] !== undefined) return o[n];
-      const key = Object.keys(o).find(k => k.toLowerCase() === n.toLowerCase());
-      if (key) return o[key];
-    }
-    return "";
-  }
-
-  function wallForColumn(col){
-    const c = col.toUpperCase();
-    if (c >= "A" && c <= "I") return "East";
-    if (c >= "J" && c <= "O") return "South";
-    if (c >= "P" && c <= "X") return "West";
-    return "Other";
-  }
-
-  function colRange(start, end){
-    const out = [];
-    for (let i=start.charCodeAt(0); i<=end.charCodeAt(0); i++){
-      out.push(String.fromCharCode(i));
-    }
-    return out;
-  }
-
-  /** Data **/
-  let ITEMS = [];      // {ChestID, Column, Description}
-  let COL_HAS_ITEMS = new Set();
-  let COL_TILES = new Map(); // "A" -> element
-  let ACTIVE_COL = null;
-
-  /** UI **/
-  function buildDiagram(){
-    const layout = $("layout");
-    layout.innerHTML = "";
-    COL_TILES.clear();
-
-    const walls = [
-      { name: "East Wall",  range: "A–I", cols: colRange("A","I") },
-      { name: "South Wall", range: "J–O", cols: colRange("J","O") },
-      { name: "West Wall",  range: "P–X", cols: colRange("P","X") },
-    ];
-
-    for (const w of walls){
-      const box = document.createElement("div");
-      box.className = "wallBox";
-
-      const hd = document.createElement("div");
-      hd.className = "wallHd";
-      hd.innerHTML = `<div class="wallName">${w.name}</div><div class="wallRange">${w.range}</div>`;
-
-      const cols = document.createElement("div");
-      cols.className = "cols";
-
-      for (const c of w.cols){
-        const tile = document.createElement("div");
-        tile.className = "colTile";
-        tile.dataset.col = c;
-        tile.textContent = c;
-
-        const dot = document.createElement("div");
-        dot.className = "dot";
-        tile.appendChild(dot);
-
-        if (COL_HAS_ITEMS.has(c)) tile.classList.add("hasItems");
-
-        tile.addEventListener("click", () => {
-          // Clicking column filters search to that column (nice shortcut)
-          const q = $("q").value.trim();
-          if (!q.toLowerCase().includes(`col:${c.toLowerCase()}`)){
-            $("q").value = (q ? q + " " : "") + `col:${c}`;
-            runSearch();
-          }
-        });
-
-        COL_TILES.set(c, tile);
-        cols.appendChild(tile);
-      }
-
-      box.appendChild(hd);
-      box.appendChild(cols);
-      layout.appendChild(box);
-    }
-  }
-
-  function setActiveColumn(col){
-    if (ACTIVE_COL && COL_TILES.get(ACTIVE_COL)) COL_TILES.get(ACTIVE_COL).classList.remove("active");
-    ACTIVE_COL = col;
-    if (col && COL_TILES.get(col)) COL_TILES.get(col).classList.add("active");
-  }
-
-  function renderResults(list){
-    const results = $("results");
-    results.innerHTML = "";
-
-    if (!list.length){
-      $("none").style.display = "block";
-      return;
-    }
-    $("none").style.display = "none";
-
-    // Sort by Description, then ChestID
-    list.sort((a,b) => {
-      const ad = a.Description.toLowerCase(), bd = b.Description.toLowerCase();
-      if (ad !== bd) return ad.localeCompare(bd);
-      return a.ChestID.localeCompare(b.ChestID);
     });
 
-    // cap
-    const shown = list.slice(0, 200);
-    for (const it of shown){
-      const card = document.createElement("div");
-      card.className = "card";
-      card.addEventListener("click", () => selectItem(it));
+    COL_NODES.set(c, tile);
+    grid.appendChild(tile);
+  });
 
-      const top = document.createElement("div");
-      top.className = "top";
-      top.innerHTML = `<div class="id">${it.ChestID || "—"}</div><div class="pill">${wallForColumn(it.Column)} / ${it.Column}</div>`;
+  box.appendChild(hd);
+  box.appendChild(grid);
+  return box;
+}
 
-      const desc = document.createElement("div");
-      desc.className = "desc";
-      desc.textContent = it.Description || "(no description)";
+function setActiveColumn(c){
+  if(ACTIVE_COL && COL_NODES.get(ACTIVE_COL)) COL_NODES.get(ACTIVE_COL).classList.remove("active");
+  ACTIVE_COL = c;
+  if(c && COL_NODES.get(c)) COL_NODES.get(c).classList.add("active");
+}
 
-      const meta = document.createElement("div");
-      meta.className = "meta";
-      meta.innerHTML = `<span class="mono">Column ${it.Column}</span>`;
+/* ---------------- Directory Table ---------------- */
+function parseQuery(q){
+  // Supports token: col:A
+  const parts = q.split(/\s+/).filter(Boolean);
+  let colFilter = null;
+  const terms = [];
+  for(const p of parts){
+    const m = p.match(/^col:([a-z])$/i);
+    if(m) colFilter = m[1].toUpperCase();
+    else terms.push(p.toLowerCase());
+  }
+  return { colFilter, terms };
+}
 
-      card.appendChild(top);
-      card.appendChild(desc);
-      card.appendChild(meta);
-      results.appendChild(card);
-    }
+function computeView(){
+  const q = norm($("search").value);
+  const { colFilter, terms } = parseQuery(q);
 
-    if (list.length > 200){
-      const more = document.createElement("div");
-      more.className = "muted";
-      more.style.fontSize = "12px";
-      more.style.padding = "8px 2px 0";
-      more.textContent = `Showing first 200 results — refine your search.`;
-      results.appendChild(more);
-    }
+  let arr = ITEMS;
+
+  if(colFilter){
+    arr = arr.filter(it => it.Column === colFilter);
+    setActiveColumn(colFilter);
+  } else {
+    // don't auto-clear column highlight if user clicked an item
+    // so only clear if no selection
+    if(!ACTIVE_KEY) setActiveColumn(null);
   }
 
-  function selectItem(it){
-    setActiveColumn(it.Column);
-
-    $("selDesc").textContent = it.Description || "—";
-    $("selChest").textContent = it.ChestID || "—";
-    $("selLoc").textContent = `${wallForColumn(it.Column)} / Column ${it.Column}`;
+  if(terms.length){
+    arr = arr.filter(it=>{
+      const hay = (it.Description + " " + it.ChestID + " " + it.Column + " " + it.Categories).toLowerCase();
+      return terms.every(t => hay.includes(t));
+    });
   }
 
-  function parseQuery(q){
-    // Supports optional token: col:A (filters to Column A)
-    // Everything else is normal substring search over Description + ChestID
-    const parts = q.split(/\s+/).filter(Boolean);
-    let colFilter = null;
-    const terms = [];
+  // Sorting
+  const dirMul = (SORT.dir === "asc") ? 1 : -1;
+  arr = arr.slice().sort((a,b)=>{
+    const av = sortValue(a, SORT.key);
+    const bv = sortValue(b, SORT.key);
+    if(av === bv) return a.Description.localeCompare(b.Description);
+    return av.localeCompare(bv) * dirMul;
+  });
 
-    for (const p of parts){
-      const m = p.match(/^col:([a-z])$/i);
-      if (m) colFilter = m[1].toUpperCase();
-      else terms.push(p.toLowerCase());
-    }
-    return { colFilter, terms };
+  VIEW = arr;
+  $("stat").textContent = `${VIEW.length} / ${ITEMS.length}`;
+}
+
+function sortValue(it, key){
+  if(key === "Description") return (it.Description || "").toLowerCase();
+  if(key === "Categories") return (it.Categories || "").toLowerCase();
+  if(key === "Location"){
+    // location sort: Wall then Column then ChestID
+    return `${wallForColumn(it.Column)}-${it.Column}-${it.ChestID}`.toLowerCase();
   }
+  return "";
+}
 
-  function runSearch(){
-    const q = normalize($("q").value);
-    const { colFilter, terms } = parseQuery(q);
+function renderTable(){
+  const tb = $("tbody");
+  tb.innerHTML = "";
 
-    let filtered = ITEMS;
-
-    if (colFilter){
-      filtered = filtered.filter(it => it.Column === colFilter);
-      setActiveColumn(colFilter);
-    } else {
-      setActiveColumn(null);
-    }
-
-    if (terms.length){
-      filtered = filtered.filter(it => {
-        const hay = (it.Description + " " + it.ChestID + " " + it.Column).toLowerCase();
-        return terms.every(t => hay.includes(t));
-      });
-    }
-
-    $("stat").textContent = `${filtered.length} match(es) • ${ITEMS.length} total`;
-    renderResults(filtered);
+  if(!VIEW.length){
+    $("none").style.display = "block";
+    return;
   }
+  $("none").style.display = "none";
 
-  function showError(msg){
-    const err = $("err");
-    err.style.display = "block";
-    err.className = "error";
-    err.textContent = msg;
+  // update sort indicators
+  const ths = document.querySelectorAll("thead th");
+  ths.forEach(th=>{
+    const k = th.dataset.sort;
+    if(!k) return;
+    // Set text with icon by appending a span
+    th.innerHTML = th.textContent.split(" ▲")[0].split(" ▼")[0].trim() + sortIcon(k);
+  });
+
+  VIEW.slice(0, 400).forEach(it=>{
+    const key = `${it.ChestID}|||${it.Description}`;
+    const tr = document.createElement("tr");
+    if(ACTIVE_KEY === key) tr.classList.add("selected");
+    tr.addEventListener("click", () => selectItem(it));
+
+    const loc = `${wallForColumn(it.Column)} / ${it.Column} · ${it.ChestID}`;
+    tr.innerHTML = `
+      <td>
+        <div>${escapeHTML(it.Description)}</div>
+        <div class="small mono">${escapeHTML(it.Column)}</div>
+      </td>
+      <td>
+        <div class="mono">${escapeHTML(loc)}</div>
+      </td>
+      <td>
+        <span class="pill">${escapeHTML(it.Categories || "—")}</span>
+      </td>
+    `;
+    tb.appendChild(tr);
+  });
+
+  if(VIEW.length > 400){
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="3" class="muted" style="padding:10px">Showing first 400 rows — refine your search.</td>`;
+    tb.appendChild(tr);
   }
+}
 
-  async function loadCSV(){
-    $("err").style.display = "none";
-    $("stat").textContent = "Loading…";
+function escapeHTML(s){
+  return (s ?? "").toString()
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
 
-    let text;
-    try{
-      const res = await fetch("items2.csv", { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-      text = await res.text();
-    }catch(e){
-      showError(
-        `Couldn't load items2.csv.\n\n` +
-        `Make sure this HTML file and items2.csv are in the SAME directory on a web server.\n` +
-        `Error: ${e.message}`
-      );
-      $("stat").textContent = "Load failed";
-      return;
-    }
+function selectItem(it){
+  ACTIVE_KEY = `${it.ChestID}|||${it.Description}`;
+  setActiveColumn(it.Column);
 
-    const table = parseCSV(text);
-    if (!table.length || table.length < 2){
-      showError("items2.csv loaded, but it looks empty (or missing a header row).");
-      $("stat").textContent = "0 loaded";
-      return;
-    }
+  $("selDesc").textContent = it.Description || "—";
+  $("selChest").textContent = it.ChestID || "—";
+  $("selLoc").textContent = `${wallForColumn(it.Column)} / Column ${it.Column}`;
 
-    const objs = rowsToObjects(table);
+  // re-render to show selected row highlight
+  renderTable();
+}
 
-    ITEMS = objs.map(o => {
-      const chest = normalize(getField(o, "ChestID"));
-      const col   = normalize(getField(o, "Column")).toUpperCase();
-      const desc  = normalize(getField(o, "Description"));
-      return { ChestID: chest, Column: col, Description: desc };
-    }).filter(x => x.Column && x.Description); // directory entries: must have a column + description
+/* ---------------- Run ---------------- */
+function run(){
+  computeView();
+  renderTable();
+}
 
-    // Mark which columns have entries
-    COL_HAS_ITEMS = new Set(ITEMS.map(it => it.Column));
+/* ---------------- Load ---------------- */
+function loadCSV(text){
+  const t = parseCSV(text);
+  if(!t.length || t.length < 2) throw new Error("CSV seems empty or missing a header row.");
 
-    buildDiagram();
-    $("stat").textContent = `${ITEMS.length} total`;
-    runSearch();
+  const o = toObjects(t);
 
-    // Auto-select first item so the diagram shows something
-    if (ITEMS[0]) selectItem(ITEMS[0]);
+  ITEMS = o.map(x => ({
+    ChestID: norm(get(x, "ChestID")),
+    Column:  norm(get(x, "Column")).toUpperCase(),
+    Description: norm(get(x, "Description")),
+    Categories: norm(get(x, "Categories")),
+  }))
+  // "directory rows" — must have a Column + Description
+  .filter(x => x.Column && x.Description);
+
+  COLS_WITH_ITEMS = new Set(ITEMS.map(x => x.Column));
+
+  buildMap();
+  ACTIVE_KEY = null;
+  setActiveColumn(null);
+
+  // default sort: Item asc
+  SORT = { key: "Description", dir: "asc" };
+
+  run();
+
+  // auto-select first result (if any)
+  if(VIEW[0]) selectItem(VIEW[0]);
+}
+
+async function loadFromServer(){
+  $("message").style.display = "none";
+  try{
+    const res = await fetch("items.csv", { cache: "no-store" });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    loadCSV(await res.text());
+    $("localFallback").style.display = "none";
+  }catch(err){
+    $("message").innerHTML = `<div class="notice">Server load failed. Local CSV mode enabled.</div>`;
+    $("message").style.display = "block";
+    $("localFallback").style.display = "block";
+    $("stat").textContent = "Waiting for CSV";
+    // still build empty map so the layout is visible
+    COLS_WITH_ITEMS = new Set();
+    buildMap();
   }
+}
 
-  $("q").addEventListener("input", runSearch);
-  $("clear").addEventListener("click", () => { $("q").value=""; setActiveColumn(null); runSearch(); });
-  $("reload").addEventListener("click", loadCSV);
+/* ---------------- Events ---------------- */
+$("search").addEventListener("input", () => run());
+$("clear").addEventListener("click", () => { $("search").value=""; run(); });
 
-  // boot
-  loadCSV();
+document.querySelectorAll("thead th").forEach(th=>{
+  th.addEventListener("click", () => {
+    const key = th.dataset.sort;
+    if(!key) return;
+
+    if(SORT.key === key){
+      SORT.dir = (SORT.dir === "asc") ? "desc" : "asc";
+    }else{
+      SORT.key = key;
+      SORT.dir = "asc";
+    }
+    run();
+  });
+});
+
+$("loadFile").addEventListener("click", async()=>{
+  const f = $("file").files[0];
+  if(!f) return;
+  try{
+    loadCSV(await f.text());
+    $("message").style.display = "none";
+  }catch(e){
+    $("message").innerHTML = `<div class="error">Could not parse CSV: ${escapeHTML(e.message)}</div>`;
+    $("message").style.display = "block";
+  }
+});
+
+/* boot */
+loadFromServer();
 </script>
 </body>
 </html>
