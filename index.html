@@ -287,12 +287,12 @@ tbody tr.selected{ background:rgba(122,162,255,.10); }
       <!-- Local fallback only shown if server load fails -->
       <div id="localFallback" style="display:none;">
         <div class="notice">
-          Server load failed (likely local file mode). Select <span class="mono">items.csv</span> from disk.
+          Server load failed (likely local file mode). Select <span class="mono">items2.csv</span> from disk.
         </div>
         <input id="file" type="file" accept=".csv,text/csv" />
         <button id="loadFile">Load CSV</button>
         <div class="small" style="margin-top:8px;">
-          On GitHub Pages this stays hidden and loads <span class="mono">items.csv</span> automatically.
+          On GitHub Pages this stays hidden and loads <span class="mono">items2.csv</span> automatically.
         </div>
         <div style="height:12px;"></div>
       </div>
@@ -627,7 +627,7 @@ function loadCSV(text){
 async function loadFromServer(){
   $("message").style.display = "none";
   try{
-    const res = await fetch("items.csv", { cache: "no-store" });
+    const res = await fetch("items2.csv", { cache: "no-store" });
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     loadCSV(await res.text());
     $("localFallback").style.display = "none";
