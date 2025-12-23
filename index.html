@@ -112,15 +112,10 @@ tbody td{
   border-bottom:1px solid rgba(34,48,66,.6);
   vertical-align:top;
 }
-tbody tr{
-  cursor:pointer;
-}
-tbody tr:hover{
-  background:rgba(255,255,255,.04);
-}
-tbody tr.selected{
-  background:rgba(122,162,255,.10);
-}
+tbody tr{ cursor:pointer; }
+tbody tr:hover{ background:rgba(255,255,255,.04); }
+tbody tr.selected{ background:rgba(122,162,255,.10); }
+
 .small{ font-size:11px; color:var(--muted); }
 .pill{
   display:inline-block;
@@ -164,12 +159,10 @@ tbody tr.selected{
   gap:8px;
   padding:10px;
 }
-/* horizontal row (South wall) */
 .cols.row{
   grid-auto-flow:column;
   grid-auto-columns:minmax(44px, 1fr);
 }
-/* vertical column (West/East walls) */
 .cols.col{
   grid-auto-rows:minmax(40px, auto);
 }
@@ -198,10 +191,7 @@ tbody tr.selected{
   border-color:rgba(122,162,255,.9);
   box-shadow:0 0 0 4px rgba(122,162,255,.18);
 }
-.centerGap{
-  grid-column:2;
-  grid-row:1 / span 3;
-}
+.centerGap{ grid-column:2; grid-row:1 / span 3; }
 .centerLabel{
   writing-mode:vertical-rl;
   transform:rotate(180deg);
@@ -232,7 +222,7 @@ tbody tr.selected{
     <div class="sub">Search → sort → click an item to highlight its wall column</div>
   </div>
   <div class="controls">
-    <input id="search" type="text" placeholder="Search (e.g. quartz, prismarine, ladders, B2-7)" />
+    <input id="search" type="text" placeholder="Search (e.g. quartz, prismarine, ladders, G1-5)" />
     <button id="clear">Clear</button>
   </div>
 </header>
@@ -255,7 +245,7 @@ tbody tr.selected{
         <input id="file" type="file" accept=".csv,text/csv" />
         <button id="loadFile">Load CSV</button>
         <div class="small" style="margin-top:8px;">
-          Tip: On GitHub Pages this picker stays hidden and the page loads <span class="mono">items.csv</span> automatically.
+          On GitHub Pages this stays hidden and loads <span class="mono">items.csv</span> automatically.
         </div>
         <div style="height:12px;"></div>
       </div>
@@ -264,8 +254,8 @@ tbody tr.selected{
         <table>
           <thead>
             <tr>
-              <th data-sort="Description">Item <span id="sortDesc"></span></th>
-              <th data-sort="Location">Location</th>
+              <th data-sort="Description">Item</th>
+              <th data-sort="ChestID">Location</th>
               <th data-sort="Categories">Category</th>
             </tr>
           </thead>
@@ -300,8 +290,8 @@ tbody tr.selected{
         <div class="mono" id="selChest">—</div>
       </div>
       <div>
-        <div class="k">Wall/Column</div>
-        <div class="mono" id="selLoc">—</div>
+        <div class="k">Column</div>
+        <div class="mono" id="selCol">—</div>
       </div>
     </div>
   </section>
@@ -343,24 +333,25 @@ function get(o, key){
   const k = Object.keys(o).find(x => x.toLowerCase() === key.toLowerCase());
   return k ? o[k] : "";
 }
+function escapeHTML(s){
+  return (s ?? "").toString()
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
 
 /* ---------------- Data ---------------- */
-let ITEMS = [];        // full loaded items
-let VIEW  = [];        // filtered/sorted view
+let ITEMS = [];
+let VIEW  = [];
 let COLS_WITH_ITEMS = new Set();
-let COL_NODES = new Map(); // "A" => element
+let COL_NODES = new Map();
 let ACTIVE_COL = null;
-let ACTIVE_KEY = null; // ChestID|Description used for row highlight
+let ACTIVE_KEY = null;
 
-let SORT = { key: "Description", dir: "asc" }; // asc/desc
+let SORT = { key: "Description", dir: "asc" };
 
-function wallForColumn(c){
-  c = c.toUpperCase();
-  if(c >= "A" && c <= "I") return "East";
-  if(c >= "J" && c <= "O") return "South";
-  if(c >= "P" && c <= "X") return "West";
-  return "Other";
-}
 function colRange(a,b){
   const out=[];
   for(let i=a.charCodeAt(0); i<=b.charCodeAt(0); i++) out.push(String.fromCharCode(i));
@@ -377,12 +368,9 @@ function buildMap(){
   map.innerHTML = "";
   COL_NODES.clear();
 
-  // WEST on LEFT (P..X vertical)
-  // SOUTH on TOP (J..O horizontal)
-  // EAST on RIGHT (A..I vertical)
-  const westCols  = colRange("P","X"); // vertical
-  const southCols = colRange("J","O"); // horizontal
-  const eastCols  = colRange("A","I"); // vertical
+  const westCols  = colRange("P","X");
+  const southCols = colRange("J","O");
+  const eastCols  = colRange("A","I");
 
   const westBox = wallBox("West Wall", "P–X", westCols, "col");
   westBox.style.gridColumn = "1";
@@ -423,7 +411,7 @@ function wallBox(name, range, cols, mode){
     tile.textContent = c;
     tile.dataset.col = c;
 
-    // clicking a tile filters search by column shortcut
+    // click tile -> quick filter helper (optional)
     tile.addEventListener("click", () => {
       const q = $("search").value.trim();
       const token = `col:${c}`;
@@ -450,7 +438,7 @@ function setActiveColumn(c){
 
 /* ---------------- Directory Table ---------------- */
 function parseQuery(q){
-  // Supports token: col:A
+  // supports token: col:A
   const parts = q.split(/\s+/).filter(Boolean);
   let colFilter = null;
   const terms = [];
@@ -472,24 +460,21 @@ function computeView(){
     arr = arr.filter(it => it.Column === colFilter);
     setActiveColumn(colFilter);
   } else {
-    // don't auto-clear column highlight if user clicked an item
-    // so only clear if no selection
     if(!ACTIVE_KEY) setActiveColumn(null);
   }
 
   if(terms.length){
     arr = arr.filter(it=>{
-      const hay = (it.Description + " " + it.ChestID + " " + it.Column + " " + it.Categories).toLowerCase();
+      const hay = (it.Description + " " + it.ChestID + " " + it.Categories + " " + it.Column).toLowerCase();
       return terms.every(t => hay.includes(t));
     });
   }
 
-  // Sorting
   const dirMul = (SORT.dir === "asc") ? 1 : -1;
   arr = arr.slice().sort((a,b)=>{
     const av = sortValue(a, SORT.key);
     const bv = sortValue(b, SORT.key);
-    if(av === bv) return a.Description.localeCompare(b.Description);
+    if(av === bv) return (a.Description||"").localeCompare(b.Description||"");
     return av.localeCompare(bv) * dirMul;
   });
 
@@ -500,10 +485,7 @@ function computeView(){
 function sortValue(it, key){
   if(key === "Description") return (it.Description || "").toLowerCase();
   if(key === "Categories") return (it.Categories || "").toLowerCase();
-  if(key === "Location"){
-    // location sort: Wall then Column then ChestID
-    return `${wallForColumn(it.Column)}-${it.Column}-${it.ChestID}`.toLowerCase();
-  }
+  if(key === "ChestID") return (it.ChestID || "").toLowerCase();
   return "";
 }
 
@@ -511,57 +493,38 @@ function renderTable(){
   const tb = $("tbody");
   tb.innerHTML = "";
 
+  // update header arrows
+  document.querySelectorAll("thead th").forEach(th=>{
+    const k = th.dataset.sort;
+    if(!k) return;
+    th.textContent = th.textContent.split(" ▲")[0].split(" ▼")[0].trim() + sortIcon(k);
+  });
+
   if(!VIEW.length){
     $("none").style.display = "block";
     return;
   }
   $("none").style.display = "none";
 
-  // update sort indicators
-  const ths = document.querySelectorAll("thead th");
-  ths.forEach(th=>{
-    const k = th.dataset.sort;
-    if(!k) return;
-    // Set text with icon by appending a span
-    th.innerHTML = th.textContent.split(" ▲")[0].split(" ▼")[0].trim() + sortIcon(k);
-  });
-
-  VIEW.slice(0, 400).forEach(it=>{
+  VIEW.slice(0, 600).forEach(it=>{
     const key = `${it.ChestID}|||${it.Description}`;
     const tr = document.createElement("tr");
     if(ACTIVE_KEY === key) tr.classList.add("selected");
     tr.addEventListener("click", () => selectItem(it));
 
-    const loc = `${wallForColumn(it.Column)} / ${it.Column} · ${it.ChestID}`;
     tr.innerHTML = `
-      <td>
-        <div>${escapeHTML(it.Description)}</div>
-        <div class="small mono">${escapeHTML(it.Column)}</div>
-      </td>
-      <td>
-        <div class="mono">${escapeHTML(loc)}</div>
-      </td>
-      <td>
-        <span class="pill">${escapeHTML(it.Categories || "—")}</span>
-      </td>
+      <td>${escapeHTML(it.Description)}</td>
+      <td class="mono">${escapeHTML(it.ChestID || "—")}</td>
+      <td><span class="pill">${escapeHTML(it.Categories || "—")}</span></td>
     `;
     tb.appendChild(tr);
   });
 
-  if(VIEW.length > 400){
+  if(VIEW.length > 600){
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="3" class="muted" style="padding:10px">Showing first 400 rows — refine your search.</td>`;
+    tr.innerHTML = `<td colspan="3" class="muted" style="padding:10px">Showing first 600 rows — refine your search.</td>`;
     tb.appendChild(tr);
   }
-}
-
-function escapeHTML(s){
-  return (s ?? "").toString()
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
 }
 
 function selectItem(it){
@@ -570,13 +533,11 @@ function selectItem(it){
 
   $("selDesc").textContent = it.Description || "—";
   $("selChest").textContent = it.ChestID || "—";
-  $("selLoc").textContent = `${wallForColumn(it.Column)} / Column ${it.Column}`;
+  $("selCol").textContent = it.Column || "—";
 
-  // re-render to show selected row highlight
   renderTable();
 }
 
-/* ---------------- Run ---------------- */
 function run(){
   computeView();
   renderTable();
@@ -595,7 +556,6 @@ function loadCSV(text){
     Description: norm(get(x, "Description")),
     Categories: norm(get(x, "Categories")),
   }))
-  // "directory rows" — must have a Column + Description
   .filter(x => x.Column && x.Description);
 
   COLS_WITH_ITEMS = new Set(ITEMS.map(x => x.Column));
@@ -604,12 +564,9 @@ function loadCSV(text){
   ACTIVE_KEY = null;
   setActiveColumn(null);
 
-  // default sort: Item asc
   SORT = { key: "Description", dir: "asc" };
 
   run();
-
-  // auto-select first result (if any)
   if(VIEW[0]) selectItem(VIEW[0]);
 }
 
@@ -625,7 +582,6 @@ async function loadFromServer(){
     $("message").style.display = "block";
     $("localFallback").style.display = "block";
     $("stat").textContent = "Waiting for CSV";
-    // still build empty map so the layout is visible
     COLS_WITH_ITEMS = new Set();
     buildMap();
   }
