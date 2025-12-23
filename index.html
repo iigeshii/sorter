@@ -255,6 +255,49 @@ tbody tr.selected{ background:rgba(122,162,255,.10); }
   flex-wrap:wrap;
 }
 
+
+/* Locator mini-map */
+.locator {
+  display:flex;
+  flex-direction:column; /* stack vertically */
+  gap:10px;
+  align-items:flex-start;
+}
+.locBlock {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.locTitle{
+  font-size:11px;
+  color:var(--muted);
+  font-family:var(--mono);
+}
+.miniGrid{
+  display:grid;
+  grid-template-columns: repeat(3, 20px);
+  grid-auto-rows: 20px;
+  gap:6px;
+}
+.miniCell{
+  border:1px solid var(--border);
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-family:var(--mono);
+  color:var(--muted);
+  background:rgba(255,255,255,.02);
+}
+.miniCell.on{
+  color:var(--text);
+  border-color:rgba(122,162,255,.9);
+  background:rgba(122,162,255,.14);
+  box-shadow:0 0 0 3px rgba(122,162,255,.14);
+}
+
+
 /* Responsive map scaling */
 @media (max-width: 1100px){ :root{ --tile: 38px; } }
 @media (max-width: 980px){  :root{ --tile: 36px; } }
@@ -342,8 +385,8 @@ tbody tr.selected{ background:rgba(122,162,255,.10); }
         <div class="mono" id="selChest">—</div>
       </div>
       <div>
-        <div class="k">Column</div>
-        <div class="mono" id="selCol">—</div>
+        <div class="k">Locator</div>
+        <div id="locator" class="locator"></div>
       </div>
     </div>
   </section>
@@ -422,7 +465,8 @@ function buildMap(){
 
   const westCols  = colRange("P","X");
   const southCols = colRange("J","O");
-  const eastCols  = colRange("A","I");
+  const eastCols  = colRange("A","I").reverse(); // I at top, A at bottom
+
 
   // SOUTH on TOP (row 1)
   const southBox = wallBox("South Wall", "J–O", southCols, "row");
@@ -587,9 +631,56 @@ function selectItem(it){
 
   $("selDesc").textContent = it.Description || "—";
   $("selChest").textContent = it.ChestID || "—";
-  $("selCol").textContent = it.Column || "—";
+
+  renderLocator(it.ChestID);   // <-- add this
 
   renderTable();
+}
+
+
+function parseChestID(chestID){
+  // expects like "X1-5"
+  const m = (chestID || "").trim().match(/^([A-Z])(\d+)-(\d+)$/);
+  if(!m) return null;
+  return { col: m[1], cluster: parseInt(m[2],10), num: parseInt(m[3],10) };
+}
+
+function renderLocator(chestID){
+  const el = $("locator");
+  if(!el) return;
+
+  const p = parseChestID(chestID);
+  if(!p || !(p.cluster === 1 || p.cluster === 2) || !(p.num >= 1 && p.num <= 9)){
+    el.innerHTML = `<div class="muted">—</div>`;
+    return;
+  }
+
+  const makeBlock = (title, activeCluster) => {
+    const wrap = document.createElement("div");
+    wrap.className = "locBlock";
+
+    const t = document.createElement("div");
+    t.className = "locTitle";
+    t.textContent = title;
+
+    const g = document.createElement("div");
+    g.className = "miniGrid";
+
+    for(let n=1; n<=9; n++){
+      const c = document.createElement("div");
+      c.className = "miniCell" + ((p.cluster === activeCluster && p.num === n) ? " on" : "");
+      c.textContent = n;
+      g.appendChild(c);
+    }
+
+    wrap.appendChild(t);
+    wrap.appendChild(g);
+    return wrap;
+  };
+
+  el.innerHTML = "";
+  el.appendChild(makeBlock(`${p.col}1 (Top)`, 1));
+  el.appendChild(makeBlock(`${p.col}2 (Bottom)`, 2));
 }
 
 function run(){
