@@ -287,7 +287,7 @@ tbody tr.active{
 .centerGrid{
   display:grid;
   grid-template-columns: 120px 1fr;
-  gap: 12px;
+  gap: 6px;
   align-items:start;
   min-width: 0;
   width: 100%;
@@ -386,38 +386,3 @@ tbody tr.active{
   .tableMap{ min-height: 540px; }
 }
 
-/* --- MOBILE: give Chest more room + scootch locator left --- */
-@media (max-width: 600px){
-  .wrap{ padding: 14px 12px 20px; }
-
-  /* ensure map doesn't feel huge on small screens */
-  .tableMap{
-    min-height: 520px;
-    grid-template-columns: 80px 1fr 80px;
-    gap: 8px;
-  }
-
-  /* IMPORTANT: increase chest column; locator stays readable */
-  .tableCenter .centerGrid{
-    grid-template-columns: 150px 1fr;
-    gap: 10px;
-  }
-
-  /* scootch locator left so it doesn't steal space visually */
-  .tableCenter .locator{
-    margin-left: -12px;
-    gap: 8px;
-  }
-  .tableCenter .locBlock{ gap: 4px; }
-
-  /* slightly tighter mini-grid without shrinking too much */
-  .tableCenter .miniGrid{
-    grid-template-columns: repeat(3, 17px);
-    grid-auto-rows: 17px;
-    gap: 4px;
-  }
-  .tableCenter .miniCell{
-    border-radius: 5px;
-    font-size: 9px;
-  }
-}
