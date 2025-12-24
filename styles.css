@@ -237,9 +237,8 @@ tbody tr.active{
   flex-direction:column;
   gap:10px;
   align-items:center;
-  justify-content:flex-start; /* top-ish like South */
+  justify-content:flex-start;
 }
-
 .sideHead{
   width: 100%;
   display:flex;
@@ -249,7 +248,6 @@ tbody tr.active{
   letter-spacing:.2px;
   padding: 4px 0 2px;
 }
-
 .letterCol{
   display:flex;
   flex-direction:column;
@@ -263,12 +261,11 @@ tbody tr.active{
   padding: 16px 14px 14px;
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;  /* was center */
-  align-items:flex-start;       /* keeps content left-aligned */
+  justify-content:flex-start;
+  align-items:flex-start;
   gap:10px;
   min-width: 0;
 }
-
 
 .k{
   font-size: 10px;
@@ -296,7 +293,7 @@ tbody tr.active{
   width: 100%;
 }
 
-/* Your existing “nice squares” */
+/* nice squares */
 .colBtn{
   position:relative;
   border:1px solid rgba(255,255,255,.08);
@@ -372,7 +369,7 @@ tbody tr.active{
   box-shadow: 0 0 0 3px rgba(122,162,255,.14);
 }
 
-/* Keep everything fitting */
+/* --- Fit/Responsive --- */
 @media (max-height: 760px){
   .tableMap{ min-height: 540px; }
   .colBtn{ height: 38px; width: 50px; }
@@ -389,13 +386,38 @@ tbody tr.active{
   .tableMap{ min-height: 540px; }
 }
 
+/* --- MOBILE: give Chest more room + scootch locator left --- */
 @media (max-width: 600px){
-  .locator{
-    gap: 6px;
+  .wrap{ padding: 14px 12px 20px; }
+
+  /* ensure map doesn't feel huge on small screens */
+  .tableMap{
+    min-height: 520px;
+    grid-template-columns: 80px 1fr 80px;
+    gap: 8px;
   }
 
-  .locBlock{
+  /* IMPORTANT: increase chest column; locator stays readable */
+  .tableCenter .centerGrid{
+    grid-template-columns: 150px 1fr;
+    gap: 10px;
+  }
+
+  /* scootch locator left so it doesn't steal space visually */
+  .tableCenter .locator{
+    margin-left: -12px;
+    gap: 8px;
+  }
+  .tableCenter .locBlock{ gap: 4px; }
+
+  /* slightly tighter mini-grid without shrinking too much */
+  .tableCenter .miniGrid{
+    grid-template-columns: repeat(3, 17px);
+    grid-auto-rows: 17px;
     gap: 4px;
   }
+  .tableCenter .miniCell{
+    border-radius: 5px;
+    font-size: 9px;
+  }
 }
-
