@@ -1,770 +1,872 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Barn Sorter Item Directory</title>
-
-<style>
-:root{
-  --bg:#0b0f14;
-  --text:#e6edf3;
-  --muted:#9fb0c0;
-  --border:#223042;
-  --accent:#7aa2ff;
-  --ok:#46d39a;
-  --shadow:0 12px 40px rgba(0,0,0,.35);
-  --radius:14px;
-  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --sans:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-
-  /* Map sizing */
-  --tile: 42px;  /* size of each A–X tile */
-  --gap: 8px;
-}
-*{box-sizing:border-box}
-body{ margin:0; padding:18px; background:var(--bg); color:var(--text); font-family:var(--sans); }
-
-header{
-  max-width:1200px; margin:0 auto 16px;
-  display:flex; justify-content:space-between; align-items:flex-end;
-  gap:12px; flex-wrap:wrap;
-}
-h1{margin:0;font-size:18px}
-.sub{color:var(--muted);font-size:12px}
-
-.controls{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-input[type="text"]{
-  min-width:280px; width:min(560px, 88vw);
-  padding:10px 12px; border-radius:12px;
-  border:1px solid var(--border); background:rgba(255,255,255,.03); color:var(--text);
-  outline:none;
-}
-input[type="text"]:focus{
-  border-color:rgba(122,162,255,.6);
-  box-shadow:0 0 0 3px rgba(122,162,255,.15);
-}
-button{
-  padding:10px 12px; border-radius:12px;
-  border:1px solid var(--border); background:rgba(255,255,255,.04);
-  color:var(--text); cursor:pointer; font-weight:700;
-}
-button:hover{background:rgba(255,255,255,.06)}
-
-main{
-  max-width:1200px; margin:0 auto;
-  display:grid; grid-template-columns: 1fr 420px; gap:14px;
-}
-@media(max-width:980px){ main{ grid-template-columns: 1fr; } }
-
-.panel{
-  border:1px solid var(--border); border-radius:var(--radius);
-  background:linear-gradient(to bottom, rgba(16,24,38,.78), rgba(16,24,38,.55));
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-.hd{
-  padding:12px 14px; border-bottom:1px solid var(--border);
-  display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
-}
-.k{ color:var(--muted); font-size:12px; letter-spacing:.35px; text-transform:uppercase; }
-.bd{
-  padding:12px 14px;
-  overflow:auto; /* prevents clipping: scroll instead */
-}
-.mono{ font-family:var(--mono); }
-.muted{ color:var(--muted); }
-
-.notice{
-  border:1px solid rgba(122,162,255,.35);
-  background:rgba(122,162,255,.08);
-  padding:10px 12px; border-radius:12px;
-  font-size:12px; margin-bottom:10px;
-}
-.error{
-  border:1px solid rgba(255,107,107,.35);
-  background:rgba(255,107,107,.08);
-  padding:10px 12px; border-radius:12px;
-  font-size:12px; white-space:pre-line; margin-bottom:10px;
-}
-
-/* TABLE DIRECTORY */
-.tableWrap{
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  background:rgba(255,255,255,.02);
-}
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:12.5px;
-}
-thead th{
-  text-align:left;
-  padding:10px 10px;
-  border-bottom:1px solid var(--border);
-  color:var(--muted);
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.35px;
-  user-select:none;
-  cursor:pointer;
-  position:sticky;
-  top:0;
-  background:rgba(16,24,38,.95);
-}
-thead th:hover{ color:var(--text); }
-tbody td{
-  padding:10px 10px;
-  border-bottom:1px solid rgba(34,48,66,.6);
-  vertical-align:top;
-}
-tbody tr{ cursor:pointer; }
-tbody tr:hover{ background:rgba(255,255,255,.04); }
-tbody tr.selected{ background:rgba(122,162,255,.10); }
-
-.small{ font-size:11px; color:var(--muted); }
-.pill{
-  display:inline-block;
-  padding:2px 8px;
-  border-radius:999px;
-  border:1px solid rgba(70,211,154,.35);
-  color:var(--ok);
-  background:rgba(70,211,154,.08);
-  font-family:var(--mono);
-  font-size:11px;
-  white-space:nowrap;
-}
-
-/* Mobile: make map collapsible via <details> */
-.mobileMap summary{
-  cursor:pointer;
-  padding:10px 12px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:rgba(255,255,255,.03);
-  margin-bottom:10px;
-  list-style:none;
-  user-select:none;
-}
-.mobileMap summary::-webkit-details-marker{ display:none; }
-.mobileMap summary::after{
-  content:"▼";
-  float:right;
-  color:var(--muted);
-}
-.mobileMap[open] summary::after{ content:"▲"; }
-
-@media (min-width: 701px){
-  .mobileMap summary{ display:none; }
-  .mobileMap{ margin:0; }
-}
-
-/* MAP (enter from north): EAST left, SOUTH top, WEST right */
-.mapGrid{
-  display:grid;
-  width:100%;
-  max-width:100%;
-  grid-template-columns: minmax(160px, 1fr) 18px minmax(160px, 1fr);
-  grid-template-rows: auto 12px minmax(260px, 1fr);
-  gap:10px;
-  align-items:stretch;
-  justify-content:center;
-}
-.wallBox{
-  border:1px solid var(--border);
-  border-radius:14px;
-  overflow:hidden;
-  background:rgba(255,255,255,.02);
-}
-.wallHd{
-  padding:10px 12px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-.wallName{ font-weight:900; }
-.wallRange{ font-family:var(--mono); font-size:12px; color:var(--muted); }
-
-/* Fixed tile sizing so every letter slot is identical */
-.cols{
-  display:grid;
-  gap: var(--gap);
-  padding:10px;
-}
-.cols.row{
-  grid-auto-flow:column;
-  grid-auto-columns: var(--tile);
-  justify-content:center;
-}
-.cols.col{
-  grid-auto-rows: var(--tile);
-  justify-content:center;
-}
-.colTile{
-  width: var(--tile);
-  height: var(--tile);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border:1px solid var(--border);
-  border-radius:12px;
-  font-family:var(--mono);
-  font-weight:900;
-  color:var(--muted);
-  position:relative;
-  user-select:none;
-}
-.colTile.has::after{
-  content:"";
-  position:absolute;
-  top:6px; right:6px;
-  width:7px; height:7px;
-  border-radius:50%;
-  background:var(--ok);
-}
-.colTile.active{
-  color:var(--text);
-  background:rgba(122,162,255,.12);
-  border-color:rgba(122,162,255,.9);
-  box-shadow:0 0 0 4px rgba(122,162,255,.18);
-}
-
-.centerGap{ grid-column:2; grid-row:2 / span 2; }
-.centerLabel{
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:.35px;
-  text-transform:uppercase;
-  text-align:center;
-  user-select:none;
-}
-
-/* selection details */
-.details{
-  border-top:1px solid var(--border);
-  padding:12px 14px;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-
-/* Locator mini-map */
-.locator {
-  display:flex;
-  flex-direction:column; /* stack vertically */
-  gap:10px;
-  align-items:flex-start;
-}
-.locBlock {
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-.locTitle{
-  font-size:11px;
-  color:var(--muted);
-  font-family:var(--mono);
-}
-.miniGrid{
-  display:grid;
-  grid-template-columns: repeat(3, 20px);
-  grid-auto-rows: 20px;
-  gap:6px;
-}
-.miniCell{
-  border:1px solid var(--border);
-  border-radius:6px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
-  font-family:var(--mono);
-  color:var(--muted);
-  background:rgba(255,255,255,.02);
-}
-.miniCell.on{
-  color:var(--text);
-  border-color:rgba(122,162,255,.9);
-  background:rgba(122,162,255,.14);
-  box-shadow:0 0 0 3px rgba(122,162,255,.14);
-}
-
-
-/* Responsive map scaling */
-@media (max-width: 1100px){ :root{ --tile: 38px; } }
-@media (max-width: 980px){  :root{ --tile: 36px; } }
-@media (max-width: 520px){  :root{ --tile: 32px; } }
-</style>
-</head>
-
-<body>
-<header>
-  <div>
-    <h1>Barn Sorter Item Directory</h1>
-    <div class="sub">Search → sort → click an item to highlight its wall column</div>
-  </div>
-  <div class="controls">
-    <input id="search" type="text" placeholder="Search (e.g. quartz, prismarine, ladders, G1-5)" />
-    <button id="clear">Clear</button>
-  </div>
-</header>
-
-<main>
-  <!-- DIRECTORY -->
-  <section class="panel">
-    <div class="hd">
-      <div class="k">Directory</div>
-      <div class="mono muted" id="stat">Loading…</div>
-    </div>
-    <div class="bd">
-      <div id="message" style="display:none;"></div>
-
-      <!-- Local fallback only shown if server load fails -->
-      <div id="localFallback" style="display:none;">
-        <div class="notice">
-          Server load failed (likely local file mode). Select <span class="mono">items2.csv</span> from disk.
-        </div>
-        <input id="file" type="file" accept=".csv,text/csv" />
-        <button id="loadFile">Load CSV</button>
-        <div class="small" style="margin-top:8px;">
-          On GitHub Pages this stays hidden and loads <span class="mono">items2.csv</span> automatically.
-        </div>
-        <div style="height:12px;"></div>
-      </div>
-
-      <div class="tableWrap">
-        <table>
-          <thead>
-            <tr>
-              <th data-sort="Description">Item</th>
-              <th data-sort="ChestID">Location</th>
-              <th data-sort="Categories">Category</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
-
-      <div class="muted" id="none" style="display:none;font-size:12px;margin-top:10px;">No matches.</div>
-    </div>
-  </section>
-
-  <!-- MAP -->
-  <section class="panel">
-    <div class="hd">
-      <div class="k">Barn Map</div>
-      <div class="mono muted">Enter from North: East ← · South ↑ · West →</div>
-    </div>
-    <div class="bd">
-      <div class="small muted" style="margin-bottom:10px;">
-        East wall = A–I, South wall = J–O, West wall = P–X
-      </div>
-
-      <!-- Collapsible on mobile; always open on desktop -->
-      <details class="mobileMap" open>
-        <summary>Show barn map</summary>
-        <div class="mapGrid" id="map"></div>
-      </details>
-    </div>
-
-    <div class="details">
-      <div>
-        <div class="k">Item</div>
-        <div class="mono" id="selDesc">—</div>
-      </div>
-      <div>
-        <div class="k">Chest</div>
-        <div class="mono" id="selChest">—</div>
-      </div>
-      <div>
-        <div class="k">Locator</div>
-        <div id="locator" class="locator"></div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<script>
-const $ = id => document.getElementById(id);
-
-/* ---------------- CSV ---------------- */
-function parseCSV(text){
-  const rows=[]; let row=[], cur="", q=false;
-  for(let i=0;i<text.length;i++){
-    const c=text[i], n=text[i+1];
-    if(q){
-      if(c === '"' && n === '"'){ cur+='"'; i++; }
-      else if(c === '"'){ q=false; }
-      else cur+=c;
-    } else {
-      if(c === '"') q=true;
-      else if(c === ','){ row.push(cur); cur=""; }
-      else if(c === '\n'){ row.push(cur); rows.push(row); row=[]; cur=""; }
-      else if(c !== '\r'){ cur+=c; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Barn Sorter Item Directory</title>
+  <style>
+    :root{
+      --bg:#070b12;
+      --card:#0b1220;
+      --border:rgba(255,255,255,.08);
+      --text:#e7eefc;
+      --muted:rgba(231,238,252,.6);
+      --muted2:rgba(231,238,252,.45);
+      --accent:rgba(122,162,255,.9);
+      --shadow: 0 12px 50px rgba(0,0,0,.55);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
-  }
-  row.push(cur); rows.push(row);
-  return rows.filter(r => r.some(x => (x||"").trim() !== ""));
-}
-function toObjects(table){
-  const header = table[0].map(x => (x||"").trim());
-  return table.slice(1).map(r=>{
-    const o={};
-    header.forEach((k,i)=>o[k]=r[i] ?? "");
-    return o;
-  });
-}
-function norm(s){ return (s ?? "").toString().trim(); }
-function get(o, key){
-  if(o[key] !== undefined) return o[key];
-  const k = Object.keys(o).find(x => x.toLowerCase() === key.toLowerCase());
-  return k ? o[k] : "";
-}
-function escapeHTML(s){
-  return (s ?? "").toString()
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
 
-/* ---------------- Data ---------------- */
-let ITEMS = [];
-let VIEW  = [];
-let COLS_WITH_ITEMS = new Set();
-let COL_NODES = new Map();
-let ACTIVE_COL = null;
-let ACTIVE_KEY = null;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 25% 0%, rgba(122,162,255,.10), transparent 60%),
+                  radial-gradient(900px 700px at 85% 20%, rgba(45,212,191,.08), transparent 60%),
+                  var(--bg);
+    }
 
-let SORT = { key: "Description", dir: "asc" };
+    .wrap{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 16px 24px;
+    }
 
-function colRange(a,b){
-  const out=[];
-  for(let i=a.charCodeAt(0); i<=b.charCodeAt(0); i++) out.push(String.fromCharCode(i));
-  return out;
-}
-function sortIcon(thKey){
-  if(SORT.key !== thKey) return "";
-  return SORT.dir === "asc" ? " ▲" : " ▼";
-}
+    header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom: 12px;
+    }
 
-/* ---------------- Map ---------------- */
-function buildMap(){
-  const map = $("map");
-  map.innerHTML = "";
-  COL_NODES.clear();
+    .title{
+      font-weight:800;
+      letter-spacing:.2px;
+      font-size: 18px;
+      line-height:1.15;
+    }
+    .subtitle{
+      margin-top:2px;
+      font-size: 12px;
+      color:var(--muted);
+    }
 
-  const westCols  = colRange("P","X");
-  const southCols = colRange("J","O");
-  const eastCols  = colRange("A","I").reverse(); // I at top, A at bottom
+    .searchRow{
+      margin-left:auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex:1;
+      max-width: 640px;
+    }
+    .search{
+      flex:1;
+      height: 36px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      padding: 0 12px;
+      outline:none;
+    }
+    .btn{
+      height: 36px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 0 12px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .btn:hover{ border-color: rgba(122,162,255,.35); }
 
+    .grid{
+      display:grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
 
-  // SOUTH on TOP (row 1)
-  const southBox = wallBox("South Wall", "J–O", southCols, "row");
-  southBox.style.gridColumn = "1 / span 3";
-  southBox.style.gridRow = "1";
+    .card{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 12px 10px;
+      border-bottom:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+    }
+    .cardHead .label{
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing:.08em;
+    }
+    .pill{
+      margin-left:auto;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-  // EAST on LEFT (row 3)
-  const eastBox = wallBox("East Wall", "A–I", eastCols, "col");
-  eastBox.style.gridColumn = "1";
-  eastBox.style.gridRow = "3";
+    /* CSV fallback loader */
+    .loaderBox{
+      padding: 10px 12px 0;
+    }
+    .notice{
+      border:1px solid var(--border);
+      background: rgba(122,162,255,.07);
+      color: var(--muted);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .pickerRow{
+      display:none;
+      gap:10px;
+      align-items:center;
+      padding-bottom: 8px;
+    }
+    .pickerRow.show{ display:flex; }
+    .file{
+      flex:1;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    input[type="file"]{
+      width: 260px;
+      max-width: 55vw;
+      color: var(--muted);
+      font-size: 12px;
+    }
 
-  // WEST on RIGHT (row 3)
-  const westBox = wallBox("West Wall", "P–X", westCols, "col");
-  westBox.style.gridColumn = "3";
-  westBox.style.gridRow = "3";
+    /* Table */
+    .tableWrap{ padding: 10px 0 0; }
+    table{ width:100%; border-collapse: collapse; font-size: 13px; }
+    thead th{
+      text-align:left;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: var(--muted);
+      border-bottom:1px solid var(--border);
+      background: rgba(0,0,0,.12);
+      user-select:none;
+      cursor:pointer;
+    }
+    thead th .arrow{ opacity:.6; margin-left:6px; font-family:var(--mono); }
+    tbody td{
+      padding: 10px 12px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color: rgba(231,238,252,.92);
+      vertical-align:middle;
+    }
+    tbody tr{ cursor:pointer; }
+    tbody tr:hover{ background: rgba(122,162,255,.08); }
+    tbody tr.active{
+      background: rgba(122,162,255,.14);
+      outline: 1px solid rgba(122,162,255,.30);
+    }
 
-  // Center aisle label (rows 2-3)
-  const center = document.createElement("div");
-  center.className = "centerGap";
-  center.innerHTML = `<div class="centerLabel">Middle Area</div>`;
+    .tag{
+      display:inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(45,212,191,.22);
+      background: rgba(45,212,191,.10);
+      color: rgba(45,212,191,.95);
+      font-size: 11px;
+      line-height:1.2;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
 
-  map.appendChild(southBox);
-  map.appendChild(eastBox);
-  map.appendChild(center);
-  map.appendChild(westBox);
-}
+    .mono{ font-family: var(--mono); }
+    .muted{ color: var(--muted); }
+    .muted2{ color: var(--muted2); }
 
-function wallBox(name, range, cols, mode){
-  const box = document.createElement("div");
-  box.className = "wallBox";
+    /* Map panel */
+    .mapPanel{ padding-bottom: 8px; }
+    .mapBody{ padding: 10px 12px 12px; }
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
 
-  const hd = document.createElement("div");
-  hd.className = "wallHd";
-  hd.innerHTML = `<div class="wallName">${name}</div><div class="wallRange">${range}</div>`;
+    /* === Table-style barn layout (Excel-like) === */
+    .tableMap{
+      display:grid;
+      grid-template-columns: 84px 1fr 84px;  /* East rail / center / West rail */
+      grid-template-rows: auto 1fr;          /* South row / main area */
+      gap:10px;
+      min-height: 600px;
+    }
 
-  const grid = document.createElement("div");
-  grid.className = "cols " + mode;
+    .tableSouth, .tableSide, .tableCenter{
+      border:1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      background: rgba(0,0,0,.16);
+    }
 
-  cols.forEach(c=>{
-    const tile = document.createElement("div");
-    tile.className = "colTile" + (COLS_WITH_ITEMS.has(c) ? " has" : "");
-    tile.textContent = c;
-    tile.dataset.col = c;
+    .tableSouth{
+      grid-column: 1 / 4;
+      padding: 10px 10px 12px;
+    }
+    .tableSouthHead{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      letter-spacing:.2px;
+      margin-bottom:10px;
+    }
+    .letterRow{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      flex-wrap:nowrap;
+    }
 
-    tile.addEventListener("click", () => {
-      const q = $("search").value.trim();
-      const token = `col:${c}`;
-      if(!q.toLowerCase().includes(token.toLowerCase())){
-        $("search").value = (q ? q + " " : "") + token;
-        run();
+    .tableSide{
+      padding: 10px 10px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+    }
+    .letterCol{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      flex:1;
+    }
+    .sideLabel{
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted2);
+      letter-spacing:.08em;
+      user-select:none;
+    }
+
+    .tableCenter{
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:10px;
+      min-width: 0;
+    }
+
+    .k{
+      font-size: 10px;
+      color: var(--muted2);
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .mapOverlayTitle{
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    .centerGrid{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      align-items:start;
+      min-width: 0;
+    }
+
+    /* Your existing “nice squares” */
+    .colBtn{
+      position:relative;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      border-radius: 12px;
+      height: 40px;
+      width: 52px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 800;
+      letter-spacing:.12em;
+      cursor:pointer;
+      user-select:none;
+    }
+    .colBtn:hover{ border-color: rgba(122,162,255,.30); background: rgba(122,162,255,.06); }
+    .colBtn.active{
+      border-color: rgba(122,162,255,.75);
+      box-shadow: 0 0 0 3px rgba(122,162,255,.14);
+      background: rgba(122,162,255,.12);
+    }
+
+    .dot{
+      position:absolute;
+      width:7px;height:7px;
+      border-radius: 999px;
+      background: rgba(45,212,191,.95);
+      top: 7px;
+      right: 9px;
+      box-shadow: 0 0 0 3px rgba(45,212,191,.12);
+      opacity:0;
+    }
+    .colBtn.hasItems .dot{ opacity:1; }
+
+    /* Locator */
+    .locator{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .locBlock{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .locTitle{
+      font-size: 10px;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+    .miniGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 18px);
+      grid-auto-rows: 18px;
+      gap: 5px;
+    }
+    .miniCell{
+      border:1px solid var(--border);
+      border-radius: 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 10px;
+      font-family: var(--mono);
+      color: var(--muted);
+      background: rgba(255,255,255,.02);
+    }
+    .miniCell.on{
+      color: var(--text);
+      border-color: rgba(122,162,255,.9);
+      background: rgba(122,162,255,.14);
+      box-shadow: 0 0 0 3px rgba(122,162,255,.14);
+    }
+
+    /* Keep everything fitting */
+    @media (max-height: 760px){
+      .tableMap{ min-height: 540px; }
+      .colBtn{ height: 38px; width: 50px; }
+      .miniGrid{
+        grid-template-columns: repeat(3, 16px);
+        grid-auto-rows: 16px;
+        gap:4px;
       }
-    });
-
-    COL_NODES.set(c, tile);
-    grid.appendChild(tile);
-  });
-
-  box.appendChild(hd);
-  box.appendChild(grid);
-  return box;
-}
-
-function setActiveColumn(c){
-  if(ACTIVE_COL && COL_NODES.get(ACTIVE_COL)) COL_NODES.get(ACTIVE_COL).classList.remove("active");
-  ACTIVE_COL = c;
-  if(c && COL_NODES.get(c)) COL_NODES.get(c).classList.add("active");
-}
-
-/* ---------------- Directory Table ---------------- */
-function parseQuery(q){
-  const parts = q.split(/\s+/).filter(Boolean);
-  let colFilter = null;
-  const terms = [];
-  for(const p of parts){
-    const m = p.match(/^col:([a-z])$/i);
-    if(m) colFilter = m[1].toUpperCase();
-    else terms.push(p.toLowerCase());
-  }
-  return { colFilter, terms };
-}
-
-function computeView(){
-  const q = norm($("search").value);
-  const { colFilter, terms } = parseQuery(q);
-
-  let arr = ITEMS;
-
-  if(colFilter){
-    arr = arr.filter(it => it.Column === colFilter);
-    setActiveColumn(colFilter);
-  } else {
-    if(!ACTIVE_KEY) setActiveColumn(null);
-  }
-
-  if(terms.length){
-    arr = arr.filter(it=>{
-      const hay = (it.Description + " " + it.ChestID + " " + it.Categories + " " + it.Column).toLowerCase();
-      return terms.every(t => hay.includes(t));
-    });
-  }
-
-  const dirMul = (SORT.dir === "asc") ? 1 : -1;
-  arr = arr.slice().sort((a,b)=>{
-    const av = sortValue(a, SORT.key);
-    const bv = sortValue(b, SORT.key);
-    if(av === bv) return (a.Description||"").localeCompare(b.Description||"");
-    return av.localeCompare(bv) * dirMul;
-  });
-
-  VIEW = arr;
-  $("stat").textContent = `${VIEW.length} / ${ITEMS.length}`;
-}
-
-function sortValue(it, key){
-  if(key === "Description") return (it.Description || "").toLowerCase();
-  if(key === "Categories") return (it.Categories || "").toLowerCase();
-  if(key === "ChestID") return (it.ChestID || "").toLowerCase();
-  return "";
-}
-
-function renderTable(){
-  const tb = $("tbody");
-  tb.innerHTML = "";
-
-  document.querySelectorAll("thead th").forEach(th=>{
-    const k = th.dataset.sort;
-    if(!k) return;
-    const base = th.textContent.split(" ▲")[0].split(" ▼")[0].trim();
-    th.textContent = base + sortIcon(k);
-  });
-
-  if(!VIEW.length){
-    $("none").style.display = "block";
-    return;
-  }
-  $("none").style.display = "none";
-
-  VIEW.slice(0, 600).forEach(it=>{
-    const key = `${it.ChestID}|||${it.Description}`;
-    const tr = document.createElement("tr");
-    if(ACTIVE_KEY === key) tr.classList.add("selected");
-    tr.addEventListener("click", () => selectItem(it));
-
-    tr.innerHTML = `
-      <td>${escapeHTML(it.Description)}</td>
-      <td class="mono">${escapeHTML(it.ChestID || "—")}</td>
-      <td><span class="pill">${escapeHTML(it.Categories || "—")}</span></td>
-    `;
-    tb.appendChild(tr);
-  });
-
-  if(VIEW.length > 600){
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="3" class="muted" style="padding:10px">Showing first 600 rows — refine your search.</td>`;
-    tb.appendChild(tr);
-  }
-}
-
-function selectItem(it){
-  ACTIVE_KEY = `${it.ChestID}|||${it.Description}`;
-  setActiveColumn(it.Column);
-
-  $("selDesc").textContent = it.Description || "—";
-  $("selChest").textContent = it.ChestID || "—";
-
-  renderLocator(it.ChestID);   // <-- add this
-
-  renderTable();
-}
-
-
-function parseChestID(chestID){
-  // expects like "X1-5"
-  const m = (chestID || "").trim().match(/^([A-Z])(\d+)-(\d+)$/);
-  if(!m) return null;
-  return { col: m[1], cluster: parseInt(m[2],10), num: parseInt(m[3],10) };
-}
-
-function renderLocator(chestID){
-  const el = $("locator");
-  if(!el) return;
-
-  const p = parseChestID(chestID);
-  if(!p || !(p.cluster === 1 || p.cluster === 2) || !(p.num >= 1 && p.num <= 9)){
-    el.innerHTML = `<div class="muted">—</div>`;
-    return;
-  }
-
-  const makeBlock = (title, activeCluster) => {
-    const wrap = document.createElement("div");
-    wrap.className = "locBlock";
-
-    const t = document.createElement("div");
-    t.className = "locTitle";
-    t.textContent = title;
-
-    const g = document.createElement("div");
-    g.className = "miniGrid";
-
-    for(let n=1; n<=9; n++){
-      const c = document.createElement("div");
-      c.className = "miniCell" + ((p.cluster === activeCluster && p.num === n) ? " on" : "");
-      c.textContent = n;
-      g.appendChild(c);
+      .miniCell{ border-radius:5px; font-size:9px; }
     }
 
-    wrap.appendChild(t);
-    wrap.appendChild(g);
-    return wrap;
-  };
-
-  el.innerHTML = "";
-  el.appendChild(makeBlock(`${p.col}1 (Top)`, 1));
-  el.appendChild(makeBlock(`${p.col}2 (Bottom)`, 2));
-}
-
-function run(){
-  computeView();
-  renderTable();
-}
-
-/* ---------------- Load ---------------- */
-function loadCSV(text){
-  const t = parseCSV(text);
-  if(!t.length || t.length < 2) throw new Error("CSV seems empty or missing a header row.");
-
-  const o = toObjects(t);
-
-  ITEMS = o.map(x => ({
-    ChestID: norm(get(x, "ChestID")),
-    Column:  norm(get(x, "Column")).toUpperCase(),
-    Description: norm(get(x, "Description")),
-    Categories: norm(get(x, "Categories")),
-  }))
-  .filter(x => x.Column && x.Description);
-
-  COLS_WITH_ITEMS = new Set(ITEMS.map(x => x.Column));
-
-  buildMap();
-  ACTIVE_KEY = null;
-  setActiveColumn(null);
-
-  SORT = { key: "Description", dir: "asc" };
-
-  run();
-  if(VIEW[0]) selectItem(VIEW[0]);
-}
-
-async function loadFromServer(){
-  $("message").style.display = "none";
-  try{
-    const res = await fetch("items2.csv", { cache: "no-store" });
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    loadCSV(await res.text());
-    $("localFallback").style.display = "none";
-  }catch(err){
-    $("message").innerHTML = `<div class="notice">Server load failed. Local CSV mode enabled.</div>`;
-    $("message").style.display = "block";
-    $("localFallback").style.display = "block";
-    $("stat").textContent = "Waiting for CSV";
-    COLS_WITH_ITEMS = new Set();
-    buildMap();
-  }
-}
-
-/* ---------------- Events ---------------- */
-$("search").addEventListener("input", () => run());
-$("clear").addEventListener("click", () => { $("search").value=""; run(); });
-
-document.querySelectorAll("thead th").forEach(th=>{
-  th.addEventListener("click", () => {
-    const key = th.dataset.sort;
-    if(!key) return;
-
-    if(SORT.key === key){
-      SORT.dir = (SORT.dir === "asc") ? "desc" : "asc";
-    }else{
-      SORT.key = key;
-      SORT.dir = "asc";
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .tableMap{ min-height: 540px; }
     }
-    run();
-  });
-});
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="title">Barn Sorter Item Directory</div>
+        <div class="subtitle">Search • sort • click an item to highlight its wall column</div>
+      </div>
 
-$("loadFile").addEventListener("click", async()=>{
-  const f = $("file").files[0];
-  if(!f) return;
-  try{
-    loadCSV(await f.text());
-    $("message").style.display = "none";
-  }catch(e){
-    $("message").innerHTML = `<div class="error">Could not parse CSV: ${escapeHTML(e.message)}</div>`;
-    $("message").style.display = "block";
-  }
-});
+      <div class="searchRow">
+        <input id="q" class="search" placeholder="Search (e.g. quartz, prismarine, ladders, G1-5)" autocomplete="off" />
+        <button id="clear" class="btn">Clear</button>
+      </div>
+    </header>
 
-/* boot */
-loadFromServer();
-</script>
+    <div class="grid">
+      <!-- DIRECTORY -->
+      <div class="card">
+        <div class="cardHead">
+          <div class="label">DIRECTORY</div>
+          <div class="pill"><span id="countNow">0</span> / <span id="countAll">0</span></div>
+        </div>
+
+        <div class="loaderBox">
+          <div id="notice" class="notice" style="display:none"></div>
+
+          <div id="pickerRow" class="pickerRow">
+            <input id="file" type="file" accept=".csv,text/csv" />
+            <button id="loadBtn" class="btn">Load CSV</button>
+            <div class="file muted">Local file mode only</div>
+          </div>
+
+          <div class="muted2" style="font-size:11px;padding:0 2px 8px;">
+            On GitHub Pages this loads <span class="mono">items.csv</span> automatically. If you open the file locally, you may need the picker.
+          </div>
+        </div>
+
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th id="thItem">ITEM <span class="arrow" id="arItem">▲</span></th>
+                <th id="thLoc">LOCATION <span class="arrow" id="arLoc"></span></th>
+                <th id="thCat">CATEGORY <span class="arrow" id="arCat"></span></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="card mapPanel" id="mapPanel">
+        <div class="cardHead">
+          <div class="label">BARN MAP</div>
+          <div class="pill">Enter from North: East ← • South ↑ • West →</div>
+        </div>
+
+        <div class="mapBody">
+          <div class="hint">Click an item (or a column) to highlight where it lives.</div>
+
+          <!-- Excel-like single table layout -->
+          <div class="tableMap" id="tableMap">
+            <!-- South Wall -->
+            <div class="tableSouth">
+              <div class="tableSouthHead">South Wall</div>
+              <div class="letterRow" id="southCols"></div>
+            </div>
+
+            <!-- East Wall (A bottom, I top) -->
+            <div class="tableSide">
+              <div class="letterCol" id="eastCols"></div>
+              <div class="sideLabel">East Wall</div>
+            </div>
+
+            <!-- Center: Selected item -->
+            <div class="tableCenter" aria-live="polite">
+              <div class="k">Item</div>
+              <div class="mapOverlayTitle" id="selDesc2">—</div>
+
+              <div class="centerGrid">
+                <div>
+                  <div class="k">Chest</div>
+                  <div class="mono" id="selChest2">—</div>
+                </div>
+
+                <div>
+                  <div class="k">Locator</div>
+                  <div id="locator2" class="locator"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- West Wall -->
+            <div class="tableSide">
+              <div class="letterCol" id="westCols"></div>
+              <div class="sideLabel">West Wall</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ---------- helpers ----------
+    const $ = (id) => document.getElementById(id);
+
+    function colRange(a,b){
+      const A=a.charCodeAt(0), B=b.charCodeAt(0);
+      const out=[];
+      for(let c=A;c<=B;c++) out.push(String.fromCharCode(c));
+      return out;
+    }
+
+    function normalizeText(s){
+      return (s||"")
+        .toString()
+        .replace(/\s+/g," ")
+        .trim();
+    }
+
+    function safeLocation(chestID){
+      const m = (chestID||"").trim().match(/^([A-Z])(\d+)-(\d+)$/);
+      if(!m) return "";
+      return `${m[1]}${m[2]}-${m[3]}`;
+    }
+
+    function parseCSV(text){
+      const rows=[];
+      let i=0, field="", row=[], inQ=false;
+      const pushField = ()=>{ row.push(field); field=""; };
+      const pushRow = ()=>{ rows.push(row); row=[]; };
+
+      while(i<text.length){
+        const ch=text[i];
+        if(inQ){
+          if(ch === '"'){
+            if(text[i+1] === '"'){ field+='"'; i+=2; continue; }
+            inQ=false; i++; continue;
+          }
+          field += ch; i++; continue;
+        }else{
+          if(ch === '"'){ inQ=true; i++; continue; }
+          if(ch === ","){ pushField(); i++; continue; }
+          if(ch === "\r"){ i++; continue; }
+          if(ch === "\n"){ pushField(); pushRow(); i++; continue; }
+          field += ch; i++; continue;
+        }
+      }
+      pushField(); pushRow();
+      while(rows.length && rows[rows.length-1].every(v => (v||"").trim()==="")) rows.pop();
+      return rows;
+    }
+
+    function rowsToItems(csvRows){
+      if(!csvRows.length) return [];
+      const header = csvRows[0].map(h => normalizeText(h));
+      const idx = (name) => header.findIndex(h => h.toLowerCase() === name.toLowerCase());
+
+      const iDesc = idx("Description");
+      const iChest= idx("ChestID");
+      const iCol  = idx("Column");
+      const iCat  = idx("Categories");
+
+      const iDesc2 = iDesc>=0 ? iDesc : header.findIndex(h=>h.toLowerCase().includes("description"));
+      const iChest2= iChest>=0 ? iChest : header.findIndex(h=>h.toLowerCase().includes("chest"));
+      const iCol2  = iCol>=0 ? iCol : header.findIndex(h=>h.toLowerCase()==="column");
+      const iCat2  = iCat>=0 ? iCat : header.findIndex(h=>h.toLowerCase().includes("categor"));
+
+      const out=[];
+      for(let r=1;r<csvRows.length;r++){
+        const row=csvRows[r];
+        const Description = normalizeText(row[iDesc2] ?? "");
+        const ChestID     = normalizeText(row[iChest2] ?? "");
+        const Column      = normalizeText(row[iCol2] ?? "");
+        const Category    = normalizeText(row[iCat2] ?? "");
+        if(!Description || !ChestID) continue;
+
+        out.push({
+          Description,
+          ChestID,
+          Location: safeLocation(ChestID),
+          Column: Column || (ChestID[0] || ""),
+          Category
+        });
+      }
+      return out;
+    }
+
+    function parseChestID(chestID){
+      const m = (chestID || "").trim().match(/^([A-Z])(\d+)-(\d+)$/);
+      if(!m) return null;
+      return { col: m[1], cluster: parseInt(m[2],10), num: parseInt(m[3],10) };
+    }
+
+    function renderLocator(chestID, targetId="locator2"){
+      const el = $(targetId);
+      if(!el) return;
+
+      const p = parseChestID(chestID);
+      if(!p || !(p.cluster === 1 || p.cluster === 2) || !(p.num >= 1 && p.num <= 9)){
+        el.innerHTML = `<div class="muted">—</div>`;
+        return;
+      }
+
+      const makeBlock = (title, activeCluster) => {
+        const wrap = document.createElement("div");
+        wrap.className = "locBlock";
+
+        const t = document.createElement("div");
+        t.className = "locTitle";
+        t.textContent = title;
+
+        const g = document.createElement("div");
+        g.className = "miniGrid";
+
+        for(let n=1; n<=9; n++){
+          const c = document.createElement("div");
+          c.className = "miniCell" + ((p.cluster === activeCluster && p.num === n) ? " on" : "");
+          c.textContent = n;
+          g.appendChild(c);
+        }
+
+        wrap.appendChild(t);
+        wrap.appendChild(g);
+        return wrap;
+      };
+
+      el.innerHTML = "";
+      el.appendChild(makeBlock(`${p.col}1 (Top)`, 1));
+      el.appendChild(makeBlock(`${p.col}2 (Bottom)`, 2));
+    }
+
+    // ---------- state ----------
+    let ALL = [];
+    let FILTERED = [];
+    let ACTIVE_KEY = "";
+    let ACTIVE_COL = "";
+    let sortKey = "Description";
+    let sortDir = 1; // 1 asc, -1 desc
+
+    // ---------- map build ----------
+    function buildMap(){
+      // East should be I (top) .. A (bottom)
+      const east  = colRange("A","I").reverse();
+      const south = colRange("J","O");
+      const west  = colRange("P","X");
+
+      const eastEl = $("eastCols");
+      const southEl = $("southCols");
+      const westEl = $("westCols");
+      eastEl.innerHTML = "";
+      southEl.innerHTML = "";
+      westEl.innerHTML = "";
+
+      for(const c of south) southEl.appendChild(makeColBtn(c));
+      for(const c of east)  eastEl.appendChild(makeColBtn(c));
+      for(const c of west)  westEl.appendChild(makeColBtn(c));
+
+      refreshColDots();
+    }
+
+    function makeColBtn(letter){
+      const btn = document.createElement("div");
+      btn.className = "colBtn";
+      btn.dataset.col = letter;
+      btn.title = `Column ${letter}`;
+      btn.textContent = letter;
+
+      const dot = document.createElement("div");
+      dot.className = "dot";
+      btn.appendChild(dot);
+
+      btn.addEventListener("click", () => {
+        setActiveColumn(letter);
+        ACTIVE_KEY = "";
+        renderTable();
+      });
+
+      return btn;
+    }
+
+    function setActiveColumn(letter){
+      ACTIVE_COL = letter || "";
+      document.querySelectorAll(".colBtn").forEach(b=>{
+        b.classList.toggle("active", b.dataset.col === ACTIVE_COL);
+      });
+    }
+
+    function refreshColDots(){
+      const colsWithItems = new Set(ALL.map(x => x.Column).filter(Boolean));
+      document.querySelectorAll(".colBtn").forEach(b=>{
+        b.classList.toggle("hasItems", colsWithItems.has(b.dataset.col));
+      });
+    }
+
+    // ---------- table ----------
+    function applyFilter(){
+      const q = normalizeText($("q").value).toLowerCase();
+      if(!q){
+        FILTERED = ALL.slice();
+      }else{
+        FILTERED = ALL.filter(it=>{
+          const hay = `${it.Description} ${it.Location} ${it.Category}`.toLowerCase();
+          return hay.includes(q);
+        });
+      }
+      sortFiltered();
+      $("countAll").textContent = ALL.length.toString();
+      $("countNow").textContent = FILTERED.length.toString();
+    }
+
+    function sortFiltered(){
+      const key = sortKey;
+      const dir = sortDir;
+      const get = (it)=>{
+        if(key==="Location") return it.Location || "";
+        if(key==="Category") return it.Category || "";
+        return it.Description || "";
+      };
+      FILTERED.sort((a,b)=>{
+        const A = get(a).toLowerCase();
+        const B = get(b).toLowerCase();
+        if(A<B) return -1*dir;
+        if(A>B) return  1*dir;
+        return 0;
+      });
+      renderSortArrows();
+    }
+
+    function renderSortArrows(){
+      $("arItem").textContent = (sortKey==="Description") ? (sortDir===1 ? "▲" : "▼") : "";
+      $("arLoc").textContent  = (sortKey==="Location")    ? (sortDir===1 ? "▲" : "▼") : "";
+      $("arCat").textContent  = (sortKey==="Category")    ? (sortDir===1 ? "▲" : "▼") : "";
+    }
+
+    function renderTable(){
+      const tb = $("rows");
+      tb.innerHTML = "";
+
+      for(const it of FILTERED){
+        const tr = document.createElement("tr");
+        const key = `${it.ChestID}|||${it.Description}`;
+        tr.classList.toggle("active", key === ACTIVE_KEY);
+
+        const tdItem = document.createElement("td");
+        tdItem.textContent = it.Description;
+
+        const tdLoc = document.createElement("td");
+        tdLoc.className = "mono";
+        tdLoc.textContent = it.Location;
+
+        const tdCat = document.createElement("td");
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = it.Category || "—";
+        tdCat.appendChild(tag);
+
+        tr.appendChild(tdItem);
+        tr.appendChild(tdLoc);
+        tr.appendChild(tdCat);
+
+        tr.addEventListener("click", ()=> selectItem(it));
+        tb.appendChild(tr);
+      }
+    }
+
+    function selectItem(it){
+      ACTIVE_KEY = `${it.ChestID}|||${it.Description}`;
+      setActiveColumn(it.Column);
+
+      $("selDesc2").textContent  = it.Description || "—";
+      $("selChest2").textContent = it.Location || "—";
+      renderLocator(it.ChestID, "locator2");
+
+      renderTable();
+    }
+
+    // ---------- loading ----------
+    async function tryLoadServerCSV(){
+      try{
+        const res = await fetch("items.csv", { cache: "no-store" });
+        if(!res.ok) throw new Error("HTTP " + res.status);
+        const txt = await res.text();
+        const parsed = parseCSV(txt);
+        const items = rowsToItems(parsed);
+        if(!items.length) throw new Error("No items parsed.");
+        setItems(items);
+        showNotice("", false);
+        showPicker(false);
+        return true;
+      }catch(err){
+        showNotice("Server load failed (likely local file mode). Select items.csv from disk.", true);
+        showPicker(true);
+        return false;
+      }
+    }
+
+    function showNotice(msg, show){
+      const n = $("notice");
+      n.textContent = msg || "";
+      n.style.display = show ? "block" : "none";
+    }
+
+    function showPicker(show){
+      $("pickerRow").classList.toggle("show", !!show);
+    }
+
+    function setItems(items){
+      ALL = items;
+      FILTERED = items.slice();
+
+      buildMap();
+      refreshColDots();
+      applyFilter();
+      renderTable();
+
+      // Clear center panel
+      $("selDesc2").textContent = "—";
+      $("selChest2").textContent = "—";
+      renderLocator("", "locator2");
+    }
+
+    async function loadLocalFile(){
+      const f = $("file").files?.[0];
+      if(!f) return;
+      const txt = await f.text();
+      const parsed = parseCSV(txt);
+      const items = rowsToItems(parsed);
+      setItems(items);
+      showNotice("Local CSV loaded.", true);
+    }
+
+    // ---------- init ----------
+    function wireUI(){
+      $("q").addEventListener("input", ()=>{
+        applyFilter();
+        renderTable();
+      });
+
+      $("clear").addEventListener("click", ()=>{
+        $("q").value = "";
+        setActiveColumn("");
+        ACTIVE_KEY = "";
+        applyFilter();
+        renderTable();
+      });
+
+      $("loadBtn").addEventListener("click", loadLocalFile);
+
+      $("thItem").addEventListener("click", ()=>{
+        if(sortKey==="Description") sortDir *= -1;
+        sortKey="Description";
+        sortFiltered();
+        renderTable();
+      });
+      $("thLoc").addEventListener("click", ()=>{
+        if(sortKey==="Location") sortDir *= -1;
+        sortKey="Location";
+        sortFiltered();
+        renderTable();
+      });
+      $("thCat").addEventListener("click", ()=>{
+        if(sortKey==="Category") sortDir *= -1;
+        sortKey="Category";
+        sortFiltered();
+        renderTable();
+      });
+    }
+
+    (async function init(){
+      wireUI();
+      renderSortArrows();
+      await tryLoadServerCSV();
+    })();
+  </script>
 </body>
 </html>
