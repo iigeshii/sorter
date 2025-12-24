@@ -197,7 +197,15 @@ function applyFilter(){
   sortFiltered();
   $("countAll").textContent = ALL.length.toString();
   $("countNow").textContent = FILTERED.length.toString();
+
+  // --- AUTO-SELECTION LOGIC (pick first result if any) ---
+  if (FILTERED.length > 0) {
+    selectItem(FILTERED[0]);
+  } else {
+    clearSelection();
+  }
 }
+
 
 function sortFiltered(){
   const key = sortKey;
@@ -307,6 +315,17 @@ function setItems(items){
   $("selDesc2").textContent = "—";
   $("selChest2").textContent = "—";
   renderLocator("", "locator2");
+}
+
+function clearSelection(){
+  ACTIVE_KEY = "";
+  setActiveColumn("");
+
+  $("selDesc2").textContent  = "—";
+  $("selChest2").textContent = "—";
+  renderLocator("", "locator2");
+
+  renderTable();
 }
 
 async function loadLocalFile(){
