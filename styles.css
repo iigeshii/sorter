@@ -1,11 +1,9 @@
 :root{
   --bg:#070b12;
-  --card:#0b1220;
   --border:rgba(255,255,255,.08);
   --text:#e7eefc;
   --muted:rgba(231,238,252,.6);
   --muted2:rgba(231,238,252,.45);
-  --accent:rgba(122,162,255,.9);
   --shadow: 0 12px 50px rgba(0,0,0,.55);
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -21,11 +19,7 @@ body{
               var(--bg);
 }
 
-.wrap{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 18px 16px 24px;
-}
+.wrap{ max-width:1200px; margin:0 auto; padding:18px 16px 24px; }
 
 header{
   display:flex;
@@ -34,17 +28,8 @@ header{
   margin-bottom: 12px;
 }
 
-.title{
-  font-weight:800;
-  letter-spacing:.2px;
-  font-size: 18px;
-  line-height:1.15;
-}
-.subtitle{
-  margin-top:2px;
-  font-size: 12px;
-  color:var(--muted);
-}
+.title{ font-weight:800; letter-spacing:.2px; font-size:18px; line-height:1.15; }
+.subtitle{ margin-top:2px; font-size:12px; color:var(--muted); }
 
 .searchRow{
   margin-left:auto;
@@ -56,8 +41,8 @@ header{
 }
 .search{
   flex:1;
-  height: 36px;
-  border-radius: 12px;
+  height:36px;
+  border-radius:12px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.03);
   color: var(--text);
@@ -65,8 +50,8 @@ header{
   outline:none;
 }
 .btn{
-  height: 36px;
-  border-radius: 12px;
+  height:36px;
+  border-radius:12px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.04);
   color: var(--text);
@@ -85,7 +70,7 @@ header{
 
 .card{
   border:1px solid var(--border);
-  border-radius: 16px;
+  border-radius:16px;
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
   box-shadow: var(--shadow);
   overflow:hidden;
@@ -98,30 +83,18 @@ header{
   border-bottom:1px solid var(--border);
   background: rgba(0,0,0,.18);
 }
-.cardHead .label{
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing:.08em;
-}
-.pill{
-  margin-left:auto;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--muted);
-}
+.cardHead .label{ font-size:11px; color:var(--muted); letter-spacing:.08em; }
+.pill{ margin-left:auto; font-family:var(--mono); font-size:12px; color:var(--muted); }
 
-/* CSV fallback loader */
-.loaderBox{
-  padding: 10px 12px 0;
-}
+.loaderBox{ padding: 10px 12px 0; }
 .notice{
   border:1px solid var(--border);
   background: rgba(122,162,255,.07);
   color: var(--muted);
-  border-radius: 12px;
+  border-radius:12px;
   padding: 8px 10px;
-  font-size: 12px;
-  margin-bottom: 10px;
+  font-size:12px;
+  margin-bottom:10px;
 }
 .pickerRow{
   display:none;
@@ -130,26 +103,22 @@ header{
   padding-bottom: 8px;
 }
 .pickerRow.show{ display:flex; }
-.file{
-  flex:1;
-  color: var(--muted);
-  font-size: 12px;
-}
+.file{ flex:1; color:var(--muted); font-size:12px; }
 input[type="file"]{
-  width: 260px;
-  max-width: 55vw;
-  color: var(--muted);
-  font-size: 12px;
+  width:260px;
+  max-width:55vw;
+  color:var(--muted);
+  font-size:12px;
 }
+.footnote{ font-size:11px; padding: 0 2px 8px; }
 
-/* Table */
 .tableWrap{ padding: 10px 0 0; }
-table{ width:100%; border-collapse: collapse; font-size: 13px; }
+table{ width:100%; border-collapse: collapse; font-size:13px; }
 thead th{
   text-align:left;
   padding: 10px 12px;
-  font-size: 11px;
-  color: var(--muted);
+  font-size:11px;
+  color:var(--muted);
   border-bottom:1px solid var(--border);
   background: rgba(0,0,0,.12);
   user-select:none;
@@ -160,7 +129,6 @@ tbody td{
   padding: 10px 12px;
   border-bottom:1px solid rgba(255,255,255,.06);
   color: rgba(231,238,252,.92);
-  vertical-align:middle;
 }
 tbody tr{ cursor:pointer; }
 tbody tr:hover{ background: rgba(122,162,255,.08); }
@@ -172,43 +140,37 @@ tbody tr.active{
 .tag{
   display:inline-block;
   padding: 3px 8px;
-  border-radius: 999px;
+  border-radius:999px;
   border:1px solid rgba(45,212,191,.22);
   background: rgba(45,212,191,.10);
   color: rgba(45,212,191,.95);
-  font-size: 11px;
+  font-size:11px;
   line-height:1.2;
-  white-space: nowrap;
-  max-width: 100%;
+  white-space:nowrap;
+  max-width:100%;
   overflow:hidden;
   text-overflow: ellipsis;
 }
 
-.mono{ font-family: var(--mono); }
-.muted{ color: var(--muted); }
-.muted2{ color: var(--muted2); }
+.mono{ font-family:var(--mono); }
+.muted{ color:var(--muted); }
+.muted2{ color:var(--muted2); }
 
-/* Map panel */
-.mapPanel{ padding-bottom: 8px; }
+.mapPanel{ padding-bottom:8px; }
 .mapBody{ padding: 10px 12px 12px; }
-.hint{
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
+.hint{ font-size:12px; color:var(--muted); margin-bottom:8px; }
 
-/* === Table-style barn layout (Excel-like) === */
+/* === Map (Excel-like) === */
 .tableMap{
   display:grid;
-  grid-template-columns: 84px 1fr 84px;  /* East rail / center / West rail */
-  grid-template-rows: auto 1fr;          /* South row / main area */
+  grid-template-columns: 84px 1fr 84px;  /* East / center / West */
+  grid-template-rows: auto 1fr;
   gap:10px;
   min-height: 600px;
 }
-
 .tableSouth, .tableSide, .tableCenter{
   border:1px solid rgba(255,255,255,.06);
-  border-radius: 16px;
+  border-radius:16px;
   background: rgba(0,0,0,.16);
 }
 
@@ -218,8 +180,8 @@ tbody tr.active{
 }
 .tableSouthHead{
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   font-weight:900;
   letter-spacing:.2px;
   margin-bottom:10px;
@@ -240,7 +202,7 @@ tbody tr.active{
   justify-content:flex-start;
 }
 .sideHead{
-  width: 100%;
+  width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -264,36 +226,40 @@ tbody tr.active{
   justify-content:flex-start;
   align-items:flex-start;
   gap:10px;
-  min-width: 0;
+  min-width:0;
 }
 
 .k{
-  font-size: 10px;
-  color: var(--muted2);
+  font-size:10px;
+  color:var(--muted2);
   letter-spacing:.08em;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom:4px;
 }
 .mapOverlayTitle{
-  font-weight: 900;
-  font-size: 13px;
+  font-weight:900;
+  font-size:13px;
   margin: 2px 0 10px;
   white-space: nowrap;
   overflow:hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  width:100%;
 }
 
-.centerGrid{
-  display:grid;
-  grid-template-columns: 120px 1fr;
-  gap: 6px;
-  align-items:start;
-  min-width: 0;
-  width: 100%;
+/* Center: stack Chest then Locator (mobile-proof) */
+.centerStack{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  width:100%;
+}
+.centerBlock{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  width:100%;
 }
 
-/* nice squares */
 .colBtn{
   position:relative;
   border:1px solid rgba(255,255,255,.08);
@@ -304,7 +270,7 @@ tbody tr.active{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight: 800;
+  font-weight:800;
   letter-spacing:.12em;
   cursor:pointer;
   user-select:none;
@@ -315,11 +281,10 @@ tbody tr.active{
   box-shadow: 0 0 0 3px rgba(122,162,255,.14);
   background: rgba(122,162,255,.12);
 }
-
 .dot{
   position:absolute;
   width:7px;height:7px;
-  border-radius: 999px;
+  border-radius:999px;
   background: rgba(45,212,191,.95);
   top: 7px;
   right: 9px;
@@ -341,9 +306,9 @@ tbody tr.active{
   gap:6px;
 }
 .locTitle{
-  font-size: 10px;
-  color: var(--muted);
-  font-family: var(--mono);
+  font-size:10px;
+  color:var(--muted);
+  font-family:var(--mono);
 }
 .miniGrid{
   display:grid;
@@ -357,9 +322,9 @@ tbody tr.active{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size: 10px;
-  font-family: var(--mono);
-  color: var(--muted);
+  font-size:10px;
+  font-family:var(--mono);
+  color:var(--muted);
   background: rgba(255,255,255,.02);
 }
 .miniCell.on{
@@ -369,7 +334,11 @@ tbody tr.active{
   box-shadow: 0 0 0 3px rgba(122,162,255,.14);
 }
 
-/* --- Fit/Responsive --- */
+/* Responsive */
+@media (max-width: 980px){
+  .grid{ grid-template-columns: 1fr; }
+  .tableMap{ min-height: 540px; }
+}
 @media (max-height: 760px){
   .tableMap{ min-height: 540px; }
   .colBtn{ height: 38px; width: 50px; }
@@ -380,9 +349,12 @@ tbody tr.active{
   }
   .miniCell{ border-radius:5px; font-size:9px; }
 }
-
-@media (max-width: 980px){
-  .grid{ grid-template-columns: 1fr; }
-  .tableMap{ min-height: 540px; }
+@media (max-width: 600px){
+  .wrap{ padding: 14px 12px 20px; }
+  .tableMap{
+    min-height: 520px;
+    grid-template-columns: 64px 1fr 64px;
+    gap: 8px;
+  }
+  .colBtn{ width: 46px; height: 36px; }
 }
-

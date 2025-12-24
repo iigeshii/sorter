@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Barn Sorter Item Directory</title>
+  <title>Sorting Barn Directory</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
     <header>
       <div>
-        <div class="title">Barn Sorter Item Directory</div>
-        <div class="subtitle">Search • sort • click an item to highlight its wall column</div>
+        <div class="title">Sorting Barn Directory</div>
+        <div class="subtitle">Search • sort • click an item to highlight its column</div>
       </div>
 
       <div class="searchRow">
@@ -37,8 +37,9 @@
             <div class="file muted">Local file mode only</div>
           </div>
 
-          <div class="muted2" style="font-size:11px;padding:0 2px 8px;">
-            On GitHub Pages this loads <span class="mono">items.csv</span> automatically. If you open the file locally, you may need the picker.
+          <div class="muted2 footnote">
+            Loads <span class="mono">items.csv</span> automatically on a server (GitHub Pages).
+            If you open locally, the picker may be required.
           </div>
         </div>
 
@@ -57,7 +58,7 @@
       </div>
 
       <!-- MAP -->
-      <div class="card mapPanel" id="mapPanel">
+      <div class="card mapPanel">
         <div class="cardHead">
           <div class="label">BARN MAP</div>
           <div class="pill">Enter from North: East ← • South ↑ • West →</div>
@@ -66,39 +67,38 @@
         <div class="mapBody">
           <div class="hint">Click an item (or a column) to highlight where it lives.</div>
 
-          <!-- Excel-like single table layout -->
           <div class="tableMap" id="tableMap">
-            <!-- South Wall -->
+            <!-- South -->
             <div class="tableSouth">
               <div class="tableSouthHead">South</div>
               <div class="letterRow" id="southCols"></div>
             </div>
 
-            <!-- East Wall (A bottom, I top) -->
+            <!-- East -->
             <div class="tableSide">
               <div class="sideHead">East</div>
               <div class="letterCol" id="eastCols"></div>
             </div>
 
-            <!-- Center: Selected item -->
+            <!-- Center -->
             <div class="tableCenter" aria-live="polite">
               <div class="k">Item</div>
               <div class="mapOverlayTitle" id="selDesc2">—</div>
 
-              <div class="centerGrid">
-                <div>
+              <div class="centerStack">
+                <div class="centerBlock">
                   <div class="k">Chest</div>
                   <div class="mono" id="selChest2">—</div>
                 </div>
 
-                <div>
+                <div class="centerBlock">
                   <div class="k">Locator</div>
                   <div id="locator2" class="locator"></div>
                 </div>
               </div>
             </div>
 
-            <!-- West Wall -->
+            <!-- West -->
             <div class="tableSide">
               <div class="sideHead">West</div>
               <div class="letterCol" id="westCols"></div>

@@ -9,10 +9,7 @@ function colRange(a,b){
 }
 
 function normalizeText(s){
-  return (s||"")
-    .toString()
-    .replace(/\s+/g," ")
-    .trim();
+  return (s||"").toString().replace(/\s+/g," ").trim();
 }
 
 function safeLocation(chestID){
@@ -137,21 +134,17 @@ let sortDir = 1; // 1 asc, -1 desc
 
 // ---------- map build ----------
 function buildMap(){
-  // East should be I (top) .. A (bottom)
-  const east  = colRange("A","I").reverse();
+  const east  = colRange("A","I").reverse(); // I top -> A bottom
   const south = colRange("J","O");
   const west  = colRange("P","X");
 
-  const eastEl = $("eastCols");
-  const southEl = $("southCols");
-  const westEl = $("westCols");
-  eastEl.innerHTML = "";
-  southEl.innerHTML = "";
-  westEl.innerHTML = "";
+  $("eastCols").innerHTML = "";
+  $("southCols").innerHTML = "";
+  $("westCols").innerHTML = "";
 
-  for(const c of south) southEl.appendChild(makeColBtn(c));
-  for(const c of east)  eastEl.appendChild(makeColBtn(c));
-  for(const c of west)  westEl.appendChild(makeColBtn(c));
+  for(const c of south) $("southCols").appendChild(makeColBtn(c));
+  for(const c of east)  $("eastCols").appendChild(makeColBtn(c));
+  for(const c of west)  $("westCols").appendChild(makeColBtn(c));
 
   refreshColDots();
 }
@@ -311,7 +304,6 @@ function setItems(items){
   applyFilter();
   renderTable();
 
-  // Clear center panel
   $("selDesc2").textContent = "—";
   $("selChest2").textContent = "—";
   renderLocator("", "locator2");
