@@ -1,3 +1,4 @@
+import csv
 import json
 import sys
 from pathlib import Path
@@ -8,7 +9,7 @@ from typing import Any
 
 CATEGORIES_JSON = Path("categories.json")
 LAYOUT_JSON = Path("category_layout.json")
-
+OUTPUT_CSV = Path("sorter_layout.csv")
 BIN_CAPACITY = 9  # 3x3 pod
 
 
@@ -136,12 +137,22 @@ def validate_layout_bins_unique(layout: Dict[str, List[str]]) -> None:
         sys.exit(3)
 
 
+def parse_bin(bin_id: str) -> tuple[str, int]:
+    """
+    'A1' -> ('A', 1)
+    'X2' -> ('X', 2)
+    """
+    if len(bin_id) != 2 or bin_id[0] not in ascii_uppercase or bin_id[1] not in ("1", "2"):
+        raise ValueError(f"Invalid bin id: {bin_id!r} (expected like 'A1' or 'X2')")
+    return bin_id[0], int(bin_id[1])
+
+
 def generate_all_bins(start_letter: str = "A", end_letter: str = "X") -> List[str]:
     # order: A1, A2, B1, B2, ...
     start_idx = ascii_uppercase.index(start_letter)
     end_idx = ascii_uppercase.index(end_letter)
-    letters = ascii_uppercase[start_idx : end_idx + 1]
-    bins = []
+    letters = ascii_uppercase[start_idx:end_idx + 1]
+    bins: List[str] = []
     for letter in letters:
         bins.append(f"{letter}1")
         bins.append(f"{letter}2")
@@ -213,26 +224,53 @@ def build_full_sorter(
     return sorter
 
 
-def print_bins_as_csv(sorter: Dict[str, Dict[str, object]], all_bins: List[str]) -> None:
+def write_exhaustive_chest_csv(
+    sorter: Dict[str, Dict[str, object]],
+    all_bins: List[str],
+    out_path: Path = OUTPUT_CSV,
+) -> None:
     """
-    Prints CSV to stdout:
-    Bin,Category,Slot1,...,Slot9
+    Output one row per chest position, e.g. A1-1 .. A1-9 .. X2-9
+    Columns:
+      #, ChestID, Column, Cluster, Number, Categories, Description, Locked, Framed
     """
-    headers = ["Bin", "Category"] + [f"Slot{i}" for i in range(1, BIN_CAPACITY + 1)]
-    print(",".join(headers))
+    headers = ["#", "ChestID", "Column", "Cluster", "Number", "Categories", "Description", "Locked", "Framed"]
 
-    for b in all_bins:
-        category = sorter[b]["category"]
-        items: List[str] = sorter[b]["items"]
-        row = [b, category] + items + [""] * (BIN_CAPACITY - len(items))
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # CSV-safe minimal quoting (only when needed)
-        def q(s: str) -> str:
-            if any(ch in s for ch in [",", '"', "\n"]):
-                return '"' + s.replace('"', '""') + '"'
-            return s
+    counter = 1  # <-- running chest index
 
-        print(",".join(q(x) for x in row))
+    with out_path.open("w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(headers)
+
+        for bin_id in all_bins:
+            col_letter, cluster_num = parse_bin(bin_id)
+
+            category = str(sorter[bin_id]["category"])
+            items: List[str] = list(sorter[bin_id]["items"])  # up to 9 items
+
+            # Ensure exactly 9 slots per bin
+            items = items + [""] * (BIN_CAPACITY - len(items))
+
+            for slot_num in range(1, BIN_CAPACITY + 1):
+                chest_id = f"{bin_id}-{slot_num}"
+                desc = items[slot_num - 1]
+
+                w.writerow([
+                    counter,        # #
+                    chest_id,       # ChestID (A1-1)
+                    col_letter,     # Column (A)
+                    cluster_num,    # Cluster (1 or 2)
+                    slot_num,       # Number (1..9)
+                    category,       # Categories (or UNUSED)
+                    desc             # Description (blank if unused)
+                ])
+
+                counter += 1
+
+    print(f"Wrote: {out_path.resolve()}")
+
 
 
 def main() -> None:
@@ -246,7 +284,7 @@ def main() -> None:
     sorter = build_full_sorter(categories, layout, all_bins)
 
     # Output
-    print_bins_as_csv(sorter, all_bins)
+    write_exhaustive_chest_csv(sorter, all_bins, OUTPUT_CSV)
 
 
 if __name__ == "__main__":
