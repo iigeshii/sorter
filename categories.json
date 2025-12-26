@@ -354,5 +354,16 @@
     "Iron (All Forms)",
     "Lapis (All Forms)",
     "Redstone (All Forms)"
+  ],
+  "Oceanic Materials": [
+    "Prismarine",
+    "Prismarine Bricks",
+    "Dark Prismarine",
+    "Prismarine Shards",
+    "Prismarine Crystals",
+    "Coral (All Types)",
+    "Coral Fans (All Types)",
+    "Coral Blocks (All Types)"
   ]
+
 }

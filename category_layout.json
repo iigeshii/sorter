@@ -1,6 +1,6 @@
 {
   "Armor & Equipment": ["A2"],
-  "Utilities": ["A1", "B1"],
+  "Utilities": ["P1", "Q1"],
   "Weapons & Combat Gear": ["B2"],
   "Navigation & Transport": ["C1"],
   "Tools": ["C2"],
@@ -29,5 +29,6 @@
   "Redstone & Logic": ["S2", "T2"],
   "Rare & Boss Mob Drops": ["U1", "V1"],
   "Mob Drops & Loot": ["U2", "V2", "W2"],
-  "Base Terrain - Dirt Family": ["J2"]
+  "Base Terrain - Dirt Family": ["A1"],
+  "Oceanic Materials": ["R1"]
 }
