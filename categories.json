@@ -147,17 +147,14 @@
     "Pointed Dripstone"
   ],
 
-  "Shapes - Stone": [
-    "Iron Bars",
+  "Building Shapes": [
     "Stone & Mineral Slabs (All)",
     "Stone & Mineral Stairs (All)",
-    "Stone & Mineral Walls (All)"
-  ],
-
-  "Shapes - Wood": [
+    "Stone & Mineral Walls (All)",
     "Wood Fences & Gates (All)",
     "Wood Slabs (All)",
-    "Wood Stairs (All)"
+    "Wood Stairs (All)",
+    "Iron Bars"
   ],
 
   "Sand, Gravel & Sandstone": [
