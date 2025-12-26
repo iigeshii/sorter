@@ -217,6 +217,11 @@
     gap: 6px;
     }
 
+    .pod.selected {
+    outline: 2px solid rgba(122,162,255, 0.6);
+    outline-offset: 2px;
+    }
+
     .wall {
         border: 1px solid rgba(255,255,255,.08);
         border-radius: 8px;
@@ -519,20 +524,30 @@
       return matchesFilterText(row.category, q) || matchesFilterText(row.desc, q);
     }
 
-    // Jump to & select a chest slot by ChestID
     function selectChest(chestId) {
-      const row = getRow(chestId);
-      if (!row) return;
+        const row = getRow(chestId);
+        if (!row) return;
 
-      document.querySelectorAll(".slot.selected").forEach(x => x.classList.remove("selected"));
-      const btn = document.querySelector(`.slot[data-chest="${CSS.escape(chestId)}"]`);
-      if (btn) btn.classList.add("selected");
-      SELECTED = chestId;
-      setDetails(row);
+        // Remove slot selection
+        document.querySelectorAll(".slot.selected").forEach(x => x.classList.remove("selected"));
+        // Remove pod selection
+        document.querySelectorAll(".pod.selected").forEach(x => x.classList.remove("selected"));
 
-      // scroll it into view if possible
-      if (btn) btn.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+        // Highlight selected slot
+        const slotEl = document.querySelector(`.slot[data-chest="${CSS.escape(chestId)}"]`);
+        if (slotEl) slotEl.classList.add("selected");
+
+        // Highlight parent pod
+        const podEl = slotEl?.closest(".pod");
+        if (podEl) podEl.classList.add("selected");
+
+        SELECTED = chestId;
+        setDetails(row);
+
+        // Optional: Scroll to view
+        slotEl?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
     }
+
 
     // --------------------------
     // DIRECTORY RENDER
@@ -635,6 +650,7 @@
                 const podWrap = document.createElement("div");
                 podWrap.className = "pod";
 
+                /* ---------- POD HEADER ---------- */
                 const head2 = document.createElement("div");
                 head2.className = "podHeader";
 
@@ -654,8 +670,11 @@
                 head2.appendChild(podCat);
                 podWrap.appendChild(head2);
 
+                /* ---------- GRID ---------- */
                 const grid = document.createElement("div");
                 grid.className = "grid";
+
+                let podHasMatch = false;
 
                 for (const n of slotOrder()) {
                 const chestId = `${bin}-${n}`;
@@ -677,8 +696,23 @@
                 btn.style.background = c.bg;
                 btn.style.borderColor = c.border;
 
-                const ok = row ? matchesRowFilter(row, ACTIVE_FILTER) : true;
-                if (ACTIVE_FILTER && row && !ok) btn.style.opacity = "0.22";
+                const isMatch = row ? matchesRowFilter(row, ACTIVE_FILTER) : false;
+                const isSelected = chestId === SELECTED;
+
+                /* ---------- DIM LOGIC ---------- */
+                if (ACTIVE_FILTER && row) {
+                    if (!isMatch || (SELECTED && !isSelected)) {
+                    btn.style.opacity = "0.22";
+                    }
+                }
+
+                if (isMatch) podHasMatch = true;
+
+                /* ---------- SELECTION ---------- */
+                if (isSelected) {
+                    btn.classList.add("selected");
+                    podWrap.classList.add("selected");
+                }
 
                 btn.addEventListener("click", () => {
                     if (!row) return;
@@ -686,6 +720,12 @@
                 });
 
                 grid.appendChild(btn);
+                }
+
+                /* ---------- POD HIGHLIGHT ---------- */
+                const isSelectedPod = SELECTED?.startsWith(`${bin}-`);
+                if (isSelectedPod || (!SELECTED && podHasMatch)) {
+                podWrap.classList.add("selected");
                 }
 
                 podWrap.appendChild(grid);
@@ -699,6 +739,7 @@
             elWalls.appendChild(wallWrap);
         }
         }
+
 
 
     function renderAll() {
