@@ -1,433 +1,433 @@
 #,ChestID,Column,Cluster,Number,Categories,Description,Locked,Framed
-1,A1-1,A,1,1,Base Terrain - Dirt Family,Clay
-2,A1-2,A,1,2,Base Terrain - Dirt Family,Coarse Dirt
-3,A1-3,A,1,3,Base Terrain - Dirt Family,Dirt
-4,A1-4,A,1,4,Base Terrain - Dirt Family,Dirt (Overflow)
-5,A1-5,A,1,5,Base Terrain - Dirt Family,Grass Block
-6,A1-6,A,1,6,Base Terrain - Dirt Family,Mud & Packed Mud
-7,A1-7,A,1,7,Base Terrain - Dirt Family,Podzol
-8,A1-8,A,1,8,Base Terrain - Dirt Family,Rooted Dirt
-9,A1-9,A,1,9,Base Terrain - Dirt Family,
-10,A2-1,A,2,1,Armor & Equipment,Boots
-11,A2-2,A,2,2,Armor & Equipment,Chestplates
-12,A2-3,A,2,3,Armor & Equipment,Elytra
-13,A2-4,A,2,4,Armor & Equipment,Helmets
-14,A2-5,A,2,5,Armor & Equipment,Horse Armor
-15,A2-6,A,2,6,Armor & Equipment,Leggings
-16,A2-7,A,2,7,Armor & Equipment,Saddles
-17,A2-8,A,2,8,Armor & Equipment,Shields
-18,A2-9,A,2,9,Armor & Equipment,
-19,B1-1,B,1,1,UNUSED,
-20,B1-2,B,1,2,UNUSED,
-21,B1-3,B,1,3,UNUSED,
-22,B1-4,B,1,4,UNUSED,
-23,B1-5,B,1,5,UNUSED,
-24,B1-6,B,1,6,UNUSED,
-25,B1-7,B,1,7,UNUSED,
-26,B1-8,B,1,8,UNUSED,
-27,B1-9,B,1,9,UNUSED,
-28,B2-1,B,2,1,Weapons & Combat Gear,Arrows
-29,B2-2,B,2,2,Weapons & Combat Gear,Axes
-30,B2-3,B,2,3,Weapons & Combat Gear,Bows
-31,B2-4,B,2,4,Weapons & Combat Gear,Crossbows
-32,B2-5,B,2,5,Weapons & Combat Gear,Spears
-33,B2-6,B,2,6,Weapons & Combat Gear,Swords
-34,B2-7,B,2,7,Weapons & Combat Gear,Tridents
-35,B2-8,B,2,8,Weapons & Combat Gear,
-36,B2-9,B,2,9,Weapons & Combat Gear,
-37,C1-1,C,1,1,Navigation & Transport,Boats (All)
-38,C1-2,C,1,2,Navigation & Transport,Compass
-39,C1-3,C,1,3,Navigation & Transport,Lodestone
-40,C1-4,C,1,4,Navigation & Transport,Maps (All)
-41,C1-5,C,1,5,Navigation & Transport,Minecarts (All)
-42,C1-6,C,1,6,Navigation & Transport,Rails (All)
-43,C1-7,C,1,7,Navigation & Transport,Rockets
-44,C1-8,C,1,8,Navigation & Transport,
-45,C1-9,C,1,9,Navigation & Transport,
-46,C2-1,C,2,1,Tools,Fishing Rods
-47,C2-2,C,2,2,Tools,Hoes
-48,C2-3,C,2,3,Tools,Pickaxes
-49,C2-4,C,2,4,Tools,Shears
-50,C2-5,C,2,5,Tools,Shovels
-51,C2-6,C,2,6,Tools,
-52,C2-7,C,2,7,Tools,
-53,C2-8,C,2,8,Tools,
-54,C2-9,C,2,9,Tools,
-55,D1-1,D,1,1,Enchanting & Magic,Books & Bookshelves
-56,D1-2,D,1,2,Enchanting & Magic,Enchanted Books
-57,D1-3,D,1,3,Enchanting & Magic,Glass Bottles & Experience Bottles
-58,D1-4,D,1,4,Enchanting & Magic,Paper
-59,D1-5,D,1,5,Enchanting & Magic,Potions
-60,D1-6,D,1,6,Enchanting & Magic,
-61,D1-7,D,1,7,Enchanting & Magic,
-62,D1-8,D,1,8,Enchanting & Magic,
-63,D1-9,D,1,9,Enchanting & Magic,
-64,D2-1,D,2,1,Storage & Item Transport,Chests
-65,D2-2,D,2,2,Storage & Item Transport,Copper Chest
-66,D2-3,D,2,3,Storage & Item Transport,Dispenser
-67,D2-4,D,2,4,Storage & Item Transport,Dropper
-68,D2-5,D,2,5,Storage & Item Transport,Ender Chest
-69,D2-6,D,2,6,Storage & Item Transport,Hopper
-70,D2-7,D,2,7,Storage & Item Transport,Shulker Boxes
-71,D2-8,D,2,8,Storage & Item Transport,
-72,D2-9,D,2,9,Storage & Item Transport,
-73,E1-1,E,1,1,Lighting & Illumination,Candles (All)
-74,E1-2,E,1,2,Lighting & Illumination,End Rods
-75,E1-3,E,1,3,Lighting & Illumination,Froglights (All Types)
-76,E1-4,E,1,4,Lighting & Illumination,Lanterns (Normal & Soul)
-77,E1-5,E,1,5,Lighting & Illumination,Redstone Lamps
-78,E1-6,E,1,6,Lighting & Illumination,Screens (All)
-79,E1-7,E,1,7,Lighting & Illumination,Sea Lanterns
-80,E1-8,E,1,8,Lighting & Illumination,Torches (Normal & Soul)
-81,E1-9,E,1,9,Lighting & Illumination,
-82,E2-1,E,2,1,Decorative Materials,Bricks
-83,E2-2,E,2,2,Decorative Materials,Carpet (All Colors)
-84,E2-3,E,2,3,Decorative Materials,Concrete
-85,E2-4,E,2,4,Decorative Materials,Concrete Powder
-86,E2-5,E,2,5,Decorative Materials,Copper Blocks (Cut/Chiseled/Bricks/Tiles)
-87,E2-6,E,2,6,Decorative Materials,Copper Components (Grates/Bulbs/Doors/Trapdoors)
-88,E2-7,E,2,7,Decorative Materials,Dyes (All Colors)
-89,E2-8,E,2,8,Decorative Materials,Glass
-90,E2-9,E,2,9,Decorative Materials,Glass Panes
-91,F1-1,F,1,1,Decorative Artifacts,Armor Trims & Banner Patterns
-92,F1-2,F,1,2,Decorative Artifacts,Pottery Sherds (All)
-93,F1-3,F,1,3,Decorative Artifacts,Sniffer Eggs
-94,F1-4,F,1,4,Decorative Artifacts,
-95,F1-5,F,1,5,Decorative Artifacts,
-96,F1-6,F,1,6,Decorative Artifacts,
-97,F1-7,F,1,7,Decorative Artifacts,
-98,F1-8,F,1,8,Decorative Artifacts,
-99,F1-9,F,1,9,Decorative Artifacts,
-100,F2-1,F,2,1,Decorative Materials,Nether Bricks
-101,F2-2,F,2,2,Decorative Materials,Quartz Blocks
-102,F2-3,F,2,3,Decorative Materials,Stained Glass (Colors)
-103,F2-4,F,2,4,Decorative Materials,Terracotta (All / Colored / Glazed)
-104,F2-5,F,2,5,Decorative Materials,Wool (All Colors)
-105,F2-6,F,2,6,Decorative Materials,
-106,F2-7,F,2,7,Decorative Materials,
-107,F2-8,F,2,8,Decorative Materials,
-108,F2-9,F,2,9,Decorative Materials,
-109,G1-1,G,1,1,UNUSED,
-110,G1-2,G,1,2,UNUSED,
-111,G1-3,G,1,3,UNUSED,
-112,G1-4,G,1,4,UNUSED,
-113,G1-5,G,1,5,UNUSED,
-114,G1-6,G,1,6,UNUSED,
-115,G1-7,G,1,7,UNUSED,
-116,G1-8,G,1,8,UNUSED,
-117,G1-9,G,1,9,UNUSED,
-118,G2-1,G,2,1,Building Shapes,Iron Bars
-119,G2-2,G,2,2,Building Shapes,Stone & Mineral Slabs (All)
-120,G2-3,G,2,3,Building Shapes,Stone & Mineral Stairs (All)
-121,G2-4,G,2,4,Building Shapes,Stone & Mineral Walls (All)
-122,G2-5,G,2,5,Building Shapes,Wood Fences & Gates (All)
-123,G2-6,G,2,6,Building Shapes,Wood Slabs (All)
-124,G2-7,G,2,7,Building Shapes,Wood Stairs (All)
-125,G2-8,G,2,8,Building Shapes,
-126,G2-9,G,2,9,Building Shapes,
-127,H1-1,H,1,1,Building Utilities,Buckets (Empty & Fluid)
-128,H1-2,H,1,2,Building Utilities,Crafting Table
-129,H1-3,H,1,3,Building Utilities,Furnace
-130,H1-4,H,1,4,Building Utilities,Item Frames (Normal & Glow)
-131,H1-5,H,1,5,Building Utilities,Ladders
-132,H1-6,H,1,6,Building Utilities,Scaffolding
-133,H1-7,H,1,7,Building Utilities,Sticks
-134,H1-8,H,1,8,Building Utilities,
-135,H1-9,H,1,9,Building Utilities,
-136,H2-1,H,2,1,Core Stone & Deepslate,Andesite (All)
-137,H2-2,H,2,2,Core Stone & Deepslate,Bricks Variants
-138,H2-3,H,2,3,Core Stone & Deepslate,Cobbled Deepslate
-139,H2-4,H,2,4,Core Stone & Deepslate,Cobblestone
-140,H2-5,H,2,5,Core Stone & Deepslate,Deepslate
-141,H2-6,H,2,6,Core Stone & Deepslate,Diorite (All)
-142,H2-7,H,2,7,Core Stone & Deepslate,Granite (All)
-143,H2-8,H,2,8,Core Stone & Deepslate,Polished Deepslate
-144,H2-9,H,2,9,Core Stone & Deepslate,Smooth Stone
-145,I1-1,I,1,1,Exotic & Biome Stone,Amethyst Block
-146,I1-2,I,1,2,Exotic & Biome Stone,Amethyst Shard
-147,I1-3,I,1,3,Exotic & Biome Stone,Basalt
-148,I1-4,I,1,4,Exotic & Biome Stone,Blackstone
-149,I1-5,I,1,5,Exotic & Biome Stone,Blackstone Bricks
-150,I1-6,I,1,6,Exotic & Biome Stone,Calcite
-151,I1-7,I,1,7,Exotic & Biome Stone,Dripstone Block
-152,I1-8,I,1,8,Exotic & Biome Stone,Gilded Blackstone
-153,I1-9,I,1,9,Exotic & Biome Stone,Pointed Dripstone
-154,I2-1,I,2,1,Core Stone & Deepslate,Smooth Stone Block (Addon)
-155,I2-2,I,2,2,Core Stone & Deepslate,Stone
-156,I2-3,I,2,3,Core Stone & Deepslate,Stone Bricks
-157,I2-4,I,2,4,Core Stone & Deepslate,Tuff (All)
-158,I2-5,I,2,5,Core Stone & Deepslate,
-159,I2-6,I,2,6,Core Stone & Deepslate,
-160,I2-7,I,2,7,Core Stone & Deepslate,
-161,I2-8,I,2,8,Core Stone & Deepslate,
-162,I2-9,I,2,9,Core Stone & Deepslate,
-163,J1-1,J,1,1,Exotic & Biome Stone,Polished Basalt
-164,J1-2,J,1,2,Exotic & Biome Stone,Polished Blackstone
-165,J1-3,J,1,3,Exotic & Biome Stone,Smooth Basalt
-166,J1-4,J,1,4,Exotic & Biome Stone,
-167,J1-5,J,1,5,Exotic & Biome Stone,
-168,J1-6,J,1,6,Exotic & Biome Stone,
-169,J1-7,J,1,7,Exotic & Biome Stone,
-170,J1-8,J,1,8,Exotic & Biome Stone,
-171,J1-9,J,1,9,Exotic & Biome Stone,
-172,J2-1,J,2,1,UNUSED,
-173,J2-2,J,2,2,UNUSED,
-174,J2-3,J,2,3,UNUSED,
-175,J2-4,J,2,4,UNUSED,
-176,J2-5,J,2,5,UNUSED,
-177,J2-6,J,2,6,UNUSED,
-178,J2-7,J,2,7,UNUSED,
-179,J2-8,J,2,8,UNUSED,
-180,J2-9,J,2,9,UNUSED,
-181,K1-1,K,1,1,Organic Terrain & Flora,Flowers (All)
-182,K1-2,K,1,2,Organic Terrain & Flora,Leaf Litter
-183,K1-3,K,1,3,Organic Terrain & Flora,Moss Block
-184,K1-4,K,1,4,Organic Terrain & Flora,Moss Carpet
-185,K1-5,K,1,5,Organic Terrain & Flora,Mycelium
-186,K1-6,K,1,6,Organic Terrain & Flora,Pitcher Pods
-187,K1-7,K,1,7,Organic Terrain & Flora,Sea Pickles
-188,K1-8,K,1,8,Organic Terrain & Flora,Torchflower Seeds
-189,K1-9,K,1,9,Organic Terrain & Flora,
-190,K2-1,K,2,1,"Sand, Gravel & Sandstone",Chiseled Sandstone
-191,K2-2,K,2,2,"Sand, Gravel & Sandstone",Cut Sandstone
-192,K2-3,K,2,3,"Sand, Gravel & Sandstone",Flint
-193,K2-4,K,2,4,"Sand, Gravel & Sandstone",Gravel
-194,K2-5,K,2,5,"Sand, Gravel & Sandstone",Red Sand
-195,K2-6,K,2,6,"Sand, Gravel & Sandstone",Red Sandstone (All Variants)
-196,K2-7,K,2,7,"Sand, Gravel & Sandstone",Sand
-197,K2-8,K,2,8,"Sand, Gravel & Sandstone",Sandstone
-198,K2-9,K,2,9,"Sand, Gravel & Sandstone",Smooth Sandstone
-199,L1-1,L,1,1,Cold & Frozen Terrain,Blue Ice
-200,L1-2,L,1,2,Cold & Frozen Terrain,Ice
-201,L1-3,L,1,3,Cold & Frozen Terrain,Packed Ice
-202,L1-4,L,1,4,Cold & Frozen Terrain,Powder Snow Bucket
-203,L1-5,L,1,5,Cold & Frozen Terrain,Snow
-204,L1-6,L,1,6,Cold & Frozen Terrain,Snow Block
-205,L1-7,L,1,7,Cold & Frozen Terrain,Snowballs
-206,L1-8,L,1,8,Cold & Frozen Terrain,
-207,L1-9,L,1,9,Cold & Frozen Terrain,
-208,L2-1,L,2,1,Ores & Raw Metals,Ancient Debris / Netherite (All Forms)
-209,L2-2,L,2,2,Ores & Raw Metals,Coal (All Forms)
-210,L2-3,L,2,3,Ores & Raw Metals,Copper (All Forms)
-211,L2-4,L,2,4,Ores & Raw Metals,Diamond (All Forms)
-212,L2-5,L,2,5,Ores & Raw Metals,Emerald (All Forms)
-213,L2-6,L,2,6,Ores & Raw Metals,Gold (All Forms)
-214,L2-7,L,2,7,Ores & Raw Metals,Iron (All Forms)
-215,L2-8,L,2,8,Ores & Raw Metals,Lapis (All Forms)
-216,L2-9,L,2,9,Ores & Raw Metals,Redstone (All Forms)
-217,M1-1,M,1,1,Farming - Plant Materials,Bamboo & Bamboo Blocks
-218,M1-2,M,1,2,Farming - Plant Materials,Cactus
-219,M1-3,M,1,3,Farming - Plant Materials,Cocoa Beans
-220,M1-4,M,1,4,Farming - Plant Materials,Kelp
-221,M1-5,M,1,5,Farming - Plant Materials,Sugar Cane
-222,M1-6,M,1,6,Farming - Plant Materials,
-223,M1-7,M,1,7,Farming - Plant Materials,
-224,M1-8,M,1,8,Farming - Plant Materials,
-225,M1-9,M,1,9,Farming - Plant Materials,
-226,M2-1,M,2,1,Farming - Vegetables,Beetroot & Seeds
-227,M2-2,M,2,2,Farming - Vegetables,Carrots
-228,M2-3,M,2,3,Farming - Vegetables,Mushrooms
-229,M2-4,M,2,4,Farming - Vegetables,Potatoes
-230,M2-5,M,2,5,Farming - Vegetables,Pumpkins & Seeds
-231,M2-6,M,2,6,Farming - Vegetables,Wheat & Seeds
-232,M2-7,M,2,7,Farming - Vegetables,
-233,M2-8,M,2,8,Farming - Vegetables,
-234,M2-9,M,2,9,Farming - Vegetables,
-235,N1-1,N,1,1,Farming - Prepared Foods,Baked Goods (Cookies / Cake / Pies)
-236,N1-2,N,1,2,Farming - Prepared Foods,Bread
-237,N1-3,N,1,3,Farming - Prepared Foods,Golden Apples (All)
-238,N1-4,N,1,4,Farming - Prepared Foods,Golden Carrots
-239,N1-5,N,1,5,Farming - Prepared Foods,Stews & Soups (All)
-240,N1-6,N,1,6,Farming - Prepared Foods,
-241,N1-7,N,1,7,Farming - Prepared Foods,
-242,N1-8,N,1,8,Farming - Prepared Foods,
-243,N1-9,N,1,9,Farming - Prepared Foods,
-244,N2-1,N,2,1,Farming - Fruits,Apples
-245,N2-2,N,2,2,Farming - Fruits,Glow Berries
-246,N2-3,N,2,3,Farming - Fruits,Melons
-247,N2-4,N,2,4,Farming - Fruits,Sweet Berries
-248,N2-5,N,2,5,Farming - Fruits,
-249,N2-6,N,2,6,Farming - Fruits,
-250,N2-7,N,2,7,Farming - Fruits,
-251,N2-8,N,2,8,Farming - Fruits,
-252,N2-9,N,2,9,Farming - Fruits,
-253,O1-1,O,1,1,UNUSED,
-254,O1-2,O,1,2,UNUSED,
-255,O1-3,O,1,3,UNUSED,
-256,O1-4,O,1,4,UNUSED,
-257,O1-5,O,1,5,UNUSED,
-258,O1-6,O,1,6,UNUSED,
-259,O1-7,O,1,7,UNUSED,
-260,O1-8,O,1,8,UNUSED,
-261,O1-9,O,1,9,UNUSED,
-262,O2-1,O,2,1,Farming - Meats & Animal Products,Cooked Fish
-263,O2-2,O,2,2,Farming - Meats & Animal Products,Cooked Meats (All)
-264,O2-3,O,2,3,Farming - Meats & Animal Products,Eggs
-265,O2-4,O,2,4,Farming - Meats & Animal Products,Honey Bottles / Honeycomb
-266,O2-5,O,2,5,Farming - Meats & Animal Products,Raw Fish
-267,O2-6,O,2,6,Farming - Meats & Animal Products,Raw Meats (All)
-268,O2-7,O,2,7,Farming - Meats & Animal Products,
-269,O2-8,O,2,8,Farming - Meats & Animal Products,
-270,O2-9,O,2,9,Farming - Meats & Animal Products,
-271,P1-1,P,1,1,Utilities,Armor Stands
-272,P1-2,P,1,2,Utilities,Beds (All Colors)
-273,P1-3,P,1,3,Utilities,Bells
-274,P1-4,P,1,4,Utilities,Doors (All)
-275,P1-5,P,1,5,Utilities,Flint and Steel
-276,P1-6,P,1,6,Utilities,Job Site Blocks (All)
-277,P1-7,P,1,7,Utilities,Leads
-278,P1-8,P,1,8,Utilities,Mob Buckets (All Mobs)
-279,P1-9,P,1,9,Utilities,Name Tags
-280,P2-1,P,2,1,Overworld Wood - Growth Material,Leaves (All Types)
-281,P2-2,P,2,2,Overworld Wood - Growth Material,Saplings (All Types)
-282,P2-3,P,2,3,Overworld Wood - Growth Material,
-283,P2-4,P,2,4,Overworld Wood - Growth Material,
-284,P2-5,P,2,5,Overworld Wood - Growth Material,
-285,P2-6,P,2,6,Overworld Wood - Growth Material,
-286,P2-7,P,2,7,Overworld Wood - Growth Material,
-287,P2-8,P,2,8,Overworld Wood - Growth Material,
-288,P2-9,P,2,9,Overworld Wood - Growth Material,
-289,Q1-1,Q,1,1,Utilities,Signs & Hanging Signs (All)
-290,Q1-2,Q,1,2,Utilities,Sponge
-291,Q1-3,Q,1,3,Utilities,Trapdoors (All)
-292,Q1-4,Q,1,4,Utilities,
-293,Q1-5,Q,1,5,Utilities,
-294,Q1-6,Q,1,6,Utilities,
-295,Q1-7,Q,1,7,Utilities,
-296,Q1-8,Q,1,8,Utilities,
-297,Q1-9,Q,1,9,Utilities,
-298,Q2-1,Q,2,1,Overworld Wood - Logs,Acacia Logs
-299,Q2-2,Q,2,2,Overworld Wood - Logs,Birch Logs
-300,Q2-3,Q,2,3,Overworld Wood - Logs,Cherry Logs
-301,Q2-4,Q,2,4,Overworld Wood - Logs,Dark Oak Logs
-302,Q2-5,Q,2,5,Overworld Wood - Logs,Jungle Logs
-303,Q2-6,Q,2,6,Overworld Wood - Logs,Mangrove Logs
-304,Q2-7,Q,2,7,Overworld Wood - Logs,Oak Logs
-305,Q2-8,Q,2,8,Overworld Wood - Logs,Pale Oak Logs
-306,Q2-9,Q,2,9,Overworld Wood - Logs,Spruce Logs
-307,R1-1,R,1,1,Oceanic Materials,Coral (All Types)
-308,R1-2,R,1,2,Oceanic Materials,Coral Blocks (All Types)
-309,R1-3,R,1,3,Oceanic Materials,Coral Fans (All Types)
-310,R1-4,R,1,4,Oceanic Materials,Dark Prismarine
-311,R1-5,R,1,5,Oceanic Materials,Prismarine
-312,R1-6,R,1,6,Oceanic Materials,Prismarine Bricks
-313,R1-7,R,1,7,Oceanic Materials,Prismarine Crystals
-314,R1-8,R,1,8,Oceanic Materials,Prismarine Shards
-315,R1-9,R,1,9,Oceanic Materials,
-316,R2-1,R,2,1,Overworld Wood - Planks,Acacia Planks
-317,R2-2,R,2,2,Overworld Wood - Planks,Birch Planks
-318,R2-3,R,2,3,Overworld Wood - Planks,Cherry Planks
-319,R2-4,R,2,4,Overworld Wood - Planks,Dark Oak Planks
-320,R2-5,R,2,5,Overworld Wood - Planks,Jungle Planks
-321,R2-6,R,2,6,Overworld Wood - Planks,Mangrove Planks
-322,R2-7,R,2,7,Overworld Wood - Planks,Oak Planks
-323,R2-8,R,2,8,Overworld Wood - Planks,Pale Oak Planks
-324,R2-9,R,2,9,Overworld Wood - Planks,Spruce Planks
-325,S1-1,S,1,1,Nether Materials,Campfires (Normal & Soul)
-326,S1-2,S,1,2,Nether Materials,Crimson Nylium
-327,S1-3,S,1,3,Nether Materials,Crimson Stems & Planks
-328,S1-4,S,1,4,Nether Materials,Fungus (Crimson & Warped)
-329,S1-5,S,1,5,Nether Materials,Glowstone & Glowstone Dust
-330,S1-6,S,1,6,Nether Materials,Magma Block
-331,S1-7,S,1,7,Nether Materials,Magma Columns (Addon)
-332,S1-8,S,1,8,Nether Materials,Nether Wart & Wart Block
-333,S1-9,S,1,9,Nether Materials,Netherrack
-334,S2-1,S,2,1,Redstone & Logic,Buttons (All)
-335,S2-2,S,2,2,Redstone & Logic,Comparator
-336,S2-3,S,2,3,Redstone & Logic,Levers
-337,S2-4,S,2,4,Redstone & Logic,Lightning Rods
-338,S2-5,S,2,5,Redstone & Logic,Observer
-339,S2-6,S,2,6,Redstone & Logic,Piston
-340,S2-7,S,2,7,Redstone & Logic,Pressure Plates (All)
-341,S2-8,S,2,8,Redstone & Logic,Redstone Dust
-342,S2-9,S,2,9,Redstone & Logic,Redstone Torch
-343,T1-1,T,1,1,Nether Materials,Obsidian & Crying Obsidian
-344,T1-2,T,1,2,Nether Materials,Quartz Ore & Quartz
-345,T1-3,T,1,3,Nether Materials,Shroomlight
-346,T1-4,T,1,4,Nether Materials,Soul Sand
-347,T1-5,T,1,5,Nether Materials,Soul Soil
-348,T1-6,T,1,6,Nether Materials,Vines (Twisting & Weeping)
-349,T1-7,T,1,7,Nether Materials,Warped Nylium
-350,T1-8,T,1,8,Nether Materials,Warped Stems & Planks
-351,T1-9,T,1,9,Nether Materials,
-352,T2-1,T,2,1,Redstone & Logic,Repeater
-353,T2-2,T,2,2,Redstone & Logic,Sticky Piston
-354,T2-3,T,2,3,Redstone & Logic,
-355,T2-4,T,2,4,Redstone & Logic,
-356,T2-5,T,2,5,Redstone & Logic,
-357,T2-6,T,2,6,Redstone & Logic,
-358,T2-7,T,2,7,Redstone & Logic,
-359,T2-8,T,2,8,Redstone & Logic,
-360,T2-9,T,2,9,Redstone & Logic,
-361,U1-1,U,1,1,Rare & Boss Mob Drops,Armadillo Scute
-362,U1-2,U,1,2,Rare & Boss Mob Drops,Blaze Powder
-363,U1-3,U,1,3,Rare & Boss Mob Drops,Chorus Fruit
-364,U1-4,U,1,4,Rare & Boss Mob Drops,Dragon Breath
-365,U1-5,U,1,5,Rare & Boss Mob Drops,Echo Shard
-366,U1-6,U,1,6,Rare & Boss Mob Drops,Eye of Ender
-367,U1-7,U,1,7,Rare & Boss Mob Drops,Heart of the Sea
-368,U1-8,U,1,8,Rare & Boss Mob Drops,Heavy Core
-369,U1-9,U,1,9,Rare & Boss Mob Drops,Nether Star
-370,U2-1,U,2,1,Mob Drops & Loot,Blaze Rod
-371,U2-2,U,2,2,Mob Drops & Loot,Bone Meal
-372,U2-3,U,2,3,Mob Drops & Loot,Bones
-373,U2-4,U,2,4,Mob Drops & Loot,Breeze Rods
-374,U2-5,U,2,5,Mob Drops & Loot,Ender Pearl
-375,U2-6,U,2,6,Mob Drops & Loot,Feathers
-376,U2-7,U,2,7,Mob Drops & Loot,Ghast Tear
-377,U2-8,U,2,8,Mob Drops & Loot,Glow Ink Sac
-378,U2-9,U,2,9,Mob Drops & Loot,Gunpowder
-379,V1-1,V,1,1,Rare & Boss Mob Drops,Popped Chorus Fruit
-380,V1-2,V,1,2,Rare & Boss Mob Drops,Prismarine & Prismarine Bricks
-381,V1-3,V,1,3,Rare & Boss Mob Drops,Prismarine Shards & Crystals
-382,V1-4,V,1,4,Rare & Boss Mob Drops,Shulker Shell
-383,V1-5,V,1,5,Rare & Boss Mob Drops,Totem of Undying
-384,V1-6,V,1,6,Rare & Boss Mob Drops,Wither Skeleton Skull
-385,V1-7,V,1,7,Rare & Boss Mob Drops,
-386,V1-8,V,1,8,Rare & Boss Mob Drops,
-387,V1-9,V,1,9,Rare & Boss Mob Drops,
-388,V2-1,V,2,1,Mob Drops & Loot,Ink Sac
-389,V2-2,V,2,2,Mob Drops & Loot,Leather
-390,V2-3,V,2,3,Mob Drops & Loot,Magma Cream
-391,V2-4,V,2,4,Mob Drops & Loot,Nautilus Shell
-392,V2-5,V,2,5,Mob Drops & Loot,Phantom Membrane
-393,V2-6,V,2,6,Mob Drops & Loot,Rotten Flesh
-394,V2-7,V,2,7,Mob Drops & Loot,Slimeball
-395,V2-8,V,2,8,Mob Drops & Loot,Spider Eye
-396,V2-9,V,2,9,Mob Drops & Loot,String
-397,W1-1,W,1,1,UNUSED,
-398,W1-2,W,1,2,UNUSED,
-399,W1-3,W,1,3,UNUSED,
-400,W1-4,W,1,4,UNUSED,
-401,W1-5,W,1,5,UNUSED,
-402,W1-6,W,1,6,UNUSED,
-403,W1-7,W,1,7,UNUSED,
-404,W1-8,W,1,8,UNUSED,
-405,W1-9,W,1,9,UNUSED,
-406,W2-1,W,2,1,Mob Drops & Loot,TNT
-407,W2-2,W,2,2,Mob Drops & Loot,Wind Charges
-408,W2-3,W,2,3,Mob Drops & Loot,
-409,W2-4,W,2,4,Mob Drops & Loot,
-410,W2-5,W,2,5,Mob Drops & Loot,
-411,W2-6,W,2,6,Mob Drops & Loot,
-412,W2-7,W,2,7,Mob Drops & Loot,
-413,W2-8,W,2,8,Mob Drops & Loot,
-414,W2-9,W,2,9,Mob Drops & Loot,
-415,X1-1,X,1,1,UNUSED,
-416,X1-2,X,1,2,UNUSED,
-417,X1-3,X,1,3,UNUSED,
-418,X1-4,X,1,4,UNUSED,
-419,X1-5,X,1,5,UNUSED,
-420,X1-6,X,1,6,UNUSED,
-421,X1-7,X,1,7,UNUSED,
-422,X1-8,X,1,8,UNUSED,
-423,X1-9,X,1,9,UNUSED,
-424,X2-1,X,2,1,UNUSED,
-425,X2-2,X,2,2,UNUSED,
-426,X2-3,X,2,3,UNUSED,
-427,X2-4,X,2,4,UNUSED,
-428,X2-5,X,2,5,UNUSED,
-429,X2-6,X,2,6,UNUSED,
-430,X2-7,X,2,7,UNUSED,
-431,X2-8,X,2,8,UNUSED,
-432,X2-9,X,2,9,UNUSED,
+1,A1-1,A,1,1,Base Terrain - Dirt Family,Clay,Yes,Yes
+2,A1-2,A,1,2,Base Terrain - Dirt Family,Coarse Dirt,EMPTY,
+3,A1-3,A,1,3,Base Terrain - Dirt Family,Dirt,Yes,Yes
+4,A1-4,A,1,4,Base Terrain - Dirt Family,Dirt (Overflow),Yes,Yes
+5,A1-5,A,1,5,Base Terrain - Dirt Family,Grass Block,Yes,Yes
+6,A1-6,A,1,6,Base Terrain - Dirt Family,Mud & Packed Mud,EMPTY,
+7,A1-7,A,1,7,Base Terrain - Dirt Family,Podzol,Yes,Yes
+8,A1-8,A,1,8,Base Terrain - Dirt Family,Rooted Dirt,EMPTY,
+9,A1-9,A,1,9,Base Terrain - Dirt Family,,EMPTY,
+10,A2-1,A,2,1,Armor & Equipment,Boots,Yes,Yes
+11,A2-2,A,2,2,Armor & Equipment,Chestplates,Yes,Yes
+12,A2-3,A,2,3,Armor & Equipment,Elytra,EMPTY,
+13,A2-4,A,2,4,Armor & Equipment,Helmets,Yes,Yes
+14,A2-5,A,2,5,Armor & Equipment,Horse Armor,Yes,Yes
+15,A2-6,A,2,6,Armor & Equipment,Leggings,EMPTY,
+16,A2-7,A,2,7,Armor & Equipment,Saddles,EMPTY,
+17,A2-8,A,2,8,Armor & Equipment,Shields,Yes,Yes
+18,A2-9,A,2,9,Armor & Equipment,,EMPTY,
+19,B1-1,B,1,1,UNUSED,,EMPTY,
+20,B1-2,B,1,2,UNUSED,,EMPTY,
+21,B1-3,B,1,3,UNUSED,,EMPTY,
+22,B1-4,B,1,4,UNUSED,,EMPTY,
+23,B1-5,B,1,5,UNUSED,,EMPTY,
+24,B1-6,B,1,6,UNUSED,,EMPTY,
+25,B1-7,B,1,7,UNUSED,,EMPTY,
+26,B1-8,B,1,8,UNUSED,,EMPTY,
+27,B1-9,B,1,9,UNUSED,,EMPTY,
+28,B2-1,B,2,1,Weapons & Combat Gear,Arrows,,
+29,B2-2,B,2,2,Weapons & Combat Gear,Axes,,
+30,B2-3,B,2,3,Weapons & Combat Gear,Bows,,
+31,B2-4,B,2,4,Weapons & Combat Gear,Crossbows,,
+32,B2-5,B,2,5,Weapons & Combat Gear,Spears,,
+33,B2-6,B,2,6,Weapons & Combat Gear,Swords,,
+34,B2-7,B,2,7,Weapons & Combat Gear,Tridents,,
+35,B2-8,B,2,8,Weapons & Combat Gear,,,
+36,B2-9,B,2,9,Weapons & Combat Gear,,,
+37,C1-1,C,1,1,Navigation & Transport,Boats (All),,
+38,C1-2,C,1,2,Navigation & Transport,Compass,,
+39,C1-3,C,1,3,Navigation & Transport,Lodestone,,
+40,C1-4,C,1,4,Navigation & Transport,Maps (All),,
+41,C1-5,C,1,5,Navigation & Transport,Minecarts (All),,
+42,C1-6,C,1,6,Navigation & Transport,Rails (All),,
+43,C1-7,C,1,7,Navigation & Transport,Rockets,,
+44,C1-8,C,1,8,Navigation & Transport,,,
+45,C1-9,C,1,9,Navigation & Transport,,,
+46,C2-1,C,2,1,Tools,Fishing Rods,,
+47,C2-2,C,2,2,Tools,Hoes,,
+48,C2-3,C,2,3,Tools,Pickaxes,Yes,Yes
+49,C2-4,C,2,4,Tools,Shears,,
+50,C2-5,C,2,5,Tools,Shovels,,
+51,C2-6,C,2,6,Tools,,,
+52,C2-7,C,2,7,Tools,,,
+53,C2-8,C,2,8,Tools,,,
+54,C2-9,C,2,9,Tools,,,
+55,D1-1,D,1,1,Enchanting & Magic,Books & Bookshelves,,
+56,D1-2,D,1,2,Enchanting & Magic,Enchanted Books,,
+57,D1-3,D,1,3,Enchanting & Magic,Glass Bottles & Experience Bottles,,
+58,D1-4,D,1,4,Enchanting & Magic,Paper,,
+59,D1-5,D,1,5,Enchanting & Magic,Potions,,
+60,D1-6,D,1,6,Enchanting & Magic,,,
+61,D1-7,D,1,7,Enchanting & Magic,,,
+62,D1-8,D,1,8,Enchanting & Magic,,,
+63,D1-9,D,1,9,Enchanting & Magic,,,
+64,D2-1,D,2,1,Storage & Item Transport,Chests,,
+65,D2-2,D,2,2,Storage & Item Transport,Copper Chest,,
+66,D2-3,D,2,3,Storage & Item Transport,Dispenser,Yes,Yes
+67,D2-4,D,2,4,Storage & Item Transport,Dropper,,
+68,D2-5,D,2,5,Storage & Item Transport,Ender Chest,,
+69,D2-6,D,2,6,Storage & Item Transport,Hopper,Yes,Yes
+70,D2-7,D,2,7,Storage & Item Transport,Shulker Boxes,,
+71,D2-8,D,2,8,Storage & Item Transport,,,
+72,D2-9,D,2,9,Storage & Item Transport,,,
+73,E1-1,E,1,1,Lighting & Illumination,Candles (All),Yes,Yes
+74,E1-2,E,1,2,Lighting & Illumination,End Rods,,
+75,E1-3,E,1,3,Lighting & Illumination,Froglights (All Types),,
+76,E1-4,E,1,4,Lighting & Illumination,Lanterns (Normal & Soul),,
+77,E1-5,E,1,5,Lighting & Illumination,Redstone Lamps,,
+78,E1-6,E,1,6,Lighting & Illumination,Screens (All),,
+79,E1-7,E,1,7,Lighting & Illumination,Sea Lanterns,,
+80,E1-8,E,1,8,Lighting & Illumination,Torches (Normal & Soul),,
+81,E1-9,E,1,9,Lighting & Illumination,,,
+82,E2-1,E,2,1,Decorative Materials,Bricks,,
+83,E2-2,E,2,2,Decorative Materials,Carpet (All Colors),Yes,Yes
+84,E2-3,E,2,3,Decorative Materials,Concrete,,
+85,E2-4,E,2,4,Decorative Materials,Concrete Powder,,
+86,E2-5,E,2,5,Decorative Materials,Copper Blocks (Cut/Chiseled/Bricks/Tiles),,
+87,E2-6,E,2,6,Decorative Materials,Copper Components (Grates/Bulbs/Doors/Trapdoors),,
+88,E2-7,E,2,7,Decorative Materials,Dyes (All Colors),Yes,Yes
+89,E2-8,E,2,8,Decorative Materials,Glass,,
+90,E2-9,E,2,9,Decorative Materials,Glass Panes,,
+91,F1-1,F,1,1,Decorative Artifacts,Armor Trims & Banner Patterns,,
+92,F1-2,F,1,2,Decorative Artifacts,Pottery Sherds (All),,
+93,F1-3,F,1,3,Decorative Artifacts,Sniffer Eggs,,
+94,F1-4,F,1,4,Decorative Artifacts,,,
+95,F1-5,F,1,5,Decorative Artifacts,,,
+96,F1-6,F,1,6,Decorative Artifacts,,,
+97,F1-7,F,1,7,Decorative Artifacts,,,
+98,F1-8,F,1,8,Decorative Artifacts,,,
+99,F1-9,F,1,9,Decorative Artifacts,,,
+100,F2-1,F,2,1,Decorative Materials,Nether Bricks,,
+101,F2-2,F,2,2,Decorative Materials,Quartz Blocks,,
+102,F2-3,F,2,3,Decorative Materials,Stained Glass (Colors),,
+103,F2-4,F,2,4,Decorative Materials,Terracotta (All / Colored / Glazed),,
+104,F2-5,F,2,5,Decorative Materials,Wool (All Colors),,
+105,F2-6,F,2,6,Decorative Materials,,,
+106,F2-7,F,2,7,Decorative Materials,,,
+107,F2-8,F,2,8,Decorative Materials,,,
+108,F2-9,F,2,9,Decorative Materials,,,
+109,G1-1,G,1,1,UNUSED,,,
+110,G1-2,G,1,2,UNUSED,,,
+111,G1-3,G,1,3,UNUSED,,,
+112,G1-4,G,1,4,UNUSED,,,
+113,G1-5,G,1,5,UNUSED,,,
+114,G1-6,G,1,6,UNUSED,,,
+115,G1-7,G,1,7,UNUSED,,,
+116,G1-8,G,1,8,UNUSED,,,
+117,G1-9,G,1,9,UNUSED,,,
+118,G2-1,G,2,1,Building Shapes,Iron Bars,,
+119,G2-2,G,2,2,Building Shapes,Stone & Mineral Slabs (All),,
+120,G2-3,G,2,3,Building Shapes,Stone & Mineral Stairs (All),Yes,Yes
+121,G2-4,G,2,4,Building Shapes,Stone & Mineral Walls (All),,
+122,G2-5,G,2,5,Building Shapes,Wood Fences & Gates (All),,
+123,G2-6,G,2,6,Building Shapes,Wood Slabs (All),,
+124,G2-7,G,2,7,Building Shapes,Wood Stairs (All),Yes,Yes
+125,G2-8,G,2,8,Building Shapes,,,
+126,G2-9,G,2,9,Building Shapes,,,
+127,H1-1,H,1,1,Building Utilities,Buckets (Empty & Fluid),Yes,Yes
+128,H1-2,H,1,2,Building Utilities,Crafting Table,Yes,Yes
+129,H1-3,H,1,3,Building Utilities,Furnace,Yes,Yes
+130,H1-4,H,1,4,Building Utilities,Item Frames (Normal & Glow),Yes,Yes
+131,H1-5,H,1,5,Building Utilities,Ladders,Yes,Yes
+132,H1-6,H,1,6,Building Utilities,Scaffolding,Yes,Yes
+133,H1-7,H,1,7,Building Utilities,Sticks,Yes,Yes
+134,H1-8,H,1,8,Building Utilities,,EMPTY,
+135,H1-9,H,1,9,Building Utilities,,EMPTY,
+136,H2-1,H,2,1,Core Stone & Deepslate,Andesite (All),,
+137,H2-2,H,2,2,Core Stone & Deepslate,Bricks Variants,,
+138,H2-3,H,2,3,Core Stone & Deepslate,Cobbled Deepslate,,
+139,H2-4,H,2,4,Core Stone & Deepslate,Cobblestone,,
+140,H2-5,H,2,5,Core Stone & Deepslate,Deepslate,,
+141,H2-6,H,2,6,Core Stone & Deepslate,Diorite (All),,
+142,H2-7,H,2,7,Core Stone & Deepslate,Granite (All),Yes,Yes
+143,H2-8,H,2,8,Core Stone & Deepslate,Polished Deepslate,,
+144,H2-9,H,2,9,Core Stone & Deepslate,Smooth Stone,,
+145,I1-1,I,1,1,Exotic & Biome Stone,Amethyst Block,,
+146,I1-2,I,1,2,Exotic & Biome Stone,Amethyst Shard,,
+147,I1-3,I,1,3,Exotic & Biome Stone,Basalt,Yes,Yes
+148,I1-4,I,1,4,Exotic & Biome Stone,Blackstone,,
+149,I1-5,I,1,5,Exotic & Biome Stone,Blackstone Bricks,,
+150,I1-6,I,1,6,Exotic & Biome Stone,Calcite,,
+151,I1-7,I,1,7,Exotic & Biome Stone,Dripstone Block,,
+152,I1-8,I,1,8,Exotic & Biome Stone,Gilded Blackstone,,
+153,I1-9,I,1,9,Exotic & Biome Stone,Pointed Dripstone,,
+154,I2-1,I,2,1,Core Stone & Deepslate,Smooth Stone Block (Addon),,
+155,I2-2,I,2,2,Core Stone & Deepslate,Stone,,
+156,I2-3,I,2,3,Core Stone & Deepslate,Stone Bricks,,
+157,I2-4,I,2,4,Core Stone & Deepslate,Tuff (All),,
+158,I2-5,I,2,5,Core Stone & Deepslate,,,
+159,I2-6,I,2,6,Core Stone & Deepslate,,,
+160,I2-7,I,2,7,Core Stone & Deepslate,,,
+161,I2-8,I,2,8,Core Stone & Deepslate,,,
+162,I2-9,I,2,9,Core Stone & Deepslate,,,
+163,J1-1,J,1,1,Exotic & Biome Stone,Polished Basalt,,
+164,J1-2,J,1,2,Exotic & Biome Stone,Polished Blackstone,,
+165,J1-3,J,1,3,Exotic & Biome Stone,Smooth Basalt,,
+166,J1-4,J,1,4,Exotic & Biome Stone,,,
+167,J1-5,J,1,5,Exotic & Biome Stone,,,
+168,J1-6,J,1,6,Exotic & Biome Stone,,,
+169,J1-7,J,1,7,Exotic & Biome Stone,,,
+170,J1-8,J,1,8,Exotic & Biome Stone,,,
+171,J1-9,J,1,9,Exotic & Biome Stone,,,
+172,J2-1,J,2,1,UNUSED,,,
+173,J2-2,J,2,2,UNUSED,,,
+174,J2-3,J,2,3,UNUSED,,,
+175,J2-4,J,2,4,UNUSED,,,
+176,J2-5,J,2,5,UNUSED,,,
+177,J2-6,J,2,6,UNUSED,,,
+178,J2-7,J,2,7,UNUSED,,,
+179,J2-8,J,2,8,UNUSED,,,
+180,J2-9,J,2,9,UNUSED,,,
+181,K1-1,K,1,1,Organic Terrain & Flora,Flowers (All),Yes,Yes
+182,K1-2,K,1,2,Organic Terrain & Flora,Leaf Litter,Yes,Yes
+183,K1-3,K,1,3,Organic Terrain & Flora,Moss Block,Yes,Yes
+184,K1-4,K,1,4,Organic Terrain & Flora,Moss Carpet,EMPTY,
+185,K1-5,K,1,5,Organic Terrain & Flora,Mycelium,Yes,Yes
+186,K1-6,K,1,6,Organic Terrain & Flora,Pitcher Pods,Yes,Yes
+187,K1-7,K,1,7,Organic Terrain & Flora,Sea Pickles,Yes,Yes
+188,K1-8,K,1,8,Organic Terrain & Flora,Torchflower Seeds,Yes,Yes
+189,K1-9,K,1,9,Organic Terrain & Flora,,EMPTY,
+190,K2-1,K,2,1,"Sand, Gravel & Sandstone",Chiseled Sandstone,,
+191,K2-2,K,2,2,"Sand, Gravel & Sandstone",Cut Sandstone,,
+192,K2-3,K,2,3,"Sand, Gravel & Sandstone",Flint,,
+193,K2-4,K,2,4,"Sand, Gravel & Sandstone",Gravel,,
+194,K2-5,K,2,5,"Sand, Gravel & Sandstone",Red Sand,,
+195,K2-6,K,2,6,"Sand, Gravel & Sandstone",Red Sandstone (All Variants),,
+196,K2-7,K,2,7,"Sand, Gravel & Sandstone",Sand,,
+197,K2-8,K,2,8,"Sand, Gravel & Sandstone",Sandstone,,
+198,K2-9,K,2,9,"Sand, Gravel & Sandstone",Smooth Sandstone,,
+199,L1-1,L,1,1,Cold & Frozen Terrain,Blue Ice,,
+200,L1-2,L,1,2,Cold & Frozen Terrain,Ice,,
+201,L1-3,L,1,3,Cold & Frozen Terrain,Packed Ice,,
+202,L1-4,L,1,4,Cold & Frozen Terrain,Powder Snow Bucket,,
+203,L1-5,L,1,5,Cold & Frozen Terrain,Snow,,
+204,L1-6,L,1,6,Cold & Frozen Terrain,Snow Block,Yes,Yes
+205,L1-7,L,1,7,Cold & Frozen Terrain,Snowballs,,
+206,L1-8,L,1,8,Cold & Frozen Terrain,,,
+207,L1-9,L,1,9,Cold & Frozen Terrain,,,
+208,L2-1,L,2,1,Ores & Raw Metals,Ancient Debris / Netherite (All Forms),,
+209,L2-2,L,2,2,Ores & Raw Metals,Coal (All Forms),,
+210,L2-3,L,2,3,Ores & Raw Metals,Copper (All Forms),,
+211,L2-4,L,2,4,Ores & Raw Metals,Diamond (All Forms),,
+212,L2-5,L,2,5,Ores & Raw Metals,Emerald (All Forms),,
+213,L2-6,L,2,6,Ores & Raw Metals,Gold (All Forms),,
+214,L2-7,L,2,7,Ores & Raw Metals,Iron (All Forms),,
+215,L2-8,L,2,8,Ores & Raw Metals,Lapis (All Forms),,
+216,L2-9,L,2,9,Ores & Raw Metals,Redstone (All Forms),,
+217,M1-1,M,1,1,Farming - Plant Materials,Bamboo & Bamboo Blocks,,
+218,M1-2,M,1,2,Farming - Plant Materials,Cactus,,
+219,M1-3,M,1,3,Farming - Plant Materials,Cocoa Beans,,
+220,M1-4,M,1,4,Farming - Plant Materials,Kelp,,
+221,M1-5,M,1,5,Farming - Plant Materials,Sugar Cane,,
+222,M1-6,M,1,6,Farming - Plant Materials,,,
+223,M1-7,M,1,7,Farming - Plant Materials,,,
+224,M1-8,M,1,8,Farming - Plant Materials,,,
+225,M1-9,M,1,9,Farming - Plant Materials,,,
+226,M2-1,M,2,1,Farming - Vegetables,Beetroot & Seeds,,
+227,M2-2,M,2,2,Farming - Vegetables,Carrots,Yes,Yes
+228,M2-3,M,2,3,Farming - Vegetables,Mushrooms,,
+229,M2-4,M,2,4,Farming - Vegetables,Potatoes,,
+230,M2-5,M,2,5,Farming - Vegetables,Pumpkins & Seeds,,
+231,M2-6,M,2,6,Farming - Vegetables,Wheat & Seeds,,
+232,M2-7,M,2,7,Farming - Vegetables,,,
+233,M2-8,M,2,8,Farming - Vegetables,,,
+234,M2-9,M,2,9,Farming - Vegetables,,,
+235,N1-1,N,1,1,Farming - Prepared Foods,Baked Goods (Cookies / Cake / Pies),,
+236,N1-2,N,1,2,Farming - Prepared Foods,Bread,,
+237,N1-3,N,1,3,Farming - Prepared Foods,Golden Apples (All),Yes,Yes
+238,N1-4,N,1,4,Farming - Prepared Foods,Golden Carrots,Yes,Yes
+239,N1-5,N,1,5,Farming - Prepared Foods,Stews & Soups (All),,
+240,N1-6,N,1,6,Farming - Prepared Foods,,,
+241,N1-7,N,1,7,Farming - Prepared Foods,,,
+242,N1-8,N,1,8,Farming - Prepared Foods,,,
+243,N1-9,N,1,9,Farming - Prepared Foods,,,
+244,N2-1,N,2,1,Farming - Fruits,Apples,,
+245,N2-2,N,2,2,Farming - Fruits,Glow Berries,,
+246,N2-3,N,2,3,Farming - Fruits,Melons,,
+247,N2-4,N,2,4,Farming - Fruits,Sweet Berries,,
+248,N2-5,N,2,5,Farming - Fruits,,,
+249,N2-6,N,2,6,Farming - Fruits,,,
+250,N2-7,N,2,7,Farming - Fruits,,,
+251,N2-8,N,2,8,Farming - Fruits,,,
+252,N2-9,N,2,9,Farming - Fruits,,,
+253,O1-1,O,1,1,UNUSED,,,
+254,O1-2,O,1,2,UNUSED,,,
+255,O1-3,O,1,3,UNUSED,,,
+256,O1-4,O,1,4,UNUSED,,,
+257,O1-5,O,1,5,UNUSED,,,
+258,O1-6,O,1,6,UNUSED,,,
+259,O1-7,O,1,7,UNUSED,,,
+260,O1-8,O,1,8,UNUSED,,,
+261,O1-9,O,1,9,UNUSED,,,
+262,O2-1,O,2,1,Farming - Meats & Animal Products,Cooked Fish,,
+263,O2-2,O,2,2,Farming - Meats & Animal Products,Cooked Meats (All),,
+264,O2-3,O,2,3,Farming - Meats & Animal Products,Eggs,,
+265,O2-4,O,2,4,Farming - Meats & Animal Products,Honey Bottles / Honeycomb,,
+266,O2-5,O,2,5,Farming - Meats & Animal Products,Raw Fish,,
+267,O2-6,O,2,6,Farming - Meats & Animal Products,Raw Meats (All),,
+268,O2-7,O,2,7,Farming - Meats & Animal Products,,,
+269,O2-8,O,2,8,Farming - Meats & Animal Products,,,
+270,O2-9,O,2,9,Farming - Meats & Animal Products,,,
+271,P1-1,P,1,1,Utilities,Armor Stands,,
+272,P1-2,P,1,2,Utilities,Beds (All Colors),Yes,Yes
+273,P1-3,P,1,3,Utilities,Bells,,
+274,P1-4,P,1,4,Utilities,Doors (All),,
+275,P1-5,P,1,5,Utilities,Flint and Steel,,
+276,P1-6,P,1,6,Utilities,Job Site Blocks (All),,
+277,P1-7,P,1,7,Utilities,Leads,,
+278,P1-8,P,1,8,Utilities,Mob Buckets (All Mobs),,
+279,P1-9,P,1,9,Utilities,Name Tags,Yes,Yes
+280,P2-1,P,2,1,Overworld Wood - Growth Material,Leaves (All Types),Yes,Yes
+281,P2-2,P,2,2,Overworld Wood - Growth Material,Saplings (All Types),Yes,Yes
+282,P2-3,P,2,3,Overworld Wood - Growth Material,,EMPTY,
+283,P2-4,P,2,4,Overworld Wood - Growth Material,,EMPTY,
+284,P2-5,P,2,5,Overworld Wood - Growth Material,,EMPTY,
+285,P2-6,P,2,6,Overworld Wood - Growth Material,,EMPTY,
+286,P2-7,P,2,7,Overworld Wood - Growth Material,,EMPTY,
+287,P2-8,P,2,8,Overworld Wood - Growth Material,,EMPTY,
+288,P2-9,P,2,9,Overworld Wood - Growth Material,,EMPTY,
+289,Q1-1,Q,1,1,Utilities,Signs & Hanging Signs (All),EMPTY,
+290,Q1-2,Q,1,2,Utilities,Sponge,Yes,Yes
+291,Q1-3,Q,1,3,Utilities,Trapdoors (All),EMPTY,
+292,Q1-4,Q,1,4,Utilities,,EMPTY,
+293,Q1-5,Q,1,5,Utilities,,EMPTY,
+294,Q1-6,Q,1,6,Utilities,,EMPTY,
+295,Q1-7,Q,1,7,Utilities,,EMPTY,
+296,Q1-8,Q,1,8,Utilities,,EMPTY,
+297,Q1-9,Q,1,9,Utilities,,EMPTY,
+298,Q2-1,Q,2,1,Overworld Wood - Logs,Acacia Logs,,
+299,Q2-2,Q,2,2,Overworld Wood - Logs,Birch Logs,,
+300,Q2-3,Q,2,3,Overworld Wood - Logs,Cherry Logs,,
+301,Q2-4,Q,2,4,Overworld Wood - Logs,Dark Oak Logs,,
+302,Q2-5,Q,2,5,Overworld Wood - Logs,Jungle Logs,,
+303,Q2-6,Q,2,6,Overworld Wood - Logs,Mangrove Logs,,
+304,Q2-7,Q,2,7,Overworld Wood - Logs,Oak Logs,,
+305,Q2-8,Q,2,8,Overworld Wood - Logs,Pale Oak Logs,,
+306,Q2-9,Q,2,9,Overworld Wood - Logs,Spruce Logs,,
+307,R1-1,R,1,1,Oceanic Materials,Coral (All Types),,
+308,R1-2,R,1,2,Oceanic Materials,Coral Blocks (All Types),,
+309,R1-3,R,1,3,Oceanic Materials,Coral Fans (All Types),,
+310,R1-4,R,1,4,Oceanic Materials,Dark Prismarine,,
+311,R1-5,R,1,5,Oceanic Materials,Prismarine,Yes,Yes
+312,R1-6,R,1,6,Oceanic Materials,Prismarine Bricks,Yes,Yes
+313,R1-7,R,1,7,Oceanic Materials,Prismarine Crystals,,
+314,R1-8,R,1,8,Oceanic Materials,Prismarine Shards,Yes,Yes
+315,R1-9,R,1,9,Oceanic Materials,,,
+316,R2-1,R,2,1,Overworld Wood - Planks,Acacia Planks,,
+317,R2-2,R,2,2,Overworld Wood - Planks,Birch Planks,Yes,Yes
+318,R2-3,R,2,3,Overworld Wood - Planks,Cherry Planks,,
+319,R2-4,R,2,4,Overworld Wood - Planks,Dark Oak Planks,,
+320,R2-5,R,2,5,Overworld Wood - Planks,Jungle Planks,,
+321,R2-6,R,2,6,Overworld Wood - Planks,Mangrove Planks,Yes,Yes
+322,R2-7,R,2,7,Overworld Wood - Planks,Oak Planks,,
+323,R2-8,R,2,8,Overworld Wood - Planks,Pale Oak Planks,,
+324,R2-9,R,2,9,Overworld Wood - Planks,Spruce Planks,,
+325,S1-1,S,1,1,Nether Materials,Campfires (Normal & Soul),,
+326,S1-2,S,1,2,Nether Materials,Crimson Nylium,,
+327,S1-3,S,1,3,Nether Materials,Crimson Stems & Planks,,
+328,S1-4,S,1,4,Nether Materials,Fungus (Crimson & Warped),,
+329,S1-5,S,1,5,Nether Materials,Glowstone & Glowstone Dust,,
+330,S1-6,S,1,6,Nether Materials,Magma Block,,
+331,S1-7,S,1,7,Nether Materials,Magma Columns (Addon),,
+332,S1-8,S,1,8,Nether Materials,Nether Wart & Wart Block,,
+333,S1-9,S,1,9,Nether Materials,Netherrack,,
+334,S2-1,S,2,1,Redstone & Logic,Buttons (All),EMPTY,
+335,S2-2,S,2,2,Redstone & Logic,Comparator,Yes,Yes
+336,S2-3,S,2,3,Redstone & Logic,Levers,EMPTY,
+337,S2-4,S,2,4,Redstone & Logic,Lightning Rods,EMPTY,
+338,S2-5,S,2,5,Redstone & Logic,Observer,Yes,Yes
+339,S2-6,S,2,6,Redstone & Logic,Piston,EMPTY,
+340,S2-7,S,2,7,Redstone & Logic,Pressure Plates (All),EMPTY,
+341,S2-8,S,2,8,Redstone & Logic,Redstone Dust,Yes,Yes
+342,S2-9,S,2,9,Redstone & Logic,Redstone Torch,Yes,Yes
+343,T1-1,T,1,1,Nether Materials,Obsidian & Crying Obsidian,,
+344,T1-2,T,1,2,Nether Materials,Quartz Ore & Quartz,Yes,Yes
+345,T1-3,T,1,3,Nether Materials,Shroomlight,,
+346,T1-4,T,1,4,Nether Materials,Soul Sand,,
+347,T1-5,T,1,5,Nether Materials,Soul Soil,,
+348,T1-6,T,1,6,Nether Materials,Vines (Twisting & Weeping),,
+349,T1-7,T,1,7,Nether Materials,Warped Nylium,,
+350,T1-8,T,1,8,Nether Materials,Warped Stems & Planks,,
+351,T1-9,T,1,9,Nether Materials,,EMPTY,
+352,T2-1,T,2,1,Redstone & Logic,Repeater,Yes,Yes
+353,T2-2,T,2,2,Redstone & Logic,Sticky Piston,EMPTY,
+354,T2-3,T,2,3,Redstone & Logic,,EMPTY,
+355,T2-4,T,2,4,Redstone & Logic,,EMPTY,
+356,T2-5,T,2,5,Redstone & Logic,,EMPTY,
+357,T2-6,T,2,6,Redstone & Logic,,EMPTY,
+358,T2-7,T,2,7,Redstone & Logic,,EMPTY,
+359,T2-8,T,2,8,Redstone & Logic,,EMPTY,
+360,T2-9,T,2,9,Redstone & Logic,,EMPTY,
+361,U1-1,U,1,1,Rare & Boss Mob Drops,Armadillo Scute,,
+362,U1-2,U,1,2,Rare & Boss Mob Drops,Blaze Powder,,
+363,U1-3,U,1,3,Rare & Boss Mob Drops,Chorus Fruit,,
+364,U1-4,U,1,4,Rare & Boss Mob Drops,Dragon Breath,,
+365,U1-5,U,1,5,Rare & Boss Mob Drops,Echo Shard,,
+366,U1-6,U,1,6,Rare & Boss Mob Drops,Eye of Ender,,
+367,U1-7,U,1,7,Rare & Boss Mob Drops,Heart of the Sea,,
+368,U1-8,U,1,8,Rare & Boss Mob Drops,Heavy Core,,
+369,U1-9,U,1,9,Rare & Boss Mob Drops,Nether Star,,
+370,U2-1,U,2,1,Mob Drops & Loot,Blaze Rod,,
+371,U2-2,U,2,2,Mob Drops & Loot,Bone Meal,,
+372,U2-3,U,2,3,Mob Drops & Loot,Bones,,
+373,U2-4,U,2,4,Mob Drops & Loot,Breeze Rods,,
+374,U2-5,U,2,5,Mob Drops & Loot,Ender Pearl,,
+375,U2-6,U,2,6,Mob Drops & Loot,Feathers,,
+376,U2-7,U,2,7,Mob Drops & Loot,Ghast Tear,,
+377,U2-8,U,2,8,Mob Drops & Loot,Glow Ink Sac,,
+378,U2-9,U,2,9,Mob Drops & Loot,Gunpowder,,
+379,V1-1,V,1,1,Rare & Boss Mob Drops,Popped Chorus Fruit,,
+380,V1-2,V,1,2,Rare & Boss Mob Drops,Shulker Shell,,
+381,V1-3,V,1,3,Rare & Boss Mob Drops,Totem of Undying,,
+382,V1-4,V,1,4,Rare & Boss Mob Drops,Wither Skeleton Skull,,
+383,V1-5,V,1,5,Rare & Boss Mob Drops,,,
+384,V1-6,V,1,6,Rare & Boss Mob Drops,,,
+385,V1-7,V,1,7,Rare & Boss Mob Drops,,,
+386,V1-8,V,1,8,Rare & Boss Mob Drops,,,
+387,V1-9,V,1,9,Rare & Boss Mob Drops,,,
+388,V2-1,V,2,1,Mob Drops & Loot,Ink Sac,,
+389,V2-2,V,2,2,Mob Drops & Loot,Leather,,
+390,V2-3,V,2,3,Mob Drops & Loot,Magma Cream,,
+391,V2-4,V,2,4,Mob Drops & Loot,Nautilus Shell,,
+392,V2-5,V,2,5,Mob Drops & Loot,Phantom Membrane,,
+393,V2-6,V,2,6,Mob Drops & Loot,Rotten Flesh,,
+394,V2-7,V,2,7,Mob Drops & Loot,Slimeball,,
+395,V2-8,V,2,8,Mob Drops & Loot,Spider Eye,,
+396,V2-9,V,2,9,Mob Drops & Loot,String,,
+397,W1-1,W,1,1,UNUSED,,,
+398,W1-2,W,1,2,UNUSED,,,
+399,W1-3,W,1,3,UNUSED,,,
+400,W1-4,W,1,4,UNUSED,,,
+401,W1-5,W,1,5,UNUSED,,,
+402,W1-6,W,1,6,UNUSED,,,
+403,W1-7,W,1,7,UNUSED,,,
+404,W1-8,W,1,8,UNUSED,,,
+405,W1-9,W,1,9,UNUSED,,,
+406,W2-1,W,2,1,Mob Drops & Loot,TNT,,
+407,W2-2,W,2,2,Mob Drops & Loot,Wind Charges,,
+408,W2-3,W,2,3,Mob Drops & Loot,,,
+409,W2-4,W,2,4,Mob Drops & Loot,,,
+410,W2-5,W,2,5,Mob Drops & Loot,,,
+411,W2-6,W,2,6,Mob Drops & Loot,,,
+412,W2-7,W,2,7,Mob Drops & Loot,,,
+413,W2-8,W,2,8,Mob Drops & Loot,,,
+414,W2-9,W,2,9,Mob Drops & Loot,,,
+415,X1-1,X,1,1,UNUSED,,,
+416,X1-2,X,1,2,UNUSED,,,
+417,X1-3,X,1,3,UNUSED,,,
+418,X1-4,X,1,4,UNUSED,,,
+419,X1-5,X,1,5,UNUSED,,,
+420,X1-6,X,1,6,UNUSED,,,
+421,X1-7,X,1,7,UNUSED,,,
+422,X1-8,X,1,8,UNUSED,,,
+423,X1-9,X,1,9,UNUSED,,,
+424,X2-1,X,2,1,UNUSED,,,
+425,X2-2,X,2,2,UNUSED,,,
+426,X2-3,X,2,3,UNUSED,,,
+427,X2-4,X,2,4,UNUSED,,,
+428,X2-5,X,2,5,UNUSED,,,
+429,X2-6,X,2,6,UNUSED,,,
+430,X2-7,X,2,7,UNUSED,,,
+431,X2-8,X,2,8,UNUSED,,,
+432,X2-9,X,2,9,UNUSED,,,
