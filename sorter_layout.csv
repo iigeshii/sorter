@@ -30,7 +30,7 @@
 29,B2-2,B,2,2,Weapons & Combat Gear,Axes,Yes,Yes
 30,B2-3,B,2,3,Weapons & Combat Gear,Bows,Yes,Yes
 31,B2-4,B,2,4,Weapons & Combat Gear,Crossbows,Yes,Yes
-32,B2-5,B,2,5,Weapons & Combat Gear,Spears,EMPTY,
+32,B2-5,B,2,5,Weapons & Combat Gear,Spears,Yes,Yes
 33,B2-6,B,2,6,Weapons & Combat Gear,Swords,Yes,Yes
 34,B2-7,B,2,7,Weapons & Combat Gear,Tridents,Yes,Yes
 35,B2-8,B,2,8,Weapons & Combat Gear,Fire Charge,Yes,Yes
@@ -123,7 +123,7 @@
 122,G2-5,G,2,5,Building Shapes,Wood Fences & Gates (All),Yes,Yes
 123,G2-6,G,2,6,Building Shapes,Wood Slabs (All),Yes,Yes
 124,G2-7,G,2,7,Building Shapes,Wood Stairs (All),Yes,Yes
-125,G2-8,G,2,8,Building Shapes,,EMPTY,
+125,G2-8,G,2,8,Building Shapes,Stone & Nether Fences,Yes,Yes
 126,G2-9,G,2,9,Building Shapes,,EMPTY,
 127,H1-1,H,1,1,Building Utilities,Buckets (Empty & Fluid),Yes,Yes
 128,H1-2,H,1,2,Building Utilities,Crafting Table,Yes,Yes
@@ -355,7 +355,7 @@
 354,T2-3,T,2,3,Redstone Devices,Piston,EMPTY,
 355,T2-4,T,2,4,Redstone Devices,Lightning Rods,EMPTY,
 356,T2-5,T,2,5,Redstone Devices,Hopper,Yes,Yes
-357,T2-6,T,2,6,Redstone Devices,,EMPTY,
+357,T2-6,T,2,6,Redstone Devices,Daylight Detector,Yes,Yes
 358,T2-7,T,2,7,Redstone Devices,,EMPTY,
 359,T2-8,T,2,8,Redstone Devices,,EMPTY,
 360,T2-9,T,2,9,Redstone Devices,,EMPTY,
