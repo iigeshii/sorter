@@ -42,7 +42,7 @@
 41,C1-5,C,1,5,Navigation & Transport,Minecarts (All),Yes,Yes
 42,C1-6,C,1,6,Navigation & Transport,Rails (All),Yes,Yes
 43,C1-7,C,1,7,Navigation & Transport,Rockets,Yes,Yes
-44,C1-8,C,1,8,Navigation & Transport,,EMPTY,
+44,C1-8,C,1,8,Navigation & Transport,Clock,Yes,Yes
 45,C1-9,C,1,9,Navigation & Transport,,EMPTY,
 46,C2-1,C,2,1,Tools,Fishing Rods,EMPTY,
 47,C2-2,C,2,2,Tools,Hoes,EMPTY,
@@ -92,8 +92,8 @@
 91,F1-1,F,1,1,Decorative Artifacts,Armor Trims & Banner Patterns,Yes,Yes
 92,F1-2,F,1,2,Decorative Artifacts,Pottery Sherds (All),Yes,Yes
 93,F1-3,F,1,3,Decorative Artifacts,Sniffer Eggs,Yes,Yes
-94,F1-4,F,1,4,Decorative Artifacts,,EMPTY,
-95,F1-5,F,1,5,Decorative Artifacts,,EMPTY,
+94,F1-4,F,1,4,Decorative Artifacts,Flower Pots,Yes,Yes
+95,F1-5,F,1,5,Decorative Artifacts,Paintings,Yes,Yes
 96,F1-6,F,1,6,Decorative Artifacts,,EMPTY,
 97,F1-7,F,1,7,Decorative Artifacts,,EMPTY,
 98,F1-8,F,1,8,Decorative Artifacts,,EMPTY,
@@ -107,15 +107,15 @@
 106,F2-7,F,2,7,Decorative Materials,,EMPTY,
 107,F2-8,F,2,8,Decorative Materials,,EMPTY,
 108,F2-9,F,2,9,Decorative Materials,,EMPTY,
-109,G1-1,G,1,1,UNUSED,,EMPTY,
-110,G1-2,G,1,2,UNUSED,,EMPTY,
-111,G1-3,G,1,3,UNUSED,,EMPTY,
-112,G1-4,G,1,4,UNUSED,,EMPTY,
-113,G1-5,G,1,5,UNUSED,,EMPTY,
-114,G1-6,G,1,6,UNUSED,,EMPTY,
-115,G1-7,G,1,7,UNUSED,,EMPTY,
-116,G1-8,G,1,8,UNUSED,,EMPTY,
-117,G1-9,G,1,9,UNUSED,,EMPTY,
+109,G1-1,G,1,1,Utility Items,Sticks,Yes,Yes
+110,G1-2,G,1,2,Utility Items,Bowls,Yes,Yes
+111,G1-3,G,1,3,Utility Items,,EMPTY,
+112,G1-4,G,1,4,Utility Items,,EMPTY,
+113,G1-5,G,1,5,Utility Items,,EMPTY,
+114,G1-6,G,1,6,Utility Items,,EMPTY,
+115,G1-7,G,1,7,Utility Items,,EMPTY,
+116,G1-8,G,1,8,Utility Items,,EMPTY,
+117,G1-9,G,1,9,Utility Items,,EMPTY,
 118,G2-1,G,2,1,Building Shapes,Iron Bars,Yes,Yes
 119,G2-2,G,2,2,Building Shapes,Stone & Mineral Slabs (All),Yes,Yes
 120,G2-3,G,2,3,Building Shapes,Stone & Mineral Stairs (All),Yes,Yes
@@ -131,9 +131,9 @@
 130,H1-4,H,1,4,Building Utilities,Item Frames (Normal & Glow),Yes,Yes
 131,H1-5,H,1,5,Building Utilities,Ladders,Yes,Yes
 132,H1-6,H,1,6,Building Utilities,Scaffolding,Yes,Yes
-133,H1-7,H,1,7,Building Utilities,Sticks,Yes,Yes
-134,H1-8,H,1,8,Building Utilities,Bowls,EMPTY,
-135,H1-9,H,1,9,Building Utilities,,EMPTY,
+133,H1-7,H,1,7,Building Utilities,Cauldron,Yes,Yes
+134,H1-8,H,1,8,Building Utilities,,EMPTY,
+135,H1-9,H,1,9,Building Utilities,Anvil,Yes,Yes
 136,H2-1,H,2,1,Core Stone & Deepslate,Andesite (All),Yes,Yes
 137,H2-2,H,2,2,Core Stone & Deepslate,Bricks Variants,Yes,Yes
 138,H2-3,H,2,3,Core Stone & Deepslate,Cobbled Deepslate,Yes,Yes
@@ -266,7 +266,7 @@
 265,O2-4,O,2,4,Farming - Meats & Animal Products,Honey Bottles / Honeycomb,Yes,Yes
 266,O2-5,O,2,5,Farming - Meats & Animal Products,Raw Fish,Yes,Yes
 267,O2-6,O,2,6,Farming - Meats & Animal Products,Raw Meats (All),Yes,Yes
-268,O2-7,O,2,7,Farming - Meats & Animal Products,,EMPTY,
+268,O2-7,O,2,7,Farming - Meats & Animal Products,Pufferfish,Yes,Yes
 269,O2-8,O,2,8,Farming - Meats & Animal Products,,EMPTY,
 270,O2-9,O,2,9,Farming - Meats & Animal Products,,EMPTY,
 271,P1-1,P,1,1,Utilities,Armor Stands,Yes,Yes
