@@ -150,7 +150,7 @@
 149,I1-5,I,1,5,Exotic & Biome Stone,Blackstone Bricks,EMPTY,
 150,I1-6,I,1,6,Exotic & Biome Stone,Calcite,EMPTY,
 151,I1-7,I,1,7,Exotic & Biome Stone,Dripstone Block,Yes,Yes
-152,I1-8,I,1,8,Exotic & Biome Stone,Gilded Blackstone,EMPTY,
+152,I1-8,I,1,8,Exotic & Biome Stone,Gilded Blackstone,Yes,Yes
 153,I1-9,I,1,9,Exotic & Biome Stone,Pointed Dripstone,Yes,Yes
 154,I2-1,I,2,1,Core Stone & Deepslate,Smooth Stone Block (Addon),Yes,Yes
 155,I2-2,I,2,2,Core Stone & Deepslate,Stone,Yes,Yes
@@ -166,7 +166,7 @@
 165,J1-3,J,1,3,Exotic & Biome Stone,Smooth Basalt,EMPTY,
 166,J1-4,J,1,4,Exotic & Biome Stone,Purpur Blocks (All Variants),Yes,Yes
 167,J1-5,J,1,5,Exotic & Biome Stone,,EMPTY,
-168,J1-6,J,1,6,Exotic & Biome Stone,,EMPTY,
+168,J1-6,J,1,6,Exotic & Biome Stone,Sculk Shrieker,Yes,Yes
 169,J1-7,J,1,7,Exotic & Biome Stone,Sculk,Yes,Yes
 170,J1-8,J,1,8,Exotic & Biome Stone,Sculk Vein,Yes,Yes
 171,J1-9,J,1,9,Exotic & Biome Stone,Sculk Sensor,Yes,Yes
@@ -182,7 +182,7 @@
 181,K1-1,K,1,1,Organic Terrain & Flora,Flowers (All),Yes,Yes
 182,K1-2,K,1,2,Organic Terrain & Flora,Leaf Litter & Tall Dry Grass,Yes,Yes
 183,K1-3,K,1,3,Organic Terrain & Flora,Moss Block,Yes,Yes
-184,K1-4,K,1,4,Organic Terrain & Flora,Moss Carpet,EMPTY,
+184,K1-4,K,1,4,Organic Terrain & Flora,Seagrass,EMPTY,
 185,K1-5,K,1,5,Organic Terrain & Flora,Mycelium,Yes,Yes
 186,K1-6,K,1,6,Organic Terrain & Flora,Pitcher Pods,Yes,Yes
 187,K1-7,K,1,7,Organic Terrain & Flora,Sea Pickles,Yes,Yes
@@ -220,7 +220,7 @@
 219,M1-3,M,1,3,Farming - Plant Materials,Cocoa Beans,Yes,Yes
 220,M1-4,M,1,4,Farming - Plant Materials,Kelp,Yes,Yes
 221,M1-5,M,1,5,Farming - Plant Materials,Sugar Cane,EMPTY,
-222,M1-6,M,1,6,Farming - Plant Materials,,EMPTY,
+222,M1-6,M,1,6,Farming - Plant Materials,Turtle Eggs,Yes,Yes
 223,M1-7,M,1,7,Farming - Plant Materials,,EMPTY,
 224,M1-8,M,1,8,Farming - Plant Materials,,EMPTY,
 225,M1-9,M,1,9,Farming - Plant Materials,,EMPTY,
@@ -267,7 +267,7 @@
 266,O2-5,O,2,5,Farming - Meats & Animal Products,Raw Fish,Yes,Yes
 267,O2-6,O,2,6,Farming - Meats & Animal Products,Raw Meats (All),Yes,Yes
 268,O2-7,O,2,7,Farming - Meats & Animal Products,Pufferfish,Yes,Yes
-269,O2-8,O,2,8,Farming - Meats & Animal Products,,EMPTY,
+269,O2-8,O,2,8,Farming - Meats & Animal Products,Tropical Fish,Yes,Yes
 270,O2-9,O,2,9,Farming - Meats & Animal Products,,EMPTY,
 271,P1-1,P,1,1,Utilities,Armor Stands,Yes,Yes
 272,P1-2,P,1,2,Utilities,Beds (All Colors),Yes,Yes
@@ -343,13 +343,13 @@
 342,S2-9,S,2,9,Redstone Devices,Redstone Torch,Yes,Yes
 343,T1-1,T,1,1,Nether Materials,Obsidian & Crying Obsidian,Yes,Yes
 344,T1-2,T,1,2,Nether Materials,Quartz Ore & Quartz,Yes,Yes
-345,T1-3,T,1,3,Nether Materials,Shroomlight,EMPTY,
+345,T1-3,T,1,3,Nether Materials,Shroomlight,Yes,Yes
 346,T1-4,T,1,4,Nether Materials,Soul Sand,Yes,Yes
 347,T1-5,T,1,5,Nether Materials,Soul Soil,Yes,Yes
 348,T1-6,T,1,6,Nether Materials,Vines (Twisting & Weeping),Yes,Yes
 349,T1-7,T,1,7,Nether Materials,Warped Nylium,Yes,Yes
 350,T1-8,T,1,8,Nether Materials,Warped Stems & Planks,Yes,Yes
-351,T1-9,T,1,9,Nether Materials,,EMPTY,
+351,T1-9,T,1,9,Nether Materials,Crimson & Warped Roots,Yes,Yes
 352,T2-1,T,2,1,Redstone Devices,Levers,Yes,Yes
 353,T2-2,T,2,2,Redstone Devices,Sticky Piston,EMPTY,
 354,T2-3,T,2,3,Redstone Devices,Piston,EMPTY,
@@ -380,10 +380,10 @@
 379,V1-1,V,1,1,Rare & Boss Mob Drops,Popped Chorus Fruit,Yes,Yes
 380,V1-2,V,1,2,Rare & Boss Mob Drops,Shulker Shell,,
 381,V1-3,V,1,3,Rare & Boss Mob Drops,Totem of Undying,Yes,Yes
-382,V1-4,V,1,4,Rare & Boss Mob Drops,Wither Skeleton Skull,,
+382,V1-4,V,1,4,Rare & Boss Mob Drops,Wither Skeleton Skull,Yes,Yes
 383,V1-5,V,1,5,Rare & Boss Mob Drops,Trial Keys,Yes,Yes
-384,V1-6,V,1,6,Rare & Boss Mob Drops,,EMPTY,
-385,V1-7,V,1,7,Rare & Boss Mob Drops,,EMPTY,
+384,V1-6,V,1,6,Rare & Boss Mob Drops,Ominous Bottles,Yes,Yes
+385,V1-7,V,1,7,Rare & Boss Mob Drops,Dragon Heads,Yes,Yes
 386,V1-8,V,1,8,Rare & Boss Mob Drops,,EMPTY,
 387,V1-9,V,1,9,Rare & Boss Mob Drops,,EMPTY,
 388,V2-1,V,2,1,Mob Drops & Loot,Ink Sac,Yes,Yes
@@ -405,7 +405,7 @@
 404,W1-8,W,1,8,UNUSED,,EMPTY,
 405,W1-9,W,1,9,UNUSED,,EMPTY,
 406,W2-1,W,2,1,Mob Drops & Loot,TNT,Yes,Yes
-407,W2-2,W,2,2,Mob Drops & Loot,Wind Charges,Empty,
+407,W2-2,W,2,2,Mob Drops & Loot,Wind Charges,Yes,Yes
 408,W2-3,W,2,3,Mob Drops & Loot,Rabbit Hide,Yes,Yes
 409,W2-4,W,2,4,Mob Drops & Loot,,EMPTY,
 410,W2-5,W,2,5,Mob Drops & Loot,,EMPTY,
