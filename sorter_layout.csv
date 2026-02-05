@@ -351,8 +351,8 @@
 350,T1-8,T,1,8,Nether Materials,Warped Stems & Planks,Yes,Yes
 351,T1-9,T,1,9,Nether Materials,Crimson & Warped Roots,Yes,Yes
 352,T2-1,T,2,1,Redstone Devices,Levers,Yes,Yes
-353,T2-2,T,2,2,Redstone Devices,Sticky Piston,EMPTY,
-354,T2-3,T,2,3,Redstone Devices,Piston,EMPTY,
+353,T2-2,T,2,2,Redstone Devices,Sticky Piston,Yes,Yes
+354,T2-3,T,2,3,Redstone Devices,Piston,Yes,Yes
 355,T2-4,T,2,4,Redstone Devices,Lightning Rods,EMPTY,
 356,T2-5,T,2,5,Redstone Devices,Hopper,Yes,Yes
 357,T2-6,T,2,6,Redstone Devices,Daylight Detector,Yes,Yes
