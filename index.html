@@ -272,8 +272,9 @@
     .slot.hasItem::after {
       content: "";
       position: absolute;
-      right: 3px;
-      bottom: 3px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 5px;
       height: 5px;
       border-radius: 50%;
@@ -649,9 +650,9 @@
             const isMatch = row ? matchesRowFilter(row, ACTIVE_FILTER) : false;
             const isSelected = chestId === SELECTED;
 
-            // DIM LOGIC
-            if (ACTIVE_FILTER && row) {
-              if (!isMatch || (SELECTED && !isSelected)) {
+            // DIM LOGIC — never dim the selected slot
+            if (ACTIVE_FILTER && row && !isSelected) {
+              if (!isMatch || SELECTED) {
                 btn.style.opacity = "0.22";
               }
             }
