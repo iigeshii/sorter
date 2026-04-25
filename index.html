@@ -308,6 +308,16 @@
 
     .k { color: var(--muted); }
 
+    .itemsList {
+      margin: 2px 0 0 0;
+      padding-left: 1.1em;
+      list-style: disc;
+    }
+    .itemsList li {
+      line-height: 1.7;
+      font-size: 11px;
+    }
+
     /* ---------------- POD INVENTORY ---------------- */
     .podSection {
       margin-top: 14px;
@@ -499,10 +509,21 @@
       INDEX.set(r.chestId, r);
 
       if (!CAT_INDEX.has(r.category)) CAT_INDEX.set(r.category, new Set());
-      if (r.desc) CAT_INDEX.get(r.category).add(r.desc);
 
-      const key = (r.desc || "").toLowerCase();
-      if (key && !DESC_TO_CHEST.has(key)) DESC_TO_CHEST.set(key, r.chestId);
+      const itemList = r.items ? r.items.split("|").map(s => s.trim()).filter(Boolean) : [];
+      if (itemList.length) {
+        for (const item of itemList) {
+          CAT_INDEX.get(r.category).add(item);
+          const k = item.toLowerCase();
+          if (!DESC_TO_CHEST.has(k)) DESC_TO_CHEST.set(k, r.chestId);
+        }
+        const descKey = (r.desc || "").toLowerCase();
+        if (descKey && !DESC_TO_CHEST.has(descKey)) DESC_TO_CHEST.set(descKey, r.chestId);
+      } else if (r.desc) {
+        CAT_INDEX.get(r.category).add(r.desc);
+        const key = r.desc.toLowerCase();
+        if (!DESC_TO_CHEST.has(key)) DESC_TO_CHEST.set(key, r.chestId);
+      }
     }
   }
 
@@ -518,7 +539,19 @@
     }
     elDChest.textContent = row.chestId || "—";
     elDCat.textContent = row.category || "—";
-    elDDesc.textContent = row.desc || "—";
+    if (row.items) {
+      elDDesc.innerHTML = "";
+      const ul = document.createElement("ul");
+      ul.className = "itemsList";
+      for (const item of row.items.split("|").map(s => s.trim()).filter(Boolean)) {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      }
+      elDDesc.appendChild(ul);
+    } else {
+      elDDesc.textContent = row.desc || "—";
+    }
 
     const bin = row.chestId.replace(/-\d+$/, "");
     elDPodId.textContent = bin;
@@ -526,10 +559,13 @@
     for (let n = 1; n <= 9; n++) {
       const cid = `${bin}-${n}`;
       const r = getRow(cid);
-      const isEmpty = !r?.desc;
+      const isEmpty = !r?.desc && !r?.items;
+      const slotLabel = r?.items
+        ? r.items.split("|").map(s => s.trim()).filter(Boolean).join(" · ")
+        : (r?.desc || "empty");
       const div = document.createElement("div");
       div.className = "podSlotRow" + (cid === row.chestId ? " active" : "") + (isEmpty ? " empty" : "");
-      div.innerHTML = `<span class="podSlotNum">${n}</span><span class="podSlotDesc">${escapeHtml(r?.desc || "empty")}</span>`;
+      div.innerHTML = `<span class="podSlotNum">${n}</span><span class="podSlotDesc">${escapeHtml(slotLabel)}</span>`;
       if (!isEmpty) div.addEventListener("click", () => selectChest(cid));
       elDPodList.appendChild(div);
     }
@@ -551,7 +587,7 @@
   function matchesRowFilter(row, q) {
     if (!q) return true;
     q = q.toLowerCase();
-    return matchesFilterText(row.category, q) || matchesFilterText(row.desc, q);
+    return matchesFilterText(row.category, q) || matchesFilterText(row.desc, q) || matchesFilterText(row.items, q);
   }
 
   function selectChest(chestId) {
@@ -715,7 +751,10 @@
             const desc = row?.desc ?? "";
 
             if (category === "UNUSED") btn.classList.add("unused");
-            if (desc) { btn.classList.add("hasItem"); btn.title = desc; }
+            const tooltip = row?.items
+              ? row.items.split("|").map(s => s.trim()).filter(Boolean).join("\n")
+              : desc;
+            if (tooltip) { btn.classList.add("hasItem"); btn.title = tooltip; }
 
             const c = slotColor(category);
             btn.style.background = c.bg;
@@ -785,7 +824,8 @@
         cluster:  r["Cluster"] ?? "",
         number:   r["Number"] ?? "",
         category: (r["Categories"] ?? "UNUSED").trim() || "UNUSED",
-        desc:     (r["Description"] ?? "").trim()
+        desc:     (r["Description"] ?? "").trim(),
+        items:    (r["Items"] ?? "").trim()
       }));
       buildIndexes(DATA);
       applyURLHash();
