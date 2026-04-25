@@ -615,13 +615,21 @@
       .replace(/\b\w/g, c => c.toUpperCase());
   }
 
+  function isPlaceholder(item) {
+    return item.itemName === "minecraft:dirt" && item.totalCount === 1;
+  }
+
   function itemBelongsInChest(row, itemName) {
     if (!row || !itemName) return null;
     if (row.category === "UNUSED") return false;
-    // Exact match against the Items field (Minecraft IDs)
+    // No description and no items defined — chest should be empty
+    if (!row.desc && !row.items) return false;
+    // Match against the Items field — accepts either Minecraft IDs or display names
     if (row.items) {
-      const expected = new Set(row.items.split("|").map(s => s.trim().toLowerCase()));
-      return expected.has(itemName.toLowerCase()) ? true : false;
+      const expected = row.items.split("|").map(s => s.trim().toLowerCase());
+      const idLower   = itemName.toLowerCase();
+      const dispLower = idToDisplay(itemName).toLowerCase();
+      return expected.some(e => e === idLower || e === dispLower) ? true : false;
     }
     // Fuzzy: check if any significant word overlaps between display name and Description
     if (!row.desc) return null;
@@ -638,7 +646,7 @@
     for (const [chestId, items] of INVENTORY) {
       if (!items.length) continue;
       const row = INDEX.get(chestId);
-      const misfits = items.filter(item => itemBelongsInChest(row, item.itemName) === false);
+      const misfits = items.filter(item => !isPlaceholder(item) && itemBelongsInChest(row, item.itemName) === false);
       if (misfits.length) DISCREPANCIES.push({ chestId, row, items: misfits });
     }
     DISCREPANCIES.sort((a, b) => a.chestId.localeCompare(b.chestId));
@@ -791,7 +799,7 @@
           const div = document.createElement("div");
           div.className = "invItemRow";
           const belongs = itemBelongsInChest(row, item.itemName);
-          if (belongs === false) div.classList.add("mismatch");
+          if (belongs === false && !isPlaceholder(item)) div.classList.add("mismatch");
           let countStr = item.totalCount.toLocaleString();
           if (item.shulkerCount > 0) countStr += ` (${item.shulkerCount.toLocaleString()} in shulkers)`;
           div.innerHTML = `<span class="invName">${escapeHtml(idToDisplay(item.itemName))}</span><span class="invCount">${countStr}</span>`;
@@ -991,7 +999,7 @@
               const invItems = INVENTORY.get(chestId) || [];
               if (invItems.length) {
                 btn.classList.add("hasInv");
-                if (invItems.some(item => itemBelongsInChest(row, item.itemName) === false)) {
+                if (invItems.some(item => !isPlaceholder(item) && itemBelongsInChest(row, item.itemName) === false)) {
                   btn.classList.add("hasMismatch");
                 }
               }

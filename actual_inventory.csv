@@ -7,7 +7,7 @@ A1-2,minecraft:waxed_copper_chest,47,47,0
 A1-2,minecraft:weathered_copper_chest,26,26,0
 A1-3,minecraft:ender_chest,3,3,0
 A1-4,minecraft:barrel,6,6,0
-A2-1,minecraft:grass_block,432,432,0
+A2-1,minecraft:dirt,1,1,0
 A2-2,minecraft:diamond_chestplate,2,2,0
 A2-3,minecraft:elytra,3,3,0
 A2-4,minecraft:diamond_helmet,4,4,0
@@ -102,7 +102,7 @@ E1-4,minecraft:lantern,78,78,0
 E1-4,minecraft:oxidized_copper_lantern,1,1,0
 E1-4,minecraft:soul_lantern,2,2,0
 E1-5,minecraft:redstone_lamp,20,20,0
-E1-6,minecraft:sand,2305,2305,0
+E1-6,minecraft:dirt,1,1,0
 E1-7,minecraft:sea_lantern,16,16,0
 E1-8,minecraft:copper_torch,4,4,0
 E1-8,minecraft:soul_torch,13,13,0
