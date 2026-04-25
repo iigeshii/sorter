@@ -308,6 +308,57 @@
 
     .k { color: var(--muted); }
 
+    /* ---------------- POD INVENTORY ---------------- */
+    .podSection {
+      margin-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 12px;
+    }
+
+    .podSectionTitle {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .podSlotRow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 6px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .podSlotRow:hover { background: rgba(255,255,255,.06); }
+
+    .podSlotRow.active {
+      background: rgba(122,162,255,.12);
+      border-color: rgba(122,162,255,.3);
+    }
+
+    .podSlotNum {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted2);
+      min-width: 14px;
+      text-align: right;
+    }
+
+    .podSlotDesc { color: var(--text); }
+
+    .podSlotRow.empty {
+      cursor: default;
+    }
+
+    .podSlotRow.empty .podSlotDesc {
+      color: var(--muted2);
+      font-style: italic;
+    }
+
     /* ---------------- RESPONSIVE ---------------- */
     @media (max-width: 1300px) {
       main { grid-template-columns: 1fr; }
@@ -358,6 +409,10 @@
       <div class="k">ChestID</div><div id="dChest">—</div>
       <div class="k">Category</div><div id="dCat">—</div>
       <div class="k">Description</div><div id="dDesc">—</div>
+    </div>
+    <div class="podSection" id="dPodSection" style="display:none">
+      <div class="podSectionTitle">All slots in <span id="dPodId"></span></div>
+      <div id="dPodList"></div>
     </div>
   </section>
 </main>
@@ -424,6 +479,9 @@
   const elDChest = document.getElementById("dChest");
   const elDCat = document.getElementById("dCat");
   const elDDesc = document.getElementById("dDesc");
+  const elDPodSection = document.getElementById("dPodSection");
+  const elDPodId = document.getElementById("dPodId");
+  const elDPodList = document.getElementById("dPodList");
 
   let DATA = [];
   let INDEX = new Map();         // chestId -> row
@@ -455,11 +513,27 @@
       elDChest.textContent = "—";
       elDCat.textContent = "—";
       elDDesc.textContent = "—";
+      elDPodSection.style.display = "none";
       return;
     }
     elDChest.textContent = row.chestId || "—";
     elDCat.textContent = row.category || "—";
     elDDesc.textContent = row.desc || "—";
+
+    const bin = row.chestId.replace(/-\d+$/, "");
+    elDPodId.textContent = bin;
+    elDPodList.innerHTML = "";
+    for (let n = 1; n <= 9; n++) {
+      const cid = `${bin}-${n}`;
+      const r = getRow(cid);
+      const isEmpty = !r?.desc;
+      const div = document.createElement("div");
+      div.className = "podSlotRow" + (cid === row.chestId ? " active" : "") + (isEmpty ? " empty" : "");
+      div.innerHTML = `<span class="podSlotNum">${n}</span><span class="podSlotDesc">${escapeHtml(r?.desc || "empty")}</span>`;
+      if (!isEmpty) div.addEventListener("click", () => selectChest(cid));
+      elDPodList.appendChild(div);
+    }
+    elDPodSection.style.display = "";
   }
 
   function clearSelection() {
@@ -641,7 +715,7 @@
             const desc = row?.desc ?? "";
 
             if (category === "UNUSED") btn.classList.add("unused");
-            if (desc) btn.classList.add("hasItem");
+            if (desc) { btn.classList.add("hasItem"); btn.title = desc; }
 
             const c = slotColor(category);
             btn.style.background = c.bg;
@@ -773,6 +847,15 @@
 
   // Clear button
   elClear.addEventListener("click", resetFilterAndView);
+
+  // "/" focuses the search box
+  document.addEventListener("keydown", e => {
+    if (e.key === "/" && document.activeElement !== elSearch) {
+      e.preventDefault();
+      elSearch.focus();
+      elSearch.select();
+    }
+  });
 
   // initial load
   reload();
