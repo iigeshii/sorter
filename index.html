@@ -322,6 +322,7 @@
       .titleWrap { align-items: center; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5/papaparse.min.js"></script>
 </head>
 <body>
 <header>
@@ -362,52 +363,24 @@
 
 <script>
   // --------------------------
-  // CSV LOADING + PARSING
+  // URL HASH STATE
   // --------------------------
-  async function loadCSV(url) {
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
-    return await res.text();
+  function updateURLHash() {
+    const params = new URLSearchParams();
+    if (ACTIVE_FILTER) params.set("q", ACTIVE_FILTER);
+    if (SELECTED) params.set("chest", SELECTED);
+    const str = params.toString();
+    history.replaceState(null, "", str ? "#" + str : location.pathname + location.search);
   }
 
-  function parseCSV(text) {
-    // minimal CSV parser supporting quotes + commas + "" escaping
-    const rows = [];
-    let row = [];
-    let cell = "";
-    let inQuotes = false;
-
-    for (let i = 0; i < text.length; i++) {
-      const ch = text[i];
-      const next = text[i + 1];
-
-      if (inQuotes) {
-        if (ch === '"' && next === '"') { cell += '"'; i++; }
-        else if (ch === '"') inQuotes = false;
-        else cell += ch;
-      } else {
-        if (ch === '"') inQuotes = true;
-        else if (ch === ',') { row.push(cell); cell = ""; }
-        else if (ch === '\n') { row.push(cell); rows.push(row); row = []; cell = ""; }
-        else if (ch !== '\r') cell += ch;
-      }
-    }
-    if (cell.length || row.length) { row.push(cell); rows.push(row); }
-
-    const header = rows.shift().map(h => h.trim());
-    const idx = Object.fromEntries(header.map((h, i) => [h, i]));
-
-    return rows
-      .filter(r => r.some(x => (x ?? "").trim() !== ""))
-      .map(r => ({
-        n: r[idx["#"]] ?? "",
-        chestId: r[idx["ChestID"]] ?? "",
-        col: r[idx["Column"]] ?? "",
-        cluster: r[idx["Cluster"]] ?? "",
-        number: r[idx["Number"]] ?? "",
-        category: (r[idx["Categories"]] ?? "UNUSED").trim() || "UNUSED",
-        desc: (r[idx["Description"]] ?? "").trim()
-      }));
+  function applyURLHash() {
+    const hash = location.hash.slice(1);
+    if (!hash) return;
+    const params = new URLSearchParams(hash);
+    const q = params.get("q");
+    const chest = params.get("chest");
+    if (q) { elSearch.value = q; ACTIVE_FILTER = q; }
+    if (chest) SELECTED = chest;
   }
 
   // --------------------------
@@ -513,6 +486,7 @@
     // update state first
     SELECTED = chestId;
     setDetails(row);
+    updateURLHash();
 
     // IMPORTANT: re-render so dim/opacity updates for the new selection
     // (renderAll() is fine too, but walls-only is usually enough)
@@ -559,7 +533,7 @@
 
       const right = document.createElement("div");
       right.className = "count";
-      right.textContent = `${filteredItems.length}`;
+      right.textContent = q ? `${filteredItems.length} / ${items.length}` : `${items.length}`;
 
       sum.appendChild(left);
       sum.appendChild(right);
@@ -585,8 +559,14 @@
       elDirList.appendChild(det);
     }
 
-    const suffix = ACTIVE_FILTER ? " (filtered)" : "";
-    elDirMeta.textContent = `${visibleCats} cats • ${visibleItems} items${suffix}`;
+    const allCats = Array.from(CAT_INDEX.keys()).filter(c => c !== "UNUSED");
+    const totalCatsCount = allCats.length;
+    const totalItemsCount = allCats.reduce((sum, c) => sum + (CAT_INDEX.get(c)?.size ?? 0), 0);
+    if (ACTIVE_FILTER) {
+      elDirMeta.textContent = `${visibleCats} / ${totalCatsCount} cats • ${visibleItems} / ${totalItemsCount} items`;
+    } else {
+      elDirMeta.textContent = `${totalCatsCount} cats • ${totalItemsCount} items`;
+    }
   }
 
   function escapeHtml(s) {
@@ -719,12 +699,27 @@
   async function reload() {
     elStatus.textContent = "Loading sorter_layout.csv…";
     try {
-      const text = await loadCSV("sorter_layout.csv");
-      DATA = parseCSV(text);
+      const res = await fetch("sorter_layout.csv", { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
+      DATA = data.map(r => ({
+        n:        r["#"] ?? "",
+        chestId:  r["ChestID"] ?? "",
+        col:      r["Column"] ?? "",
+        cluster:  r["Cluster"] ?? "",
+        number:   r["Number"] ?? "",
+        category: (r["Categories"] ?? "UNUSED").trim() || "UNUSED",
+        desc:     (r["Description"] ?? "").trim()
+      }));
       buildIndexes(DATA);
+      applyURLHash();
       elStatus.textContent = "";
-      clearSelection();
       renderAll();
+      if (SELECTED) {
+        const slotEl = document.querySelector(`.slot[data-chest="${CSS.escape(SELECTED)}"]`);
+        slotEl?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      }
     } catch (e) {
       elStatus.textContent = `ERROR: ${e.message}`;
       console.error(e);
@@ -739,22 +734,40 @@
     ACTIVE_FILTER = "";
     clearSelection();
     renderAll();
+    updateURLHash();
   }
 
-  // Typing/backspacing
+  // Typing/backspacing – debounced 150ms
+  let _searchTimer = null;
   elSearch.addEventListener("input", () => {
-    const v = elSearch.value.trim();
-    if (v === "") {
-      resetFilterAndView();
-      return;
-    }
-    ACTIVE_FILTER = v;
-    renderAll();
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(() => {
+      const v = elSearch.value.trim();
+      if (v === "") { resetFilterAndView(); return; }
+      ACTIVE_FILTER = v;
+      renderAll();
+      updateURLHash();
+    }, 150);
   });
 
   // Clicking the built-in "x" clear icon (type="search")
   elSearch.addEventListener("search", () => {
     if (elSearch.value.trim() === "") resetFilterAndView();
+  });
+
+  // Escape clears the search
+  elSearch.addEventListener("keydown", e => {
+    if (e.key === "Escape") resetFilterAndView();
+  });
+
+  // Arrow key navigation through directory item buttons
+  elDirList.addEventListener("keydown", e => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+    const btns = Array.from(elDirList.querySelectorAll(".itemBtn"));
+    const i = btns.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") btns[Math.min(i + 1, btns.length - 1)]?.focus();
+    else btns[Math.max(i - 1, 0)]?.focus();
   });
 
   // Clear button

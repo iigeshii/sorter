@@ -74,6 +74,36 @@ def load_layout(path: Path) -> dict[str, list[str]]:
     return data
 
 
+def validate_items(categories: Dict[str, List[str]]) -> None:
+    """Check for blank item names and items listed in more than one category."""
+    blanks: List[str] = []
+    item_to_cats: Dict[str, List[str]] = {}
+
+    for cat, items in categories.items():
+        for item in items:
+            if not item or not item.strip():
+                blanks.append(cat)
+            else:
+                item_to_cats.setdefault(item, []).append(cat)
+
+    dupes = {item: cats for item, cats in item_to_cats.items() if len(cats) > 1}
+
+    if blanks or dupes:
+        print("\n[ERROR] Item validation failed.\n")
+        if blanks:
+            print("Blank item names found in these categories:")
+            for cat in sorted(set(blanks), key=str.casefold):
+                print(f"  - {cat}")
+            print()
+        if dupes:
+            print("Items listed in multiple categories:")
+            for item in sorted(dupes.keys(), key=str.casefold):
+                cats = ", ".join(dupes[item])
+                print(f"  - {item!r}: {cats}")
+            print()
+        sys.exit(4)
+
+
 def validate_same_categories(categories: Dict[str, List[str]], layout: Dict[str, List[str]]) -> None:
     cat_set = set(categories.keys())
     layout_set = set(layout.keys())
@@ -277,6 +307,7 @@ def main() -> None:
     categories = load_categories(CATEGORIES_JSON)
     layout = load_layout(LAYOUT_JSON)
 
+    validate_items(categories)
     validate_same_categories(categories, layout)
     validate_layout_bins_unique(layout)
 
