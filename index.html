@@ -1059,16 +1059,20 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
-      DATA = data.map(r => ({
-        n:        r["#"] ?? "",
-        chestId:  r["ChestID"] ?? "",
-        col:      r["Column"] ?? "",
-        cluster:  r["Cluster"] ?? "",
-        number:   r["Number"] ?? "",
-        category: (r["Categories"] ?? "UNUSED").trim() || "UNUSED",
-        desc:     (r["Description"] ?? "").trim(),
-        items:    (r["Items"] ?? "").trim()
-      }));
+      DATA = data.map(r => {
+        const col     = (r["Column"]  ?? "").trim();
+        const cluster = (r["Cluster"] ?? "").trim();
+        const number  = (r["Number"]  ?? "").trim();
+        return {
+          chestId:  `${col}${cluster}-${number}`,
+          col,
+          cluster,
+          number,
+          category: (r["Categories"] ?? "UNUSED").trim() || "UNUSED",
+          desc:     (r["Description"] ?? "").trim(),
+          items:    (r["Items"] ?? "").trim(),
+        };
+      });
       buildIndexes(DATA);
       applyURLHash();
       elStatus.textContent = "";
