@@ -308,6 +308,90 @@
 
     .k { color: var(--muted); }
 
+    /* ---------------- SLOT INVENTORY INDICATORS ---------------- */
+    .slot.hasInv::after    { background: #4ade80; }
+    .slot.hasMismatch::after { background: #fb923c; }
+
+    /* ---------------- ACTUAL CONTENTS (DETAILS PANEL) ---------------- */
+    .invSection {
+      margin-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 12px;
+    }
+
+    .invItemRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: var(--mono);
+      gap: 8px;
+    }
+
+    .invItemRow.mismatch {
+      background: rgba(251,146,60,.12);
+      border: 1px solid rgba(251,146,60,.25);
+      margin: 1px 0;
+    }
+
+    .invName { color: var(--text); flex: 1; }
+    .invCount { color: var(--muted2); font-size: 11px; white-space: nowrap; }
+    .invEmpty { font-size: 12px; color: var(--muted2); font-style: italic; padding: 4px 6px; }
+
+    /* ---------------- DISCREPANCIES (DIRECTORY PANEL) ---------------- */
+    .discDetails {
+      border: 1px solid rgba(251,146,60,.3);
+      border-radius: 12px;
+      margin: 0 4px 10px;
+      background: rgba(251,146,60,.05);
+    }
+
+    .discSummary {
+      cursor: pointer;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .discTitle { font-size: 12px; font-weight: 600; color: #fb923c; }
+
+    .discList { padding: 0 10px 10px; display: grid; gap: 6px; }
+
+    .discEntry {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(251,146,60,.2);
+      border-radius: 8px;
+      padding: 6px 8px;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text);
+      width: 100%;
+    }
+
+    .discEntry:hover { background: rgba(255,255,255,.07); }
+
+    .discEntryHeader {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .discEntryDesc {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .discEntryItems {
+      font-size: 11px;
+      color: #fb923c;
+      font-family: var(--mono);
+    }
+
     .itemsList {
       margin: 2px 0 0 0;
       padding-left: 1.1em;
@@ -405,6 +489,13 @@
       <div class="title">Directory</div>
       <div class="meta" id="dirMeta">—</div>
     </div>
+    <details class="discDetails" id="discSection" style="display:none">
+      <summary class="discSummary">
+        <span class="discTitle">⚠ Discrepancies</span>
+        <span class="meta" id="discMeta"></span>
+      </summary>
+      <div id="discList" class="discList"></div>
+    </details>
     <div id="dirList"></div>
   </section>
 
@@ -423,6 +514,10 @@
     <div class="podSection" id="dPodSection" style="display:none">
       <div class="podSectionTitle">All slots in <span id="dPodId"></span></div>
       <div id="dPodList"></div>
+    </div>
+    <div class="invSection" id="dInvSection" style="display:none">
+      <div class="podSectionTitle">Actual Contents</div>
+      <div id="dInvList"></div>
     </div>
   </section>
 </main>
@@ -492,6 +587,11 @@
   const elDPodSection = document.getElementById("dPodSection");
   const elDPodId = document.getElementById("dPodId");
   const elDPodList = document.getElementById("dPodList");
+  const elDInvSection = document.getElementById("dInvSection");
+  const elDInvList = document.getElementById("dInvList");
+  const elDiscSection = document.getElementById("discSection");
+  const elDiscList = document.getElementById("discList");
+  const elDiscMeta = document.getElementById("discMeta");
 
   let DATA = [];
   let INDEX = new Map();         // chestId -> row
@@ -499,6 +599,110 @@
   let DESC_TO_CHEST = new Map(); // desc(lower) -> first chestId
   let SELECTED = null;
   let ACTIVE_FILTER = "";
+
+  let INVENTORY = new Map();     // chestId -> [{itemName, totalCount, directCount, shulkerCount}]
+  let INV_LOADED = false;
+  let DISCREPANCIES = [];        // [{chestId, row, items}] — items that don't belong
+
+  // --------------------------
+  // INVENTORY HELPERS
+  // --------------------------
+
+  function idToDisplay(id) {
+    return (id || "")
+      .replace(/^minecraft:/, "")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function itemBelongsInChest(row, itemName) {
+    if (!row || !itemName) return null;
+    if (row.category === "UNUSED") return false;
+    // Exact match against the Items field (Minecraft IDs)
+    if (row.items) {
+      const expected = new Set(row.items.split("|").map(s => s.trim().toLowerCase()));
+      return expected.has(itemName.toLowerCase()) ? true : false;
+    }
+    // Fuzzy: check if any significant word overlaps between display name and Description
+    if (!row.desc) return null;
+    const display = idToDisplay(itemName).toLowerCase();
+    const desc = row.desc.toLowerCase();
+    const displayWords = display.split(" ").filter(w => w.length > 2);
+    const descWords = desc.split(/[\s,&()/]+/).filter(w => w.length > 2);
+    const hasMatch = displayWords.some(w => desc.includes(w)) || descWords.some(w => display.includes(w));
+    return hasMatch ? null : false; // null = unclear, false = likely wrong chest
+  }
+
+  function buildDiscrepancies() {
+    DISCREPANCIES = [];
+    for (const [chestId, items] of INVENTORY) {
+      if (!items.length) continue;
+      const row = INDEX.get(chestId);
+      const misfits = items.filter(item => itemBelongsInChest(row, item.itemName) === false);
+      if (misfits.length) DISCREPANCIES.push({ chestId, row, items: misfits });
+    }
+    DISCREPANCIES.sort((a, b) => a.chestId.localeCompare(b.chestId));
+  }
+
+  async function loadInventory() {
+    try {
+      const res = await fetch("actual_inventory.csv", { cache: "no-store" });
+      if (!res.ok) return;
+      const text = await res.text();
+      const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
+      INVENTORY = new Map();
+      for (const r of data) {
+        const cid = r["ChestID"] ?? "";
+        if (!INVENTORY.has(cid)) INVENTORY.set(cid, []);
+        INVENTORY.get(cid).push({
+          itemName:     (r["ItemName"] ?? "").trim(),
+          totalCount:   parseInt(r["TotalCount"])  || 0,
+          directCount:  parseInt(r["DirectCount"]) || 0,
+          shulkerCount: parseInt(r["ShulkerCount"]) || 0,
+        });
+      }
+      INV_LOADED = true;
+      buildDiscrepancies();
+      renderAll();
+    } catch(e) {
+      // No inventory file present — silently skip
+    }
+  }
+
+  function renderDiscrepancies() {
+    if (!INV_LOADED || !DISCREPANCIES.length) {
+      elDiscSection.style.display = "none";
+      return;
+    }
+    elDiscSection.style.display = "";
+    elDiscMeta.textContent = `${DISCREPANCIES.length} chest${DISCREPANCIES.length !== 1 ? "s" : ""}`;
+    elDiscList.innerHTML = "";
+    for (const d of DISCREPANCIES) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "discEntry";
+      btn.addEventListener("click", () => selectChest(d.chestId));
+
+      const header = document.createElement("div");
+      header.className = "discEntryHeader";
+      header.textContent = `${d.chestId}  •  ${d.row?.category ?? "?"}`;
+
+      const desc = document.createElement("div");
+      desc.className = "discEntryDesc";
+      desc.textContent = d.row?.desc || "(no description)";
+
+      const items = document.createElement("div");
+      items.className = "discEntryItems";
+      items.textContent = d.items
+        .map(i => `${idToDisplay(i.itemName)} ×${i.totalCount.toLocaleString()}`)
+        .join("  •  ");
+
+      btn.appendChild(header);
+      btn.appendChild(desc);
+      btn.appendChild(items);
+      elDiscList.appendChild(btn);
+    }
+  }
 
   function buildIndexes(rows) {
     INDEX = new Map();
@@ -535,6 +739,7 @@
       elDCat.textContent = "—";
       elDDesc.textContent = "—";
       elDPodSection.style.display = "none";
+      elDInvSection.style.display = "none";
       return;
     }
     elDChest.textContent = row.chestId || "—";
@@ -570,6 +775,32 @@
       elDPodList.appendChild(div);
     }
     elDPodSection.style.display = "";
+
+    // Actual inventory contents
+    if (INV_LOADED) {
+      elDInvSection.style.display = "";
+      elDInvList.innerHTML = "";
+      const invItems = INVENTORY.get(row.chestId) || [];
+      if (!invItems.length) {
+        const e = document.createElement("div");
+        e.className = "invEmpty";
+        e.textContent = "Empty";
+        elDInvList.appendChild(e);
+      } else {
+        for (const item of invItems) {
+          const div = document.createElement("div");
+          div.className = "invItemRow";
+          const belongs = itemBelongsInChest(row, item.itemName);
+          if (belongs === false) div.classList.add("mismatch");
+          let countStr = item.totalCount.toLocaleString();
+          if (item.shulkerCount > 0) countStr += ` (${item.shulkerCount.toLocaleString()} in shulkers)`;
+          div.innerHTML = `<span class="invName">${escapeHtml(idToDisplay(item.itemName))}</span><span class="invCount">${countStr}</span>`;
+          elDInvList.appendChild(div);
+        }
+      }
+    } else {
+      elDInvSection.style.display = "none";
+    }
   }
 
   function clearSelection() {
@@ -756,6 +987,16 @@
               : desc;
             if (tooltip) { btn.classList.add("hasItem"); btn.title = tooltip; }
 
+            if (INV_LOADED) {
+              const invItems = INVENTORY.get(chestId) || [];
+              if (invItems.length) {
+                btn.classList.add("hasInv");
+                if (invItems.some(item => itemBelongsInChest(row, item.itemName) === false)) {
+                  btn.classList.add("hasMismatch");
+                }
+              }
+            }
+
             const c = slotColor(category);
             btn.style.background = c.bg;
             btn.style.borderColor = c.border;
@@ -808,6 +1049,7 @@
   function renderAll() {
     renderDirectory();
     renderWalls();
+    renderDiscrepancies();
   }
 
   async function reload() {
@@ -897,8 +1139,8 @@
     }
   });
 
-  // initial load
-  reload();
+  // initial load — inventory loads after layout so INDEX is ready for discrepancy checks
+  reload().then(loadInventory);
 </script>
 </body>
 </html>
