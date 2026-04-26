@@ -489,6 +489,14 @@
       .dir, .board, .details { max-height: none; }
     }
 
+    .invTimestamp {
+      font-size: 11px;
+      color: var(--muted2);
+      text-align: right;
+      font-family: var(--mono);
+      align-self: center;
+    }
+
     @media (max-width: 700px) {
       header {
         grid-template-columns: 1fr;
@@ -496,6 +504,7 @@
         text-align: center;
       }
       .titleWrap { align-items: center; }
+      .invTimestamp { text-align: center; }
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5/papaparse.min.js"></script>
@@ -511,6 +520,8 @@
     <input id="search" type="search" placeholder="Search item or category…" />
     <button class="btn" id="clear">Clear</button>
   </div>
+
+  <div class="invTimestamp" id="invTimestamp"></div>
 </header>
 
 <main>
@@ -719,6 +730,12 @@
     try {
       const res = await fetch("actual_inventory.csv", { cache: "no-store" });
       if (!res.ok) return;
+      const lastMod = res.headers.get("Last-Modified");
+      if (lastMod) {
+        const d = new Date(lastMod);
+        document.getElementById("invTimestamp").textContent =
+          `Inventory quantities last updated ${d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}`;
+      }
       const text = await res.text();
       const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
       INVENTORY = new Map();
