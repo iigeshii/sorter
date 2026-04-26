@@ -175,13 +175,13 @@ F1-2,minecraft:heartbreak_pottery_sherd,4,4,0
 F1-2,minecraft:howl_pottery_sherd,2,2,0
 F1-2,minecraft:sheaf_pottery_sherd,1,1,0
 F1-2,minecraft:shelter_pottery_sherd,2,2,0
-F1-3,minecraft:sniffer_egg,5,5,0
+F1-3,minecraft:sniffer_egg,6,6,0
 F1-4,minecraft:flower_pot,15,15,0
 F1-5,minecraft:painting,4,4,0
-F1-6,minecraft:sniffer_egg,1,1,0
+F1-6,minecraft:dirt,1,1,0
 F1-7,minecraft:dirt,1,1,0
 F1-8,minecraft:dirt,1,1,0
-F1-9,minecraft:glow_ink_sac,10,10,0
+F1-9,minecraft:dirt,1,1,0
 F2-1,minecraft:nether_brick,207,207,0
 F2-2,minecraft:chiseled_quartz_block,1,1,0
 F2-2,minecraft:quartz_block,25,25,0
@@ -362,7 +362,7 @@ I2-6,minecraft:calcite,417,417,0
 I2-7,minecraft:dirt,1,1,0
 I2-8,minecraft:dirt,1,1,0
 I2-9,minecraft:dirt,1,1,0
-J1-1,minecraft:dirt,3,3,0
+J1-1,minecraft:dirt,1,1,0
 J1-2,minecraft:chiseled_polished_blackstone,2,2,0
 J1-3,minecraft:dirt,1,1,0
 J1-4,minecraft:purpur_block,3,3,0
@@ -408,7 +408,7 @@ K1-3,minecraft:pale_hanging_moss,12,12,0
 K1-3,minecraft:pale_moss_block,32,32,0
 K1-4,minecraft:fern,45,45,0
 K1-4,minecraft:seagrass,104,104,0
-K1-4,minecraft:short_dry_grass,6,6,0
+K1-2,minecraft:short_dry_grass,6,6,0
 K1-4,minecraft:small_dripleaf_block,10,10,0
 K1-5,minecraft:mycelium,101,101,0
 K1-6,minecraft:pitcher_pod,184,184,0
@@ -449,7 +449,6 @@ L2-3,minecraft:cut_copper,99,99,0
 L2-3,minecraft:oxidized_copper,18,18,0
 L2-3,minecraft:raw_copper,147,147,0
 L2-3,minecraft:raw_copper_block,48,48,0
-L2-3,minecraft:shears,1,1,0
 L2-3,minecraft:waxed_copper,1031,64,967
 L2-3,minecraft:waxed_cut_copper_stairs,187,187,0
 L2-3,minecraft:waxed_exposed_copper_bulb,22,22,0

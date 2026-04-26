@@ -418,7 +418,7 @@
 
     .podSlotRow {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
       padding: 5px 6px;
       border-radius: 6px;
@@ -426,6 +426,36 @@
       cursor: pointer;
       border: 1px solid transparent;
     }
+
+    .podSlotContent {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .podSlotInv {
+      margin-top: 3px;
+      padding-left: 2px;
+      display: grid;
+      gap: 1px;
+    }
+
+    .podInvItem {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--muted);
+      padding: 1px 0;
+    }
+
+    .podInvItem.mismatch {
+      color: #fb923c;
+    }
+
+    .podInvName { flex: 1; min-width: 0; }
+    .podInvCount { white-space: nowrap; color: var(--muted2); }
+    .podInvItem.mismatch .podInvCount { color: #fb923c; }
 
     .podSlotRow:hover { background: rgba(255,255,255,.06); }
 
@@ -603,16 +633,49 @@
   let INVENTORY = new Map();     // chestId -> [{itemName, totalCount, directCount, shulkerCount}]
   let INV_LOADED = false;
   let DISCREPANCIES = [];        // [{chestId, row, items}] — items that don't belong
+  let NAME_MAP = new Map();      // itemId.toLowerCase() -> displayName
 
   // --------------------------
   // INVENTORY HELPERS
   // --------------------------
 
   function idToDisplay(id) {
-    return (id || "")
-      .replace(/^minecraft:/, "")
-      .replace(/_/g, " ")
+    if (!id) return "";
+    // Custom name map takes priority
+    const mapped = NAME_MAP.get(id.toLowerCase());
+    if (mapped) return mapped;
+
+    const colon = id.indexOf(":");
+    const namespace = colon >= 0 ? id.slice(0, colon) : "";
+    const base = colon >= 0 ? id.slice(colon + 1) : id;
+
+    const displayBase = base
+      .replace(/[-_]/g, " ")
       .replace(/\b\w/g, c => c.toUpperCase());
+
+    if (!namespace || namespace === "minecraft") return displayBase;
+
+    // Unknown namespace — show raw ID so user can copy it straight into item_names.csv
+    const parts = namespace.split("_");
+    const tag = parts[parts.length - 1].toUpperCase();
+    return `[${tag}] ${id}`;
+  }
+
+  async function loadNameMap() {
+    try {
+      const res = await fetch("item_names.csv", { cache: "no-store" });
+      if (!res.ok) return;
+      const text = await res.text();
+      const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
+      NAME_MAP = new Map();
+      for (const r of data) {
+        const id   = (r["ItemID"]      ?? "").trim().toLowerCase();
+        const name = (r["DisplayName"] ?? "").trim();
+        if (id && name) NAME_MAP.set(id, name);
+      }
+    } catch(e) {
+      // No name map file, that's fine
+    }
   }
 
   function isPlaceholder(item) {
@@ -769,46 +832,57 @@
     const bin = row.chestId.replace(/-\d+$/, "");
     elDPodId.textContent = bin;
     elDPodList.innerHTML = "";
+    elDInvSection.style.display = "none";
+
     for (let n = 1; n <= 9; n++) {
       const cid = `${bin}-${n}`;
       const r = getRow(cid);
-      const isEmpty = !r?.desc && !r?.items;
-      const slotLabel = r?.items
-        ? r.items.split("|").map(s => s.trim()).filter(Boolean).join(" · ")
-        : (r?.desc || "empty");
+      const invItems = INV_LOADED
+        ? (INVENTORY.get(cid) || []).filter(item => !isPlaceholder(item))
+        : [];
+      const hasDesc = !!(r?.desc || r?.items);
+      const hasInv  = invItems.length > 0;
+      const isEmpty = !hasDesc && !hasInv;
+
       const div = document.createElement("div");
-      div.className = "podSlotRow" + (cid === row.chestId ? " active" : "") + (isEmpty ? " empty" : "");
-      div.innerHTML = `<span class="podSlotNum">${n}</span><span class="podSlotDesc">${escapeHtml(slotLabel)}</span>`;
+      div.className = "podSlotRow"
+        + (cid === row.chestId ? " active" : "")
+        + (isEmpty ? " empty" : "");
       if (!isEmpty) div.addEventListener("click", () => selectChest(cid));
+
+      const numSpan = document.createElement("span");
+      numSpan.className = "podSlotNum";
+      numSpan.textContent = n;
+
+      const contentDiv = document.createElement("div");
+      contentDiv.className = "podSlotContent";
+
+      const descSpan = document.createElement("span");
+      descSpan.className = "podSlotDesc";
+      descSpan.textContent = isEmpty ? "empty" : (r?.desc || "");
+      contentDiv.appendChild(descSpan);
+
+      if (hasInv) {
+        const invDiv = document.createElement("div");
+        invDiv.className = "podSlotInv";
+        for (const item of invItems) {
+          const itemRow = document.createElement("div");
+          itemRow.className = "podInvItem";
+          const belongs = itemBelongsInChest(r, item.itemName);
+          if (belongs === false) itemRow.classList.add("mismatch");
+          let countStr = item.totalCount.toLocaleString();
+          if (item.shulkerCount > 0) countStr += ` (${item.shulkerCount.toLocaleString()} in shulkers)`;
+          itemRow.innerHTML = `<span class="podInvName">${escapeHtml(idToDisplay(item.itemName))}</span><span class="podInvCount">${countStr}</span>`;
+          invDiv.appendChild(itemRow);
+        }
+        contentDiv.appendChild(invDiv);
+      }
+
+      div.appendChild(numSpan);
+      div.appendChild(contentDiv);
       elDPodList.appendChild(div);
     }
     elDPodSection.style.display = "";
-
-    // Actual inventory contents
-    if (INV_LOADED) {
-      elDInvSection.style.display = "";
-      elDInvList.innerHTML = "";
-      const invItems = INVENTORY.get(row.chestId) || [];
-      if (!invItems.length) {
-        const e = document.createElement("div");
-        e.className = "invEmpty";
-        e.textContent = "Empty";
-        elDInvList.appendChild(e);
-      } else {
-        for (const item of invItems) {
-          const div = document.createElement("div");
-          div.className = "invItemRow";
-          const belongs = itemBelongsInChest(row, item.itemName);
-          if (belongs === false && !isPlaceholder(item)) div.classList.add("mismatch");
-          let countStr = item.totalCount.toLocaleString();
-          if (item.shulkerCount > 0) countStr += ` (${item.shulkerCount.toLocaleString()} in shulkers)`;
-          div.innerHTML = `<span class="invName">${escapeHtml(idToDisplay(item.itemName))}</span><span class="invCount">${countStr}</span>`;
-          elDInvList.appendChild(div);
-        }
-      }
-    } else {
-      elDInvSection.style.display = "none";
-    }
   }
 
   function clearSelection() {
@@ -1151,8 +1225,8 @@
     }
   });
 
-  // initial load — inventory loads after layout so INDEX is ready for discrepancy checks
-  reload().then(loadInventory);
+  // initial load — name map loads before inventory so display names are ready for discrepancy matching
+  reload().then(loadNameMap).then(loadInventory);
 </script>
 </body>
 </html>
