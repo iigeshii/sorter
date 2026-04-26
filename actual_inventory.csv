@@ -708,7 +708,6 @@ S1-5,minecraft:glowstone,108,108,0
 S1-5,minecraft:glowstone_dust,44,44,0
 S1-6,minecraft:magma,385,385,0
 S1-6,owlscubed_pob:column_blocks_logic-main-v21_h7,14,14,0
-S1-7,minecraft:stone,3328,3328,0
 S1-7,owlscubed_pob:column_blocks_logic-main-v21_h7,128,128,0
 S1-8,minecraft:nether_wart,1179,1179,0
 S1-8,minecraft:nether_wart_block,93,93,0
@@ -758,7 +757,7 @@ U1-4,minecraft:dirt,1,1,0
 U1-5,minecraft:dirt,1,1,0
 U1-6,minecraft:ender_eye,7,7,0
 U1-7,minecraft:heart_of_the_sea,71,71,0
-U1-8,minecraft:spider_eye,42,42,0
+U1-8,minecraft:dirt,1,1,0
 U1-9,minecraft:dirt,1,1,0
 U2-1,minecraft:blaze_powder,3,3,0
 U2-1,minecraft:blaze_rod,280,280,0
@@ -772,7 +771,6 @@ U2-7,minecraft:ghast_tear,57,57,0
 U2-8,minecraft:glow_ink_sac,211,211,0
 U2-9,minecraft:gunpowder,2254,2254,0
 V1-1,minecraft:popped_chorus_fruit,19,19,0
-V1-1,minecraft:purpur_block,3,3,0
 V1-2,minecraft:shulker_shell,579,579,0
 V1-3,minecraft:totem_of_undying,32,32,0
 V1-4,minecraft:wither_skeleton_skull,22,22,0
@@ -792,20 +790,19 @@ V2-7,minecraft:slime_ball,271,271,0
 V2-8,minecraft:spider_eye,76,76,0
 V2-9,minecraft:string,888,888,0
 W1-1,minecraft:dirt,1,1,0
-W1-2,minecraft:wind_charge,40,40,0
+W1-2,minecraft:dirt,1,1,0
 W1-3,minecraft:dirt,1,1,0
 W1-4,minecraft:dirt,1,1,0
 W1-5,minecraft:dirt,1,1,0
 W1-6,minecraft:dirt,1,1,0
 W1-7,minecraft:dirt,1,1,0
-W1-8,minecraft:deepslate_redstone_ore,2,2,0
 W1-9,minecraft:dirt,1,1,0
 W2-1,minecraft:tnt,159,159,0
 W2-2,minecraft:wind_charge,19,19,0
 W2-3,minecraft:rabbit_hide,2,2,0
 W2-4,minecraft:resin_clump,5,5,0
 W2-5,minecraft:rabbit_foot,5,5,0
-W2-6,minecraft:gold_nugget,13,13,0
+W2-6,minecraft:dirt,1,1,0
 W2-7,minecraft:dirt,1,1,0
 W2-8,minecraft:dirt,1,1,0
 W2-9,minecraft:dirt,1,1,0
