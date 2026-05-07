@@ -809,12 +809,11 @@
           const k = item.toLowerCase();
           if (!DESC_TO_CHEST.has(k)) DESC_TO_CHEST.set(k, r.chestId);
         }
-        const descKey = (r.desc || "").toLowerCase();
-        if (descKey && !DESC_TO_CHEST.has(descKey)) DESC_TO_CHEST.set(descKey, r.chestId);
-      } else if (r.desc) {
+      }
+      if (r.desc) {
         CAT_INDEX.get(r.category).add(r.desc);
-        const key = r.desc.toLowerCase();
-        if (!DESC_TO_CHEST.has(key)) DESC_TO_CHEST.set(key, r.chestId);
+        const descKey = r.desc.toLowerCase();
+        if (!DESC_TO_CHEST.has(descKey)) DESC_TO_CHEST.set(descKey, r.chestId);
       }
     }
   }
